@@ -190,3 +190,58 @@ footer a{color:#aeb8d7;text-decoration:none}
 @media(prefers-reduced-motion:reduce){
  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 }
+
+
+/* THEME LAB — THREE-WAY VISUAL TEST */
+.theme-lab{position:fixed;z-index:1000;right:18px;bottom:18px;display:grid;gap:8px;padding:11px 12px;border:1px solid #ffffff30;border-radius:16px;background:rgba(8,10,18,.82);backdrop-filter:blur(22px);box-shadow:0 12px 45px #0008;color:#fff;font:600 10px "DM Sans",sans-serif}
+.theme-lab-label{display:flex;align-items:center;justify-content:space-between;gap:14px;letter-spacing:1.5px;font-size:9px;color:#c7c9d5}.theme-lab-label i{font-style:normal;color:#ff7d91;font-size:8px}
+.theme-lab-options{display:flex;gap:6px}.theme-lab-options button{display:flex;align-items:center;gap:6px;padding:8px 9px;border:1px solid #ffffff20;border-radius:10px;background:#ffffff0a;color:#dfe1eb;font-size:10px;cursor:pointer;transition:.2s}.theme-lab-options button[aria-pressed=true]{border-color:#fff9;background:#ffffff20;color:#fff;box-shadow:0 0 18px #ffffff18}
+.theme-swatch{width:9px;height:9px;border-radius:50%;display:inline-block}.gta-swatch{background:linear-gradient(135deg,#ff5caa,#ffb15c,#8a6cff)}.mono-swatch{background:linear-gradient(135deg,#fff,#555)}.matrix-swatch{background:linear-gradient(135deg,#c6ff00,#00ff88)}
+@media(max-width:520px){.theme-lab{right:10px;bottom:10px;left:10px;padding:9px}.theme-lab-options button{flex:1;justify-content:center;padding:9px 5px;font-size:9px}.theme-lab-label{font-size:8px}}
+
+/* VICE CITY — GTA VI-inspired sunset palette */
+:root[data-theme="gta"]{--bg:#160d20;--panel:rgba(43,20,48,.78);--panel2:rgba(62,27,56,.88);--line:rgba(255,135,179,.28);--muted:#e2a9bc;--text:#fff5f7;--purple:#ff77b7;--purple2:#ff875f}
+:root[data-theme="gta"] body{background:#160d20}
+:root[data-theme="gta"] body:before{background:radial-gradient(ellipse at 18% 20%,#ff4fa866,transparent 36%),radial-gradient(ellipse at 80% 26%,#ff9b4d55,transparent 35%),radial-gradient(ellipse at 50% 95%,#7755ed66,transparent 42%);filter:blur(32px);animation:vice-drift 16s ease-in-out infinite alternate}
+:root[data-theme="gta"] body:after{opacity:.13;background-image:linear-gradient(#ffb2d222 1px,transparent 1px),linear-gradient(90deg,#ffb2d222 1px,transparent 1px);background-size:62px 62px}
+@keyframes vice-drift{0%{transform:translate(-4%,2%) scale(1) rotate(-4deg)}100%{transform:translate(4%,-3%) scale(1.12) rotate(5deg)}}
+:root[data-theme="gta"] .welcome-content h1 span,:root[data-theme="gta"] .finmalc-content h1{background:linear-gradient(100deg,#ffb1d4,#ff6eaa 38%,#ffb15f 70%,#ffe19a);background-clip:text;-webkit-background-clip:text;color:transparent}
+:root[data-theme="gta"] .brand-mark,:root[data-theme="gta"] .option-icon,:root[data-theme="gta"] .proxy-icon{background:linear-gradient(140deg,#ff70b5,#ff9b58 58%,#8b6cff);box-shadow:0 0 28px #ff70b566}
+:root[data-theme="gta"] .welcome-play,:root[data-theme="gta"] .primary-btn,:root[data-theme="gta"] .proxy-launch{background:linear-gradient(110deg,#ff65ae,#ff965c 55%,#a17aff);box-shadow:0 12px 38px #ff63934a,inset 0 1px 0 #ffffff70;color:#220d20}
+:root[data-theme="gta"] .menu-option,:root[data-theme="gta"] .account-panel,:root[data-theme="gta"] .special-panel,:root[data-theme="gta"] .proxy-card,:root[data-theme="gta"] .video-card{background:linear-gradient(120deg,rgba(76,34,69,.86),rgba(35,19,49,.82));border-color:#ff9cbb40}
+:root[data-theme="gta"] .minecraft-screen{background:radial-gradient(ellipse at 50% 25%,#ff7d9c33,transparent 50%),transparent}
+:root[data-theme="gta"] .minecraft-launch{background:linear-gradient(110deg,#ff78b7,#ffb05f);color:#2a1021}
+:root[data-theme="gta"] .minecraft-kicker,:root[data-theme="gta"] .minecraft-version,:root[data-theme="gta"] .special-kicker,:root[data-theme="gta"] .eyebrow{color:#ff9cba}
+:root[data-theme="gta"] .theme-lab{border-color:#ff8fb866;background:rgba(37,13,34,.88);box-shadow:0 0 35px #ff589533}
+
+/* PHOTON — high-contrast black, white and silver glow */
+:root[data-theme="mono"]{--bg:#030405;--panel:rgba(15,17,20,.82);--panel2:rgba(25,27,31,.9);--line:rgba(255,255,255,.23);--muted:#a5a9b0;--text:#fff;--purple:#fff;--purple2:#bfc5cc}
+:root[data-theme="mono"] body{background:#030405}
+:root[data-theme="mono"] body:before{background:radial-gradient(ellipse at 50% 15%,#ffffff30,transparent 38%),radial-gradient(ellipse at 10% 80%,#9ba8b833,transparent 34%),radial-gradient(ellipse at 90% 75%,#ffffff20,transparent 35%);filter:blur(35px);animation:photon-pulse 9s ease-in-out infinite alternate}
+:root[data-theme="mono"] body:after{opacity:.18;background-image:linear-gradient(#ffffff18 1px,transparent 1px),linear-gradient(90deg,#ffffff18 1px,transparent 1px);background-size:48px 48px}
+@keyframes photon-pulse{from{transform:scale(.94);opacity:.55}to{transform:scale(1.12);opacity:1}}
+:root[data-theme="mono"] .brand-mark,:root[data-theme="mono"] .option-icon,:root[data-theme="mono"] .proxy-icon{background:linear-gradient(145deg,#fff,#555);color:#050505;box-shadow:0 0 24px #fff7}
+:root[data-theme="mono"] .welcome-content h1 span,:root[data-theme="mono"] .finmalc-content h1{background:linear-gradient(100deg,#fff,#aeb5be 50%,#fff);background-clip:text;-webkit-background-clip:text;color:transparent}
+:root[data-theme="mono"] .welcome-play,:root[data-theme="mono"] .primary-btn,:root[data-theme="mono"] .proxy-launch{background:linear-gradient(120deg,#fff,#aeb4bd);color:#050607;box-shadow:0 0 28px #fff4,inset 0 1px 0 #fff}
+:root[data-theme="mono"] .menu-option,:root[data-theme="mono"] .account-panel,:root[data-theme="mono"] .special-panel,:root[data-theme="mono"] .proxy-card,:root[data-theme="mono"] .video-card{background:linear-gradient(145deg,#17191de8,#08090bea);border-color:#ffffff35;box-shadow:0 0 26px #ffffff0c,0 18px 60px #000a}
+:root[data-theme="mono"] .menu-option:hover,:root[data-theme="mono"] .account-tab.active{border-color:#fff;background:#ffffff16;box-shadow:0 0 24px #fff2}
+:root[data-theme="mono"] .minecraft-screen{background:radial-gradient(ellipse at 50% 30%,#ffffff18,transparent 48%),transparent}
+:root[data-theme="mono"] .minecraft-launch{background:linear-gradient(120deg,#fff,#9da4ad);color:#050505}
+:root[data-theme="mono"] .minecraft-kicker,:root[data-theme="mono"] .minecraft-version,:root[data-theme="mono"] .special-kicker,:root[data-theme="mono"] .eyebrow{color:#fff}
+:root[data-theme="mono"] .theme-lab{border-color:#fff8;background:rgba(0,0,0,.9);box-shadow:0 0 28px #fff2}
+
+/* AFTERDARK — acid-lime cyber terminal / deep forest */
+:root[data-theme="matrix"]{--bg:#050b09;--panel:rgba(8,25,18,.84);--panel2:rgba(12,39,26,.9);--line:rgba(160,255,87,.22);--muted:#91ad91;--text:#eaffdf;--purple:#c6ff55;--purple2:#4ee58b}
+:root[data-theme="matrix"] body{background:#050b09}
+:root[data-theme="matrix"] body:before{background:radial-gradient(ellipse at 15% 18%,#9dff2838,transparent 34%),radial-gradient(ellipse at 83% 32%,#00e58c30,transparent 34%),radial-gradient(ellipse at 52% 100%,#1b8b5930,transparent 40%);filter:blur(30px);animation:afterdark-flow 19s ease-in-out infinite alternate}
+:root[data-theme="matrix"] body:after{opacity:.2;background-image:linear-gradient(#9cff3b1a 1px,transparent 1px),linear-gradient(90deg,#9cff3b1a 1px,transparent 1px);background-size:44px 44px;animation:grid-flow 24s linear infinite}
+@keyframes afterdark-flow{0%{transform:translate(-3%,0) skewY(-3deg)}100%{transform:translate(4%,-3%) skewY(3deg) scale(1.08)}}
+:root[data-theme="matrix"] .brand-mark,:root[data-theme="matrix"] .option-icon,:root[data-theme="matrix"] .proxy-icon{background:linear-gradient(145deg,#d1ff56,#16c978);color:#071109;box-shadow:0 0 28px #a7ff4c55}
+:root[data-theme="matrix"] .welcome-content h1 span,:root[data-theme="matrix"] .finmalc-content h1{background:linear-gradient(100deg,#eaffc2,#a5ff3d 50%,#42e89a);background-clip:text;-webkit-background-clip:text;color:transparent}
+:root[data-theme="matrix"] .welcome-play,:root[data-theme="matrix"] .primary-btn,:root[data-theme="matrix"] .proxy-launch{background:linear-gradient(115deg,#d2ff57,#43e88e);color:#071109;box-shadow:0 0 32px #9eff3c38}
+:root[data-theme="matrix"] .menu-option,:root[data-theme="matrix"] .account-panel,:root[data-theme="matrix"] .special-panel,:root[data-theme="matrix"] .proxy-card,:root[data-theme="matrix"] .video-card{background:linear-gradient(120deg,rgba(12,43,27,.9),rgba(5,19,15,.88));border-color:#a5ff4c38}
+:root[data-theme="matrix"] .menu-option:hover,:root[data-theme="matrix"] .account-tab.active{border-color:#c6ff55;background:#9cff3b14;box-shadow:0 0 25px #9cff3b20}
+:root[data-theme="matrix"] .minecraft-screen{background:radial-gradient(ellipse at 50% 30%,#9dff2825,transparent 48%),transparent}
+:root[data-theme="matrix"] .minecraft-launch{background:linear-gradient(120deg,#d2ff57,#43e88e);color:#071109}
+:root[data-theme="matrix"] .minecraft-kicker,:root[data-theme="matrix"] .minecraft-version,:root[data-theme="matrix"] .special-kicker,:root[data-theme="matrix"] .eyebrow{color:#c6ff55}
+:root[data-theme="matrix"] .theme-lab{border-color:#a5ff4c66;background:rgba(3,15,9,.92);box-shadow:0 0 30px #9cff3b20}
