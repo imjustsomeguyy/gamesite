@@ -242,5 +242,25 @@ window.unlockGroupcat = function(event) {
     })();
   </script>
 
+  <style>
+    #gc-focus-mode{position:fixed;right:14px;bottom:14px;z-index:99999;border:1px solid #ffffff30;border-radius:999px;padding:10px 14px;background:#171520e8;color:#fff;font:600 12px DM Sans,Arial,sans-serif;box-shadow:0 5px 24px #0007;backdrop-filter:blur(12px);cursor:pointer}
+    #gc-focus-mode:hover{background:#302643}
+  </style>
+  <button id="gc-focus-mode" type="button" aria-label="Enter browser fullscreen">⛶ Focus mode</button>
+  <script>
+    (() => {
+      const button=document.getElementById("gc-focus-mode");
+      if(!button)return;
+      const update=()=>{button.textContent=document.fullscreenElement?"⛶ Exit focus":"⛶ Focus mode";};
+      button.addEventListener("click",async()=>{
+        try{
+          if(document.fullscreenElement) await document.exitFullscreen();
+          else if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
+          else alert("Fullscreen is not supported here. On a computer, press F11 to hide the browser toolbar.");
+        }catch{alert("Your browser blocked fullscreen. Try pressing F11 on a computer.");}
+      });
+      document.addEventListener("fullscreenchange",update);
+    })();
+  </script>
 </body>
 </html>
