@@ -1,12 +1,20 @@
 # Self-hosted Minecraft client storage
 
-The launcher requests exactly `/minecraft/26.3.html` on the Groupcat domain. The Pages Function in `functions/minecraft/[[path]].js` streams that object from Cloudflare R2. This avoids embedding or redirecting to an external Eaglercraft site and avoids the Pages per-file upload limit.
+The launcher requests exactly `/minecraft/26.3.html` on the Groupcat domain. The Pages Function in `functions/minecraft/[[path]].js` streams that object from Cloudflare R2. The game itself will load from your Groupcat domain; it will not redirect to or iframe an external Eaglercraft site.
+
+## Client file to use
+
+The selected build is **26.3-JM**, a community-modified build based on Eaglercraft 26.2 with selected 26.3 features backported. It is not an official, complete Minecraft 26.3 client.
+
+[Download 26.3-fixed.html (85.8 MB)](https://github.com/joeymavv/26.3-JM/releases/download/v26.3-jm.1/26.3-fixed.html)
+
+Download that file, then upload it into the R2 bucket using the exact object name `26.3.html`.
 
 ## One-time Cloudflare setup
 
 1. Create an R2 bucket named `groupcat-minecraft`.
 2. In the existing Pages project, add an R2 bucket binding with variable name `MINECRAFT` and select `groupcat-minecraft`.
-3. Upload the self-contained client HTML file into that bucket and name it exactly `26.3.html`.
+3. Upload the downloaded `26.3-fixed.html` file into that bucket and name it exactly `26.3.html`.
 4. Redeploy the Pages project.
 
-Important: the official Eaglercraft play page lists 26.3, but its offline-download page currently lists 26.2 and older, not a standalone official 26.3 HTML file. Do not rename a 26.2 client and call it 26.3. The community 26.3-JM build is based on 26.2 with selected features backported, not a complete official 26.3 client. Only upload a client you have the right to host and whose provenance you trust.
+**The game is not live until the file is uploaded and the R2 binding is connected.** I can update the website code, but I cannot access your Cloudflare account or upload into your R2 bucket from this connection.
