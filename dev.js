@@ -20,7 +20,7 @@
     const created=document.createElement("small");created.textContent="Created "+new Date(account.createdAt).toLocaleString();
     head.append(name,created);
     const info=document.createElement("div");info.className="dev-data";
-    info.textContent="Account ID: "+account.id+" · Favourites: "+account.favorites.length+" · Recently played: "+account.recent.length+" · Data updated: "+(account.dataUpdatedAt?new Date(account.dataUpdatedAt).toLocaleString():"Never");
+    info.textContent="Account ID: "+account.id+" · Active sessions: "+account.activeSessions+" · Favourites: "+account.favorites.length+" · Recently played: "+account.recent.length+" · Data updated: "+(account.dataUpdatedAt?new Date(account.dataUpdatedAt).toLocaleString():"Never");
     const fav=document.createElement("div");fav.className="dev-data";fav.textContent="Favourites: "+(account.favorites.join(", ")||"None");
     const recent=document.createElement("div");recent.className="dev-data";recent.textContent="Recent games: "+(account.recent.join(", ")||"None");
     article.append(head,info,fav,recent);
