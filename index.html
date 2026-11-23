@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101014">
+  <meta name="description" content="Groupcat Games — a collection of free browser games.">
+  <title>Groupcat Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Groupcat Games home"><span class="brand-mark">g</span><span>groupcat<span class="brand-muted">games</span></span></a>
+      <div class="side-label">DISCOVER</div>
+      <button class="nav-link active" data-category="all"><span>⌂</span> Home</button>
+      <button class="nav-link" data-category="popular"><span>↗</span> Popular</button>
+      <button class="nav-link" data-category="recent"><span>◷</span> Recently played</button>
+      <div class="side-label side-label-spaced">CATEGORIES</div>
+      <button class="nav-link" data-category="arcade"><span>▦</span> Arcade</button>
+      <button class="nav-link" data-category="action"><span>✳</span> Action</button>
+      <button class="nav-link" data-category="puzzle"><span>◇</span> Puzzle</button>
+      <button class="nav-link" data-category="racing"><span>⌁</span> Racing</button>
+      <button class="nav-link" data-category="sports"><span>◉</span> Sports</button>
+      <button class="nav-link" data-category="strategy"><span>♟</span> Strategy</button>
+      <div class="sidebar-bottom"><span class="status-dot"></span> More games added regularly</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">g</span> groupcat<span class="brand-muted">games</span></div>
+        <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search games..." autocomplete="off"><kbd>/</kbd></label>
+        <a class="top-link" href="https://groupcat.xyz" target="_blank" rel="noreferrer">Groupcat.xyz ↗</a>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="live-dot"></span> YOUR NEXT DISTRACTION</div>
+          <h1>Play something<br><span>great.</span></h1>
+          <p>A growing collection of games. No installs, no fuss. Just click and play.</p>
+          <a class="primary-btn" href="#games">Explore games <span>→</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+          <div class="hero-tile tile-back">✦</div><div class="hero-tile tile-mid">◈</div><div class="hero-tile tile-front">▶</div>
+          <div class="spark spark-one">✳</div><div class="spark spark-two">✦</div>
+        </div>
+        <div class="hero-index">01 <span>/</span> PLAY</div>
+      </section>
+
+      <section class="section-heading" id="games">
+        <div><div class="eyebrow">THE LIBRARY</div><h2 id="section-title">All games <span id="game-count">0</span></h2></div>
+        <div class="sort-wrap"><span>Sort by</span><select id="sort"><option value="featured">Featured</option><option value="name">Name A–Z</option></select></div>
+      </section>
+
+      <div class="filter-row" id="filter-row">
+        <button class="filter-chip selected" data-category="all">All games</button>
+        <button class="filter-chip" data-category="arcade">Arcade</button>
+        <button class="filter-chip" data-category="action">Action</button>
+        <button class="filter-chip" data-category="puzzle">Puzzle</button>
+        <button class="filter-chip" data-category="racing">Racing</button>
+        <button class="filter-chip" data-category="sports">Sports</button>
+        <button class="filter-chip" data-category="strategy">Strategy</button>
+      </div>
+
+      <section class="game-grid" id="game-grid" aria-live="polite"></section>
+      <div class="empty-state" id="empty-state" hidden><div>⌕</div><h3>No games found</h3><p>Try another search or category.</p></div>
+      <footer><span>GROUPCAT GAMES</span><span>Built for the love of playing.</span><a href="https://groupcat.xyz">Back to Groupcat ↗</a></footer>
+    </main>
+  </div>
+
+  <div class="player-overlay" id="player-overlay" hidden>
+    <div class="player-top"><div><span class="player-dot"></span><strong id="player-title">Game</strong></div><div class="player-actions"><button id="fullscreen" title="Fullscreen">⛶</button><button id="close-player" title="Close">✕</button></div></div>
+    <div class="player-frame-wrap"><iframe id="game-frame" title="Game player" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write" allowfullscreen></iframe></div>
+  </div>
+  <script src="games.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
