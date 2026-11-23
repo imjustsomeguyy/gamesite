@@ -30,6 +30,7 @@
       <div class="menu-options">
         <button class="menu-option minecraft-option" id="menu-minecraft" type="button" onclick="window.showSiteScreen(&quot;minecraft&quot;)"><span class="option-icon" aria-hidden="true"><img class="menu-icon minecraft-icon minecraft-logo-image" src="images/minecraft-logo.webp" alt="Minecraft grass block logo"></span><span class="option-copy"><strong>Minecraft</strong></span><span class="option-arrow">↗</span></button>
         <button class="menu-option account-option" id="menu-account" type="button" onclick="window.showSiteScreen(&quot;account&quot;)"><span class="option-icon account-menu-icon" aria-hidden="true">👤</span><span class="option-copy"><strong>Account</strong><small>Sign in or create an account</small></span><span class="option-arrow">↗</span></button>
+        <button class="menu-option gunspin-option" id="menu-gunspin" type="button" onclick="window.showSiteScreen(&quot;gunspin&quot;)"><span class="option-icon">🔫</span><span class="option-copy"><strong>GunSpin</strong><small>Play GunSpin</small></span><span class="option-arrow">↗</span></button>
         <button class="menu-option proxy-option" id="menu-proxy" onclick="window.showSiteScreen(&quot;proxy&quot;)"><span class="option-icon" aria-hidden="true"><svg class="menu-icon globe-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="2.6"/><path d="M5.8 24h36.4M24 5c5.2 5.2 7.8 11.5 7.8 19S29.2 37.8 24 43M24 5c-5.2 5.2-7.8 11.5-7.8 19S18.8 37.8 24 43M10.2 12.5h27.6M10.2 35.5h27.6" stroke="currentColor" stroke-width="1.7" opacity=".85"/><path d="M13 29.5h22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><text x="24" y="27.2" text-anchor="middle" font-size="9.5" font-weight="800" fill="currentColor">www</text></svg></span><span class="option-copy"><strong>Proxy</strong></span><span class="option-arrow">↗</span></button>
         <button class="menu-option groupcat-option" id="menu-groupcat" type="button" onclick="window.showSiteScreen(&quot;groupcat&quot;)"><span class="option-icon">👀</span><span class="option-copy"><strong>Groupcat</strong></span><span class="option-arrow">↗</span></button>
         <button class="menu-option finmalc-option" id="menu-finmalc" type="button" onclick="window.showSiteScreen(&quot;finmalc&quot;)"><span class="option-icon">🗿</span><span class="option-copy"><strong>fin malc</strong></span><span class="option-arrow">↗</span></button>
@@ -83,19 +84,15 @@
 
   <section class="proxy-screen" id="proxy-screen" hidden>
     <div class="proxy-top"><button class="menu-back" id="proxy-back" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
-    <div class="proxy-content">
-      <div class="proxy-icon"><svg class="proxy-globe" viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="2.5"/><path d="M5.8 24h36.4M24 5c5.2 5.2 7.8 11.5 7.8 19S29.2 37.8 24 43M24 5c-5.2 5.2-7.8 11.5-7.8 19S18.8 37.8 24 43" stroke="currentColor" stroke-width="1.7"/><text x="24" y="27.2" text-anchor="middle" font-size="9.5" font-weight="800" fill="currentColor">www</text></svg></div>
-      <h1>Proxy</h1><p class="proxy-small">Browse through alternative web frontends.</p>
-      <div class="proxy-card">
-        <div class="proxy-card-icon">▶</div><div class="proxy-card-copy"><strong>YouTube</strong><span>Open YouTube through Piped, an alternative frontend.</span></div>
-        <a class="proxy-launch" href="https://piped.video" target="_blank" rel="noopener noreferrer">Open ↗</a>
-      </div>
-      <form class="proxy-search-form" id="piped-search-form"><input id="piped-search" type="search" placeholder="Search YouTube through Piped…" autocomplete="off"><button type="submit">Search ↗</button></form>
-      <p class="proxy-disclaimer">Piped is a third-party service, not a private Groupcat server. Public instances can sometimes be slow or unavailable; don't enter passwords or personal details there.</p>
-      <button class="welcome-play" id="proxy-back-bottom" onclick="window.showSiteScreen(&quot;menu&quot;)">Back <span>↗</span></button>
-    </div>
+    <div class="proxy-browser-wrap"><iframe class="proxy-browser-frame" src="/proxy/index.html" title="Groupcat Scramjet browser" allow="fullscreen; clipboard-read; clipboard-write"></iframe></div>
   </section>
 
+
+  <section class="gunspin-screen" id="gunspin-screen" hidden>
+    <div class="special-top"><button class="menu-back" type="button" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
+    <div class="gunspin-heading"><div class="special-kicker">GROUPCAT ARCADE</div><h1>GunSpin</h1><p>Progress is currently stored by the game in this browser. Account syncing is not enabled yet.</p></div>
+    <div class="gunspin-frame-wrap"><iframe src="/gunspin/index.html" title="GunSpin" allow="fullscreen; autoplay" allowfullscreen></iframe></div>
+  </section>
 
   <section class="groupcat-screen" id="groupcat-screen" hidden>
     <div class="special-top"><button class="menu-back" id="groupcat-back" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
@@ -176,8 +173,8 @@
   </div>
 <script>
 window.showSiteScreen = function(screen) {
-  const ids = {welcome:"welcome-screen",menu:"menu-screen",minecraft:"minecraft-screen",account:"account-screen",proxy:"proxy-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen"};
-  ["welcome-screen","menu-screen","minecraft-screen","account-screen","proxy-screen","groupcat-screen","finmalc-screen"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
+  const ids = {welcome:"welcome-screen",menu:"menu-screen",minecraft:"minecraft-screen",account:"account-screen",proxy:"proxy-screen",gunspin:"gunspin-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen"};
+  ["welcome-screen","menu-screen","minecraft-screen","account-screen","proxy-screen","gunspin-screen","groupcat-screen","finmalc-screen"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
   const app=document.querySelector(".app-shell"); if(app) app.hidden = true;
   if(screen==="groupcat"){const lock=document.getElementById("groupcat-lock"),secret=document.getElementById("groupcat-secret"),input=document.getElementById("groupcat-password"),error=document.getElementById("groupcat-password-error");if(lock)lock.hidden=false;if(secret)secret.hidden=true;if(input)input.value="";if(error)error.hidden=true;}
   window.scrollTo(0,0);
