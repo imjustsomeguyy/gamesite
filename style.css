@@ -429,3 +429,12 @@ body{
 .account-avatar{width:66px;height:66px;display:grid;place-items:center;border-radius:21px;background:linear-gradient(135deg,#b59bff,#7651d8);font:700 30px "Space Grotesk";box-shadow:0 10px 30px #805de455}.account-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:25px 0}.account-stats>div{padding:16px;border:1px solid #ffffff1b;border-radius:12px;background:#ffffff08;display:grid;gap:5px}.account-stats strong{font:700 24px "Space Grotesk"}.account-stats span{font-size:11px;color:#9e96aa}.account-logout{border:1px solid #ffffff2c;background:#ffffff0c;color:#eee;border-radius:9px;padding:12px 18px;font:700 12px "DM Sans";cursor:pointer}
 .account-option{border-color:#765ba3;background:#211a30}.account-option .option-icon{background:#3a2a55}.account-option:hover{border-color:#b49aff;box-shadow:0 0 28px #9060d522}
 @media(max-width:600px){.account-panel{padding:25px 21px;margin-top:30px}.special-top{padding:22px 18px}.account-panel h1{font-size:37px}}
+
+.proxy-card{width:min(520px,88vw);display:flex;align-items:center;gap:15px;text-align:left;padding:17px;border:1px solid #ffffff24;border-radius:14px;background:linear-gradient(135deg,#ffffff13,#ffffff07);backdrop-filter:blur(22px) saturate(150%);-webkit-backdrop-filter:blur(22px) saturate(150%);box-shadow:0 15px 45px #0004;margin:28px auto 12px}
+.proxy-card-icon{width:43px;height:43px;display:grid;place-items:center;flex:none;border-radius:12px;background:#39274f;color:#d7c5ff;font-size:22px}
+.proxy-card-copy{display:grid;gap:5px;min-width:0}.proxy-card-copy strong{font:700 15px "Space Grotesk"}.proxy-card-copy span{font-size:11px;line-height:1.5;color:#aaa2b4}
+.proxy-launch{margin-left:auto;flex:none;padding:9px 12px;border-radius:8px;background:#9b78ff;color:#171020;text-decoration:none;font-size:11px;font-weight:800}
+.proxy-search-form{width:min(520px,88vw);display:flex;gap:8px;margin:0 auto}.proxy-search-form input{flex:1;min-width:0;height:45px;padding:0 13px;border:1px solid #ffffff25;border-radius:9px;background:#ffffff0b;color:#fff;font:13px "DM Sans";outline:none}.proxy-search-form button{border:0;border-radius:9px;padding:0 15px;background:#9b78ff;color:#171020;font:700 12px "DM Sans";cursor:pointer}
+.proxy-disclaimer{width:min(520px,88vw);margin:13px auto 24px;color:#797183;font-size:10px;line-height:1.6}
+.proxy-content{width:100%;padding:30px 0 60px}
+@media(max-width:520px){.proxy-card{padding:13px;gap:10px}.proxy-card-copy span{font-size:10px}.proxy-launch{padding:9px}.proxy-search-form{gap:6px}.proxy-search-form button{padding:0 11px}}
