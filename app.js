@@ -174,7 +174,23 @@
       }catch(error){cookieSaveStatus(error.message);}
     }
   });
-  document.getElementById("menu-cookieclicker").addEventListener("click",()=>{if(window.GROUPCAT_ACCOUNT.user)refreshCookieSaves();});
+  const cookieGuestPanel=document.getElementById("cookie-guest-panel");
+  const cookieSavePanel=document.getElementById("cookie-save-panel");
+  const cookieGameWrap=document.getElementById("cookie-game-frame-wrap");
+  function startCookieClicker(guest=false){
+    if(guest && window.GROUPCAT_ACCOUNT.user) guest=false;
+    cookieGuestPanel.hidden=true;
+    cookieSavePanel.hidden=guest;
+    cookieGameWrap.hidden=false;
+    if(cookieFrame.src==="about:blank" || !cookieFrame.src.endsWith("/cookieclicker/index.html")) cookieFrame.src="/cookieclicker/index.html";
+    if(!guest) refreshCookieSaves();
+  }
+  document.getElementById("cookie-play-guest").addEventListener("click",()=>startCookieClicker(true));
+  document.getElementById("cookie-guest-login").addEventListener("click",()=>{showScreen("account");setAccountMode("login");});
+  document.getElementById("menu-cookieclicker").addEventListener("click",()=>{
+    if(window.GROUPCAT_ACCOUNT.user) startCookieClicker(false);
+    else {cookieGuestPanel.hidden=false;cookieSavePanel.hidden=true;cookieGameWrap.hidden=true;}
+  });
 
   document.getElementById("account-login-tab").addEventListener("click",()=>setAccountMode("login"));
   document.getElementById("account-signup-tab").addEventListener("click",()=>setAccountMode("signup"));
