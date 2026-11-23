@@ -1,5 +1,10 @@
 (() => {
   const grid = document.getElementById("game-grid");
+  const welcome = document.getElementById("welcome-screen");
+  const menu = document.getElementById("menu-screen");
+  const proxy = document.getElementById("proxy-screen");
+  const appShell = document.querySelector(".app-shell");
+  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
   const search = document.getElementById("search");
   const count = document.getElementById("game-count");
   const title = document.getElementById("section-title");
@@ -99,6 +104,13 @@
     document.body.style.overflow = "";
     history.replaceState(null,"",location.pathname+location.search);
   }
+  document.getElementById("welcome-play").addEventListener("click",()=>showScreen("menu"));
+  document.getElementById("menu-back-home").addEventListener("click",()=>showScreen("welcome"));
+  document.getElementById("menu-games").addEventListener("click",()=>showScreen("games"));
+  document.getElementById("menu-proxy").addEventListener("click",()=>showScreen("proxy"));
+  document.getElementById("proxy-back").addEventListener("click",()=>showScreen("menu"));
+  document.getElementById("proxy-back-bottom").addEventListener("click",()=>showScreen("menu"));
+  document.getElementById("games-back").addEventListener("click",()=>showScreen("menu"));
   document.querySelectorAll("[data-category]").forEach(el=>el.addEventListener("click",()=>selectCategory(el.dataset.category)));
   search.addEventListener("input",()=>{query=search.value.trim().toLowerCase();render();});
   sort.addEventListener("change",render);
