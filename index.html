@@ -97,18 +97,13 @@
 
   <section class="cookieclicker-screen" id="cookieclicker-screen" hidden>
     <div class="special-top"><button class="menu-back" type="button" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
-    <div class="cookieclicker-heading"><div class="special-kicker">GROUPCAT ARCADE</div><h1>Cookie Clicker</h1><p>Play with an account or jump straight in as a guest.</p></div>
     <div class="cookie-guest-panel" id="cookie-guest-panel">
-      <strong>Playing without an account?</strong>
-      <p>Your progress may only be stored in this browser and could be lost if you clear site data, use private browsing, or switch devices. If the game offers an export or download option, save a personal backup regularly. Guest progress is not backed up to Groupcat cloud saves.</p>
-      <div class="cookie-guest-actions"><button type="button" id="cookie-play-guest">Play without an account</button><button type="button" id="cookie-guest-login">Log in / Create account</button></div>
+      <strong>Original Cookie Clicker</strong>
+      <p>This opens the official game, hosted by its creator. Your progress is handled by Cookie Clicker in your browser, not by your Groupcat account. Browser storage or privacy settings may affect whether progress is retained. Use the game's own Options menu to export a backup regularly.</p>
+      <div class="cookie-guest-actions"><button type="button" id="cookie-play-guest">Play Cookie Clicker</button><a class="cookie-guest-login" href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer">Open in a new tab ↗</a></div>
     </div>
-    <div class="cookie-save-panel" id="cookie-save-panel" hidden>
-      <div class="cookie-save-top"><div><strong>Your cloud saves</strong><span id="cookie-save-count">0 / 3 slots used</span></div><div class="cookie-save-create"><input id="cookie-save-name" maxlength="32" placeholder="Name this save" aria-label="Save name"><button id="cookie-save-new" type="button">Save current game</button></div></div>
-      <div id="cookie-save-list" class="cookie-save-list"><p class="cookie-save-empty">Loading your saves…</p></div>
-      <p id="cookie-save-message" class="cookie-save-message" role="status"></p>
-    </div>
-    <div class="cookie-game-frame-wrap" id="cookie-game-frame-wrap" hidden><iframe id="cookieclicker-frame" src="about:blank" title="Cookie Clicker" allow="fullscreen; autoplay" allowfullscreen></iframe></div>
+    <div class="cookie-save-panel" id="cookie-save-panel" hidden></div>
+    <div class="cookie-game-frame-wrap" id="cookie-game-frame-wrap" hidden><iframe id="cookieclicker-frame" src="about:blank" title="Official Cookie Clicker" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen></iframe><p class="cookie-external-fallback">If the game does not load here, <a href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer">open the official game in a new tab</a>.</p></div>
   </section>
 
   <section class="groupcat-screen" id="groupcat-screen" hidden>
