@@ -92,6 +92,10 @@
   function launch(game) {
     recent.unshift(game.id);
     saveStore("groupcat-recent",[...new Set(recent)]);
+    if (game.external) {
+      window.open(game.path, "_blank", "noopener,noreferrer");
+      return;
+    }
     overlay.hidden = false;
     playerTitle.textContent = game.name;
     frame.src = game.path;
