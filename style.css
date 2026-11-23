@@ -410,3 +410,11 @@ body{
   .welcome-content,.menu-content,.proxy-content,.special-panel,.finmalc-content{background:rgba(35,24,54,.94)}
   .menu-option,.menu-back,.back-to-menu{background:rgba(39,28,58,.96)}
 }
+
+/* Menu icon artwork */
+.menu-icon{display:block;width:29px;height:29px;overflow:visible}
+.minecraft-icon{filter:drop-shadow(0 3px 3px rgba(0,0,0,.28))}
+.globe-icon{width:31px;height:31px;color:#d9c6ff}
+.proxy-icon,.proxy-globe{width:54px;height:54px;color:#c9aaff;filter:drop-shadow(0 5px 18px rgba(168,126,255,.3))}
+.menu-option .option-icon{width:50px;height:50px}
+@media(max-width:620px){.menu-icon{width:27px;height:27px}.menu-option .option-icon{width:46px;height:46px}}
