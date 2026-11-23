@@ -230,7 +230,6 @@
   }
   document.getElementById("welcome-play").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("menu-back-home").addEventListener("click",()=>showScreen("welcome"));
-  document.getElementById("menu-games").addEventListener("click",()=>showScreen("games"));
   document.getElementById("menu-proxy").addEventListener("click",()=>showScreen("proxy"));
   document.getElementById("account-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("menu-groupcat").addEventListener("click",()=>{document.getElementById("groupcat-lock").hidden=false;document.getElementById("groupcat-secret").hidden=true;document.getElementById("groupcat-password").value="";document.getElementById("groupcat-password-error").hidden=true;showScreen("groupcat");});
