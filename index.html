@@ -12,7 +12,42 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="app-shell">
+  <section class="welcome-screen" id="welcome-screen">
+    <div class="welcome-noise"></div>
+    <div class="welcome-top"><a class="welcome-logo" href="#"><span class="brand-mark">g</span> groupcat<span>games</span></a><span class="welcome-status"><i></i> a little corner of the internet</span></div>
+    <div class="welcome-content">
+      <div class="welcome-kicker">HEY. YOU MADE IT.</div>
+      <h1>Got a minute?<br><span>Stay a while.</span></h1>
+      <p>Games, odd little corners of the web, and whatever else we feel like adding.</p>
+      <button class="welcome-play" id="welcome-play">Press play <span>↗</span></button>
+      <div class="welcome-footnote">No downloads. No big deal. Just have a look around.</div>
+    </div>
+    <div class="welcome-decoration decoration-one">✳</div><div class="welcome-decoration decoration-two">✦</div>
+    <div class="welcome-bottom"><span>MADE FOR THE CURIOUS</span><span>GROUPCAT © 2026</span></div>
+  </section>
+
+  <section class="menu-screen" id="menu-screen" hidden>
+    <div class="menu-top"><button class="menu-back" id="menu-back-home">← Back</button><a class="welcome-logo" href="#"><span class="brand-mark">g</span> groupcat<span>games</span></a><span class="menu-hint">PICK YOUR POISON</span></div>
+    <div class="menu-content">
+      <div class="welcome-kicker">THE GOOD STUFF</div>
+      <h1>Where to?</h1>
+      <p class="menu-intro">Choose a door. See what happens.</p>
+      <div class="menu-options">
+        <button class="menu-option games-option" id="menu-games"><span class="option-icon">▦</span><span class="option-copy"><strong>Games</strong><small>Take a break. Play something.</small></span><span class="option-arrow">↗</span></button>
+        <button class="menu-option proxy-option" id="menu-proxy"><span class="option-icon">◉</span><span class="option-copy"><strong>Proxy</strong><small>A different way around the web.</small></span><span class="option-arrow">↗</span></button>
+        <a class="menu-option groupcat-option" href="https://groupcat.xyz" target="_blank" rel="noreferrer"><span class="option-icon">👀</span><span class="option-copy"><strong>Groupcat</strong><small>You know you want to.</small></span><span class="option-arrow">↗</span></a>
+      </div>
+      <div class="menu-bottom-note">Take your time. There's no rush.</div>
+    </div>
+    <div class="menu-orb menu-orb-one"></div><div class="menu-orb menu-orb-two"></div>
+  </section>
+
+  <section class="proxy-screen" id="proxy-screen" hidden>
+    <div class="proxy-top"><button class="menu-back" id="proxy-back">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
+    <div class="proxy-content"><div class="welcome-kicker">THE OTHER SIDE</div><div class="proxy-icon">◉</div><h1>Proxy</h1><p>This corner isn't wired up just yet.</p><p class="proxy-small">A working web proxy needs its own server. We'll give this a proper setup rather than pretending a button does the job.</p><button class="welcome-play" id="proxy-back-bottom">Back to menu <span>↗</span></button></div>
+  </section>
+
+  <div class="app-shell" hidden>
     <aside class="sidebar">
       <a class="brand" href="#" aria-label="Groupcat Games home"><span class="brand-mark">g</span><span>groupcat<span class="brand-muted">games</span></span></a>
       <div class="side-label">DISCOVER</div>
@@ -31,7 +66,7 @@
     </aside>
 
     <main class="main">
-      <header class="topbar">
+      <header class="topbar">\n        <button class="back-to-menu" id="games-back">← Menu</button>
         <div class="mobile-brand"><span class="brand-mark">g</span> groupcat<span class="brand-muted">games</span></div>
         <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search games..." autocomplete="off"><kbd>/</kbd></label>
         <a class="top-link" href="https://groupcat.xyz" target="_blank" rel="noreferrer">Groupcat.xyz ↗</a>
