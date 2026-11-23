@@ -524,7 +524,7 @@ footer a{color:#aeb8d7;text-decoration:none}
 .cookie-save-top>div:first-child span,.cookie-save-details span{font-size:12px;color:rgba(255,255,255,.55)}
 .cookie-save-create{display:flex;gap:8px;flex-wrap:wrap}
 .cookie-save-create input{min-width:190px;max-width:100%;padding:10px 12px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:#101014;color:#fff;font:inherit}
-.cookie-save-create button,.cookie-save-actions button{padding:10px 13px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font:600 12px inherit;cursor:pointer}
+.cookie-save-create button,.cookie-save-actions button{padding:10px 13px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font:600 12px/1.2 "DM Sans",sans-serif;cursor:pointer}
 .cookie-save-create button:hover,.cookie-save-actions button:hover{background:rgba(255,255,255,.2)}
 .cookie-save-create button:disabled{opacity:.4;cursor:not-allowed}
 .cookie-save-list{display:grid;gap:9px;margin-top:14px}
