@@ -189,5 +189,28 @@ window.unlockGroupcat = function(event) {
 </script>
   <script src="games.js"></script>
   <script src="app.js"></script>
+
+  <aside class="theme-lab" id="theme-lab" aria-label="Theme test selector">
+    <span class="theme-lab-label">THEME LAB <i>DEBUG</i></span>
+    <div class="theme-lab-options">
+      <button type="button" data-theme-choice="gta" aria-pressed="false"><span class="theme-swatch gta-swatch"></span>Vice</button>
+      <button type="button" data-theme-choice="mono" aria-pressed="false"><span class="theme-swatch mono-swatch"></span>Monochrome</button>
+      <button type="button" data-theme-choice="matrix" aria-pressed="false"><span class="theme-swatch matrix-swatch"></span>Afterdark</button>
+    </div>
+  </aside>
+  <script>
+  (() => {
+    const choices = [...document.querySelectorAll("[data-theme-choice]")];
+    const saved = localStorage.getItem("groupcat-theme-test") || "gta";
+    function applyTheme(name) {
+      document.documentElement.dataset.theme = name;
+      localStorage.setItem("groupcat-theme-test", name);
+      choices.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === name)));
+    }
+    choices.forEach(button => button.addEventListener("click", () => applyTheme(button.dataset.themeChoice)));
+    applyTheme(saved);
+  })();
+  </script>
+
 </body>
 </html>
