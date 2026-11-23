@@ -14,7 +14,7 @@ const passwordHash = async (password,salt) => {
   const bits=await crypto.subtle.deriveBits({name:"PBKDF2",salt,iterations:210000,hash:"SHA-256"},key,256);
   return b64url(bits);
 };
-const decodeSalt = value => Uint8Array.from(atob(value.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((value.length+3)%4)),c=>c.charCodeAt(0));
+const decodeSalt = value => Uint8Array.from(atob(value.replace(/-/g,"+").replace(/_/g,"/")+"=".repeat((4-value.length%4)%4)),c=>c.charCodeAt(0));
 async function currentUser(request,env) {
   const token=cookieValue(request,COOKIE);
   if(!token)return null;
@@ -35,7 +35,7 @@ export async function onRequest(context) {
   if(action==="logout") {
     const token=cookieValue(request,COOKIE);
     if(token)await env.DB.prepare("DELETE FROM sessions WHERE token_hash=?").bind(await digest(token)).run();
-    return json({ok:true},{status:200,headers:{"Set-Cookie":cookieHeader("",0)}});
+    return json({ok:true},200,{"Set-Cookie":cookieHeader("",0)});
   }
   const username=String(body.username||"").trim();
   const normalized=username.toLowerCase();
@@ -67,7 +67,7 @@ export async function onRequest(context) {
     const tokenHash=await digest(token);
     const expires=Date.now()+SESSION_DAYS*86400000;
     await env.DB.prepare("INSERT INTO sessions (token_hash,user_id,expires_at) VALUES (?,?,?)").bind(tokenHash,user.id,expires).run();
-    return json({ok:true,user:{username:user.username}},{status:200,headers:{"Set-Cookie":cookieHeader(token,SESSION_DAYS*86400)}});
+    return json({ok:true,user:{username:user.username}},200,{"Set-Cookie":cookieHeader(token,SESSION_DAYS*86400)});
   } catch(error) {
     return json({error:"The account service could not complete that request. Check that the database tables have been created."},503);
   }
