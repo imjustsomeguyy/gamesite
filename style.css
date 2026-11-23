@@ -91,3 +91,34 @@
  .menu-top .welcome-logo{position:static;transform:none}
  .proxy-top .welcome-logo{position:static;transform:none}
 }
+
+/* Groupcat password page + Fin Malc fan page */
+.groupcat-screen,.finmalc-screen{min-height:100svh;background:radial-gradient(ellipse at 50% 15%,#3b2857 0%,#17121f 45%,#0c0b10 100%);color:#f7f1ff;padding-bottom:50px}
+.special-top{width:min(1120px,90vw);margin:auto;padding:28px 0;display:flex;align-items:center;justify-content:space-between}
+.special-top .welcome-logo{position:static}
+.special-panel{width:min(560px,calc(100% - 36px));margin:12vh auto 0;padding:clamp(28px,6vw,55px);border:1px solid #a98be84a;border-radius:17px;background:#1c1725;box-shadow:0 25px 80px #0009;text-align:center}
+.special-kicker{font-size:10px;letter-spacing:2px;color:#b69aff;font-weight:800}
+.special-panel h1{font:700 clamp(42px,7vw,66px) "Space Grotesk";letter-spacing:-3px;margin:15px 0}
+.special-panel p{color:#aaa1b5;font-size:13px}
+#groupcat-password-form{display:flex;gap:9px;margin-top:25px}
+#groupcat-password{min-width:0;flex:1;background:#100e15;border:1px solid #514263;border-radius:8px;padding:13px;color:#fff;font:13px "DM Sans";outline:none}
+#groupcat-password:focus{border-color:#b69aff}
+#groupcat-password-form .welcome-play{gap:18px;padding:12px 16px}
+.password-error{color:#ff8c9b!important;margin-top:15px}
+.special-link{margin-top:15px;text-decoration:none}
+.finmalc-content{width:min(760px,calc(100% - 32px));margin:5vh auto 0;text-align:center;padding:clamp(22px,5vw,48px);border:3px dashed #e4c35a;border-radius:18px;background:repeating-linear-gradient(135deg,#211a27,#211a27 14px,#251c2d 14px,#251c2d 28px);box-shadow:0 22px 70px #0009;position:relative;overflow:hidden}
+.finmalc-stamp{display:inline-block;background:#f0d66b;color:#211a12;padding:7px 12px;font-size:10px;font-weight:900;letter-spacing:1px;transform:rotate(-2deg);border-radius:4px}
+.finmalc-content h1{font:900 clamp(58px,12vw,112px)/.95 "Space Grotesk";letter-spacing:-7px;color:#f5d86c;text-shadow:5px 5px 0 #754b98,9px 9px 0 #09070d;margin:30px 0 12px}
+.finmalc-subtitle{color:#d8cce5;font-size:14px;font-weight:700}
+.finmalc-face{font-size:100px;margin:20px auto;filter:drop-shadow(0 10px 0 #0007);animation:malc-wobble 2.4s ease-in-out infinite}
+@keyframes malc-wobble{0%,100%{transform:rotate(-7deg) scale(1)}50%{transform:rotate(7deg) scale(1.08)}}
+.finmalc-marquee{background:#f1d76e;color:#211a12;font-size:11px;font-weight:900;letter-spacing:1.5px;padding:11px;margin:18px -20px;white-space:normal}
+.finmalc-content h2{font:800 clamp(19px,4vw,28px) "Space Grotesk";color:#d5b8ff;margin:25px 0 10px}
+.finmalc-content>p{max-width:500px;margin:0 auto 25px;color:#c2b7cb;font-size:13px;line-height:1.7}
+.video-card{background:#100e14;border:1px solid #55436b;border-radius:12px;padding:14px;text-align:left}
+.video-heading{font:700 13px "Space Grotesk";color:#e7d8ff;margin:0 0 12px}
+.video-card video{display:block;width:100%;max-height:440px;background:#050505;border-radius:7px}
+.video-help{font-size:10px;color:#92889b;margin-top:10px;line-height:1.6}
+.video-help code{color:#d7c4ff}
+.finmalc-footer{font-size:10px;letter-spacing:2px;color:#8c7b9d;margin-top:22px}
+@media(max-width:520px){.special-top{width:calc(100% - 36px);padding:20px 0}.special-top .welcome-logo{font-size:14px}.special-panel{margin-top:10vh;padding:28px 20px}#groupcat-password-form{flex-direction:column}.finmalc-content{margin-top:3vh}.finmalc-content h1{letter-spacing:-4px}.finmalc-face{font-size:78px}}
