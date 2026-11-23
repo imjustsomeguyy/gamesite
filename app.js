@@ -119,6 +119,49 @@
     cookieGameWrap.hidden=true;
   });
 
+  // One local backup slot for the official game's exported save string.
+  const COOKIE_SAVE_SLOT_KEY="groupcat_cookieclicker_export_v1";
+  const cookieSaveText=document.getElementById("cookie-save-text");
+  const cookieSlotStatus=document.getElementById("cookie-slot-status");
+  const cookieSlotMessage=document.getElementById("cookie-slot-message");
+  function readCookieSlot(){
+    try{return localStorage.getItem(COOKIE_SAVE_SLOT_KEY)||"";}catch{return "";}
+  }
+  function updateCookieSlotStatus(){
+    const saved=readCookieSlot();
+    cookieSlotStatus.textContent=saved?"Saved · "+saved.length.toLocaleString()+" characters":"Empty slot";
+    document.getElementById("cookie-copy-slot").disabled=!saved;
+    document.getElementById("cookie-load-slot").disabled=!saved;
+    document.getElementById("cookie-clear-slot").disabled=!saved;
+  }
+  document.getElementById("cookie-save-slot").addEventListener("click",()=>{
+    const value=cookieSaveText.value.trim();
+    if(!value){cookieSlotMessage.textContent="Paste an exported save string first.";return;}
+    try{
+      localStorage.setItem(COOKIE_SAVE_SLOT_KEY,value);
+      cookieSlotMessage.textContent="Saved. This replaces anything that was previously in your one save slot.";
+      updateCookieSlotStatus();
+    }catch{
+      cookieSlotMessage.textContent="Could not save this string. Your browser may be blocking local storage or the string may be too large.";
+    }
+  });
+  document.getElementById("cookie-copy-slot").addEventListener("click",async()=>{
+    const value=readCookieSlot();if(!value)return;
+    try{await navigator.clipboard.writeText(value);cookieSlotMessage.textContent="Saved string copied. Paste it into Cookie Clicker's Import save box.";}
+    catch{cookieSaveText.value=value;cookieSaveText.focus();cookieSaveText.select();cookieSlotMessage.textContent="Clipboard access was blocked. The saved string is loaded and selected above; copy it manually.";}
+  });
+  document.getElementById("cookie-load-slot").addEventListener("click",()=>{
+    const value=readCookieSlot();if(!value)return;
+    cookieSaveText.value=value;cookieSlotMessage.textContent="Loaded into the text box. You can edit it, then save to overwrite the slot.";
+  });
+  document.getElementById("cookie-clear-slot").addEventListener("click",()=>{
+    if(!readCookieSlot())return;
+    if(!confirm("Delete the one saved Cookie Clicker backup?"))return;
+    try{localStorage.removeItem(COOKIE_SAVE_SLOT_KEY);updateCookieSlotStatus();cookieSlotMessage.textContent="Saved slot cleared.";}
+    catch{cookieSlotMessage.textContent="Could not clear the saved slot.";}
+  });
+  updateCookieSlotStatus();
+
   document.getElementById("account-login-tab").addEventListener("click",()=>setAccountMode("login"));
   document.getElementById("account-signup-tab").addEventListener("click",()=>setAccountMode("signup"));
   document.getElementById("account-form").addEventListener("submit",async event=>{
