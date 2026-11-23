@@ -5,7 +5,7 @@ const digest=async value=>{
   return btoa(String.fromCharCode(...new Uint8Array(bytes))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 };
 function cookieValue(request) {
-  const match=request.headers.get("Cookie")?.match(/(?:^|;\\s*)gc_session=([^;]*)/);
+  const match=request.headers.get("Cookie")?.match(/(?:^|;\s*)gc_session=([^;]*)/);
   return match?decodeURIComponent(match[1]):null;
 }
 async function userFor(request,env) {
