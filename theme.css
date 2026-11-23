@@ -645,3 +645,6 @@ html.gc-performance-mode .primary-btn:hover {
 .cookie-guest-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 15px;border:1px solid rgba(230,211,255,.25);border-radius:10px;color:#eee2ff;text-decoration:none;font:700 12px "DM Sans",sans-serif;background:rgba(255,255,255,.07)}
 .cookie-external-fallback{margin:0;padding:10px;text-align:center;color:#c0b5d0;font-size:12px;background:#101014}
 .cookie-external-fallback a{color:#d5bdff}
+
+.cookie-game-frame-wrap:not([hidden]){display:flex;flex-direction:column}
+.cookie-game-frame-wrap iframe{flex:1;min-height:0;height:auto}
