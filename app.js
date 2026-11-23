@@ -64,10 +64,11 @@
     const response=await fetch("/api/data",{credentials:"same-origin"});
     if(!response.ok) throw new Error("Signed in, but your saved data could not be loaded.");
     const data=await response.json();
+    window.GROUPCAT_ACCOUNT.syncing=true;
     favorites.splice(0,favorites.length,...(Array.isArray(data.favorites)?data.favorites:[]));
     recent.splice(0,recent.length,...(Array.isArray(data.recent)?data.recent:[]));
-    saveStore("groupcat-favorites",favorites);
-    saveStore("groupcat-recent",recent);
+    try { localStorage.setItem("groupcat-favorites",JSON.stringify(favorites)); localStorage.setItem("groupcat-recent",JSON.stringify(recent)); } catch {}
+    window.GROUPCAT_ACCOUNT.syncing=false;
     updateAccountStats(); render();
   }
   function showAccountUser(user) {
@@ -101,7 +102,8 @@
       const data=await accountRequest(window.GROUPCAT_ACCOUNT.mode,{username,password});
       showAccountUser(data.user);
       if(window.GROUPCAT_ACCOUNT.mode==="signup") {
-        await fetch("/api/data",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({favorites,recent})});
+        const saved=await fetch("/api/data",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({favorites,recent})});
+        if(!saved.ok) throw new Error("Account created, but the database needs to be connected before data can be saved.");
       } else { await loadAccountData(); }
       document.getElementById("account-signed-message").textContent="Account ready. Your data is saved.";
     } catch(error) { accountStatus(error.message,true); }
@@ -211,6 +213,11 @@
   document.getElementById("finmalc-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("proxy-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("proxy-back-bottom").addEventListener("click",()=>showScreen("menu"));
+  document.getElementById("piped-search-form").addEventListener("submit",event=>{
+    event.preventDefault();
+    const query=document.getElementById("piped-search").value.trim();
+    if(query)window.open("https://piped.video/results?search_query="+encodeURIComponent(query),"_blank","noopener,noreferrer");
+  });
   document.getElementById("games-back").addEventListener("click",()=>showScreen("menu"));
   document.querySelectorAll("[data-category]").forEach(el=>el.addEventListener("click",()=>selectCategory(el.dataset.category)));
   search.addEventListener("input",()=>{query=search.value.trim().toLowerCase();render();});
