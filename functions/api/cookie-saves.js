@@ -45,7 +45,7 @@ export async function onRequest(context){
         return json({ok:true,id:body.id,updatedAt:now});
       }
       const id=crypto.randomUUID();
-      const result=await env.DB.prepare("INSERT INTO cookie_saves (id,user_id,name,save_data,created_at,updated_at,last_played_at) SELECT ?,?,?,?,?,?,?,? WHERE (SELECT COUNT(*) FROM cookie_saves WHERE user_id=?) < 3").bind(id,user.id,name,save,now,now,now,user.id).run();
+      const result=await env.DB.prepare("INSERT INTO cookie_saves (id,user_id,name,save_data,created_at,updated_at,last_played_at) SELECT ?,?,?,?,?,?,? WHERE (SELECT COUNT(*) FROM cookie_saves WHERE user_id=?) < 3").bind(id,user.id,name,save,now,now,now,user.id).run();
       if(!result.meta?.changes)return json({error:"You already have 3 saves. Delete one before creating another."},409);
       return json({ok:true,id,createdAt:now});
     }
