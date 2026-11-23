@@ -262,5 +262,56 @@ window.unlockGroupcat = function(event) {
       document.addEventListener("fullscreenchange",update);
     })();
   </script>
+
+  <div id="gc-quick-tools" aria-label="Site quick settings">
+    <button id="gc-performance-toggle" type="button" aria-pressed="false">⚡ Performance: Off</button>
+    <button id="gc-cloak-tab" type="button">↗ Open cloaked tab</button>
+  </div>
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const performanceButton = document.getElementById("gc-performance-toggle");
+      const cloakButton = document.getElementById("gc-cloak-tab");
+      const applyPerformance = enabled => {
+        root.classList.toggle("gc-performance-mode", enabled);
+        performanceButton.setAttribute("aria-pressed", String(enabled));
+        performanceButton.textContent = enabled ? "⚡ Performance: On" : "⚡ Performance: Off";
+        try { localStorage.setItem("gc_performance_mode", enabled ? "on" : "off"); } catch {}
+      };
+      let enabled = false;
+      try { enabled = localStorage.getItem("gc_performance_mode") === "on"; } catch {}
+      applyPerformance(enabled);
+      performanceButton.addEventListener("click", () => {
+        applyPerformance(!root.classList.contains("gc-performance-mode"));
+      });
+      cloakButton.addEventListener("click", () => {
+        const blank = window.open("about:blank", "_blank");
+        if (!blank) {
+          alert("Your browser blocked the new tab. Allow pop-ups for this site, then try again.");
+          return;
+        }
+        try {
+          blank.document.title = "New Tab";
+          const icon = blank.document.createElement("link");
+          icon.rel = "icon";
+          icon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23fbbc04'/%3E%3Cpath d='M24 2a22 22 0 0 0-19 11l19 11 19-11A22 22 0 0 0 24 2' fill='%23ea4335'/%3E%3Cpath d='M5 13a22 22 0 0 0 19 33l11-19-11-19z' fill='%2334a853'/%3E%3Ccircle cx='24' cy='24' r='11' fill='%234285f4' stroke='white' stroke-width='2'/%3E%3C/svg%3E";
+          blank.document.head.append(icon);
+          const frame = blank.document.createElement("iframe");
+          frame.src = window.location.href;
+          frame.title = "New Tab";
+          frame.allow = "fullscreen; autoplay; gamepad; clipboard-read; clipboard-write";
+          frame.allowFullscreen = true;
+          Object.assign(frame.style, { position:"fixed", inset:"0", width:"100%", height:"100%", border:"0", margin:"0", padding:"0", background:"#090611" });
+          Object.assign(blank.document.documentElement.style, { margin:"0", width:"100%", height:"100%", overflow:"hidden", background:"#090611" });
+          Object.assign(blank.document.body.style, { margin:"0", width:"100%", height:"100%", overflow:"hidden", background:"#090611" });
+          blank.document.body.append(frame);
+        } catch (error) {
+          blank.close();
+          alert("This browser could not create the cloaked tab. Try another browser or allow pop-ups.");
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
