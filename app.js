@@ -4,10 +4,11 @@
   const menu = document.getElementById("menu-screen");
   const proxy = document.getElementById("proxy-screen");
   const accountScreen = document.getElementById("account-screen");
+  const minecraftScreen = document.getElementById("minecraft-screen");
   const groupcatScreen = document.getElementById("groupcat-screen");
   const finmalcScreen = document.getElementById("finmalc-screen");
   const appShell = document.querySelector(".app-shell");
-  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; accountScreen.hidden = screen !== "account"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
+  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; accountScreen.hidden = screen !== "account"; minecraftScreen.hidden = screen !== "minecraft"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
   const search = document.getElementById("search");
   const count = document.getElementById("game-count");
   const title = document.getElementById("section-title");
@@ -118,6 +119,27 @@
     showAccountUser(null); accountStatus("You have been logged out."); setAccountMode("login");
   });
   document.getElementById("menu-account").addEventListener("click",()=>{showScreen("account");});
+  document.getElementById("minecraft-launch").addEventListener("click",async()=>{
+    const button=document.getElementById("minecraft-launch");
+    const status=document.getElementById("minecraft-status");
+    button.disabled=true; status.textContent="Checking the self-hosted Minecraft client…";
+    try {
+      const response=await fetch("/minecraft/26.3.html",{method:"HEAD",cache:"no-store"});
+      if(!response.ok) {
+        status.textContent=response.status===503
+          ?"Minecraft storage is not connected yet. The site owner needs to add the client file to Cloudflare R2."
+          :"The Minecraft 26.3 client file has not been uploaded yet.";
+        return;
+      }
+      document.getElementById("minecraft-frame").src="/minecraft/26.3.html";
+      document.getElementById("minecraft-frame-wrap").hidden=false;
+      status.textContent="Loading Minecraft 26.3…";
+      button.hidden=true;
+    } catch {
+      status.textContent="Could not reach the self-hosted Minecraft file. Try again after the site has deployed.";
+    } finally { button.disabled=false; }
+  });
+
 
 
   function selectCategory(next) {
