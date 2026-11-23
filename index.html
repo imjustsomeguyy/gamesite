@@ -109,7 +109,7 @@
   <section class="groupcat-screen" id="groupcat-screen" hidden>
     <div class="special-top"><button class="menu-back" id="groupcat-back" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
     <div class="special-panel password-panel" id="groupcat-lock"><div class="special-kicker">RESTRICTED AREA</div><h1>Groupcat</h1><p>This page is password protected.</p><form id="groupcat-password-form" onsubmit="return window.unlockGroupcat(event)"><input id="groupcat-password" type="password" placeholder="Enter password" autocomplete="current-password" required><button class="welcome-play" type="submit">Unlock <span>↗</span></button></form><p class="password-error" id="groupcat-password-error" hidden>Wrong password. Try again.</p></div>
-    <div class="special-panel" id="groupcat-secret" hidden><div class="special-kicker">ACCESS GRANTED</div><h1>You're in.</h1><p>Welcome to the Groupcat page.</p><a class="welcome-play special-link" href="https://groupcat.xyz" target="_blank" rel="noreferrer">Open Groupcat.xyz <span>↗</span></a></div>
+    <div class="special-panel" id="groupcat-secret" hidden><div class="special-kicker">ACCESS GRANTED</div><h1>You're in.</h1><p>Welcome to the Groupcat page.</p><a class="welcome-play special-link" href="https://groupcat.xyz" target="_blank" rel="noreferrer">Open Groupcat.xyz <span>↗</span></a><button class="welcome-play special-link" id="groupcat-dev-mode" type="button" hidden onclick="location.href='/dev.html'">Dev Mode <span>↗</span></button></div>
   </section>
 
   <section class="finmalc-screen" id="finmalc-screen" hidden>
@@ -194,18 +194,32 @@ window.showSiteScreen = function(screen) {
 };
 window.unlockGroupcat = function(event) {
   event.preventDefault();
-  const ok=document.getElementById("groupcat-password").value==="finmilk";
+  const ok=document.getElementById("groupcat-password").value==="finmilk"; document.getElementById("groupcat-dev-mode").hidden=!ok;
   document.getElementById("groupcat-lock").hidden=ok;
   document.getElementById("groupcat-secret").hidden=!ok;
   document.getElementById("groupcat-password-error").hidden=ok;
   return false;
 };
 </script>
+  <script>
+    (() => {
+      try {
+        if (localStorage.getItem("gc_url_cloak") === "off") return;
+        document.title = "New Tab";
+        const icon = document.createElement("link");
+        icon.rel = "icon";
+        icon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23202028'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23a8a8b8'/%3E%3C/svg%3E";
+        document.head.append(icon);
+        const random = Array.from(crypto.getRandomValues(new Uint8Array(12)), b => b.toString(16).padStart(2,"0")).join("");
+        history.replaceState(history.state, "", "/?s=" + random);
+      } catch {}
+    })();
+  </script>
   <script src="games.js"></script>
   <script src="app.js"></script>
 
   <script>
-    document.documentElement.dataset.theme = "mono";
+    document.documentElement.dataset.theme = localStorage.getItem("gc_theme") || "mono";
     (() => {
       const menu = document.getElementById("menu-screen");
       if (!menu || !window.matchMedia("(pointer:fine)").matches) return;
