@@ -45,3 +45,14 @@ Then visit http://localhost:8000.
 ## Adding games
 
 Add a game object to `games.js`. Each entry has an `id`, `name`, `category`, `description`, and playable `path`.
+
+
+## Accounts and saved data
+
+The site includes username/password accounts and account syncing for favourites and recently played games. To enable server-side accounts, follow [ACCOUNT-SETUP.md](ACCOUNT-SETUP.md) and connect a Cloudflare D1 database using the SQL in [database/schema.sql](database/schema.sql).
+
+Until the D1 binding is connected, the account screen will show that accounts are not available. Guest favourites and recent games continue to use browser storage.
+
+## YouTube
+
+The Proxy page links to Piped, a third-party alternative YouTube frontend. It is not a full Scramjet browser proxy, and public Piped instances can sometimes be unavailable. Do not enter passwords or sensitive details into public instances.
