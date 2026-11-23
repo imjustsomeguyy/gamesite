@@ -44,13 +44,15 @@ export async function onRequest({request,env}){
   const users=await env.DB.prepare("SELECT id,username,created_at FROM users ORDER BY created_at DESC LIMIT 500").all();
   const data=await env.DB.prepare("SELECT user_id,data_json,updated_at FROM user_data").all();
   const saves=await env.DB.prepare("SELECT id,user_id,name,length(save_data) AS bytes,created_at,updated_at,last_played_at FROM cookie_saves ORDER BY last_played_at DESC LIMIT 1500").all();
+  const sessions=await env.DB.prepare("SELECT user_id,COUNT(*) AS active_sessions FROM sessions WHERE expires_at>? GROUP BY user_id").bind(Date.now()).all();
+  const sessionsByUser=new Map((sessions.results||[]).map(row=>[row.user_id,row.active_sessions]));
   const dataByUser=new Map((data.results||[]).map(row=>[row.user_id,row]));
   const savesByUser=new Map();
   for(const save of saves.results||[]){if(!savesByUser.has(save.user_id))savesByUser.set(save.user_id,[]);savesByUser.get(save.user_id).push({id:save.id,name:save.name,bytes:save.bytes,createdAt:save.created_at,updatedAt:save.updated_at,lastPlayedAt:save.last_played_at});}
   return json({ok:true,accounts:(users.results||[]).map(user=>{
    let saved={favorites:[],recent:[]};const row=dataByUser.get(user.id);
    if(row?.data_json){try{const parsed=JSON.parse(row.data_json);saved={favorites:Array.isArray(parsed.favorites)?parsed.favorites:[],recent:Array.isArray(parsed.recent)?parsed.recent:[]};}catch{}}
-   return {id:user.id,username:user.username,createdAt:user.created_at,dataUpdatedAt:row?.updated_at||null,favorites:saved.favorites,recent:saved.recent,cookieSaves:savesByUser.get(user.id)||[]};
+   return {id:user.id,username:user.username,createdAt:user.created_at,activeSessions:sessionsByUser.get(user.id)||0,dataUpdatedAt:row?.updated_at||null,favorites:saved.favorites,recent:saved.recent,cookieSaves:savesByUser.get(user.id)||[]};
   }),counts:{accounts:(users.results||[]).length,cookieSaves:(saves.results||[]).length}});
  }catch{return json({error:"Could not read the account tables. Check the D1 schema and migrations."},500);}
 }
