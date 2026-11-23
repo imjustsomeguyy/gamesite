@@ -624,3 +624,18 @@ html.gc-performance-mode .primary-btn:hover {
   #gc-quick-tools { left: 9px; bottom: 9px; gap: 5px; }
   #gc-quick-tools button { min-height: 36px; padding: 0 10px; font-size: 10px; }
 }
+
+
+/* Guest-play choice and save warning */
+.cookie-guest-panel{
+  width:min(760px,calc(100% - 32px));margin:0 auto 22px;padding:20px;
+  border:1px solid rgba(211,183,255,.28);border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,255,255,.10),rgba(45,30,68,.48));
+  color:#f5efff;box-shadow:0 12px 36px #0003;
+}
+.cookie-guest-panel>strong{font:700 16px "Space Grotesk",sans-serif}
+.cookie-guest-panel p{margin:9px 0 16px;color:#c0b5d0;font-size:12px;line-height:1.65}
+.cookie-guest-actions{display:flex;flex-wrap:wrap;gap:9px}
+.cookie-guest-actions button{min-height:42px;padding:0 15px;border:1px solid rgba(230,211,255,.25);border-radius:10px;background:rgba(255,255,255,.08);color:#f5efff;font:700 12px "DM Sans",sans-serif;cursor:pointer}
+.cookie-guest-actions button:first-child{background:linear-gradient(135deg,#d5bdff,#956bea);color:#211431;border-color:#ffffff70}
+.cookie-guest-actions button:hover{filter:brightness(1.1)}
