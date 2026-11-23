@@ -510,3 +510,31 @@ footer a{color:#aeb8d7;text-decoration:none}
 .gunspin-frame-wrap{position:relative;width:min(1100px,calc(100% - 36px));height:min(68vh,720px);min-height:360px;margin:0 auto;border:1px solid rgba(255,255,255,.13);border-radius:20px;overflow:hidden;background:#000;box-shadow:0 22px 80px rgba(0,0,0,.55)}
 .gunspin-frame-wrap iframe{width:100%;height:100%;border:0;display:block;background:#000}
 @media(max-width:700px){.proxy-browser-wrap{inset:68px 8px 8px;border-radius:14px}.gunspin-heading{margin:16px auto 10px;padding:0 14px}.gunspin-frame-wrap{width:calc(100% - 16px);height:calc(100dvh - 190px);min-height:300px;border-radius:12px}.gunspin-screen .special-top{padding-left:10px;padding-right:10px}}
+
+
+/* Cookie Clicker cloud-save page */
+.cookieclicker-screen{min-height:100vh;background:#050507;color:#fff;padding-bottom:28px}
+.cookieclicker-heading{max-width:1120px;margin:26px auto 16px;padding:0 22px}
+.cookieclicker-heading h1{font-size:clamp(2.2rem,6vw,4rem);margin:8px 0}
+.cookieclicker-heading p{color:rgba(255,255,255,.62);margin:0}
+.cookie-save-panel{max-width:1120px;margin:0 auto 18px;padding:18px 20px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:rgba(255,255,255,.035);backdrop-filter:blur(18px)}
+.cookie-save-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.cookie-save-top>div:first-child{display:flex;flex-direction:column;gap:4px}
+.cookie-save-top>div:first-child strong{font-size:15px}
+.cookie-save-top>div:first-child span,.cookie-save-details span{font-size:12px;color:rgba(255,255,255,.55)}
+.cookie-save-create{display:flex;gap:8px;flex-wrap:wrap}
+.cookie-save-create input{min-width:190px;max-width:100%;padding:10px 12px;border:1px solid rgba(255,255,255,.16);border-radius:10px;background:#101014;color:#fff;font:inherit}
+.cookie-save-create button,.cookie-save-actions button{padding:10px 13px;border:1px solid rgba(255,255,255,.18);border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font:600 12px inherit;cursor:pointer}
+.cookie-save-create button:hover,.cookie-save-actions button:hover{background:rgba(255,255,255,.2)}
+.cookie-save-create button:disabled{opacity:.4;cursor:not-allowed}
+.cookie-save-list{display:grid;gap:9px;margin-top:14px}
+.cookie-save-empty{padding:14px 0;color:rgba(255,255,255,.55);font-size:13px}
+.cookie-save-card{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 13px;border:1px solid rgba(255,255,255,.1);border-radius:13px;background:rgba(0,0,0,.22)}
+.cookie-save-details{display:flex;min-width:0;flex-direction:column;gap:5px}
+.cookie-save-details strong{overflow-wrap:anywhere}
+.cookie-save-actions{display:flex;gap:7px;flex-wrap:wrap}
+.cookie-save-actions button.danger{border-color:rgba(255,100,100,.25);color:#ffaaaa}
+.cookie-save-message{min-height:18px;margin:10px 0 0;color:rgba(255,255,255,.72);font-size:12px}
+.cookie-game-frame-wrap{width:min(1500px,calc(100% - 28px));height:min(76vh,900px);min-height:540px;margin:0 auto;border:1px solid rgba(255,255,255,.13);border-radius:18px;overflow:hidden;background:#101014}
+.cookie-game-frame-wrap iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+@media(max-width:700px){.cookieclicker-heading{margin:16px auto 12px;padding:0 14px}.cookie-save-panel{margin:0 8px 12px;padding:13px;border-radius:14px}.cookie-save-card{align-items:flex-start;flex-direction:column}.cookie-save-actions{width:100%}.cookie-save-actions button{flex:1}.cookie-save-create{width:100%}.cookie-save-create input{min-width:0;flex:1}.cookie-save-create button{width:100%}.cookie-game-frame-wrap{width:calc(100% - 16px);height:76vh;min-height:520px;border-radius:12px}}
