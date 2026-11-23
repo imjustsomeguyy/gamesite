@@ -3,8 +3,10 @@
   const welcome = document.getElementById("welcome-screen");
   const menu = document.getElementById("menu-screen");
   const proxy = document.getElementById("proxy-screen");
+  const groupcatScreen = document.getElementById("groupcat-screen");
+  const finmalcScreen = document.getElementById("finmalc-screen");
   const appShell = document.querySelector(".app-shell");
-  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
+  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
   const search = document.getElementById("search");
   const count = document.getElementById("game-count");
   const title = document.getElementById("section-title");
@@ -112,6 +114,11 @@
   document.getElementById("menu-back-home").addEventListener("click",()=>showScreen("welcome"));
   document.getElementById("menu-games").addEventListener("click",()=>showScreen("games"));
   document.getElementById("menu-proxy").addEventListener("click",()=>showScreen("proxy"));
+  document.getElementById("menu-groupcat").addEventListener("click",()=>{document.getElementById("groupcat-lock").hidden=false;document.getElementById("groupcat-secret").hidden=true;document.getElementById("groupcat-password").value="";document.getElementById("groupcat-password-error").hidden=true;showScreen("groupcat");});
+  document.getElementById("groupcat-back").addEventListener("click",()=>showScreen("menu"));
+  document.getElementById("groupcat-password-form").addEventListener("submit",e=>{e.preventDefault();if(document.getElementById("groupcat-password").value==="finmilk"){document.getElementById("groupcat-lock").hidden=true;document.getElementById("groupcat-secret").hidden=false;}else{document.getElementById("groupcat-password-error").hidden=false;}});
+  document.getElementById("menu-finmalc").addEventListener("click",()=>showScreen("finmalc"));
+  document.getElementById("finmalc-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("proxy-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("proxy-back-bottom").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("games-back").addEventListener("click",()=>showScreen("menu"));
