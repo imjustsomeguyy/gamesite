@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS cookie_saves (
   name TEXT NOT NULL,
   save_data TEXT NOT NULL,
   created_at INTEGER NOT NULL,
-  updated_at INTEGER NOT NULL
+  updated_at INTEGER NOT NULL,
+  last_played_at INTEGER NOT NULL
 );
-CREATE INDEX IF NOT EXISTS cookie_saves_user_updated ON cookie_saves(user_id, updated_at);
+CREATE INDEX IF NOT EXISTS cookie_saves_user_updated ON cookie_saves(user_id, last_played_at);
