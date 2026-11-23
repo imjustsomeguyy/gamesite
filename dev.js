@@ -3,7 +3,15 @@
  $("back").addEventListener("click",()=>location.href="/");
  $("theme-choice").value=localStorage.getItem("gc_theme")||"mono";
  $("cloak-choice").value=localStorage.getItem("gc_url_cloak")||"on";
- function applySettings(){localStorage.setItem("gc_theme",$("theme-choice").value);localStorage.setItem("gc_url_cloak",$("cloak-choice").value);$("settings-status").textContent="Saved. The main site will use these settings on its next load."; }
+ function applySettings(){
+  localStorage.setItem("gc_theme",$("theme-choice").value);
+  localStorage.setItem("gc_url_cloak",$("cloak-choice").value);
+  if($("cloak-choice").value==="on"){
+   const random=Array.from(crypto.getRandomValues(new Uint8Array(12)),b=>b.toString(16).padStart(2,"0")).join("");
+   history.replaceState(history.state,"",location.pathname+"?s="+random);
+  }else{history.replaceState(history.state,"",location.pathname);}
+  $("settings-status").textContent="Saved. URL display setting applied immediately.";
+ }
  $("theme-choice").addEventListener("change",applySettings);$("cloak-choice").addEventListener("change",applySettings);
  async function load(){
   $("system-status").textContent="Checking D1 and loading account records…";
