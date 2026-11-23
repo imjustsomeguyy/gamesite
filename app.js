@@ -22,17 +22,18 @@
     category = next;
     document.querySelectorAll("[data-category]").forEach(el => el.classList.toggle("active", el.classList.contains("nav-link") && el.dataset.category === next));
     document.querySelectorAll(".filter-chip").forEach(el => el.classList.toggle("selected", el.dataset.category === next));
-    const labels = {all:"All games",popular:"Popular games",recent:"Recently played",arcade:"Arcade",action:"Action",puzzle:"Puzzle",racing:"Racing",sports:"Sports",strategy:"Strategy"};
+    const labels = {all:"All games",popular:"Popular games",recent:"Recently played",favorites:"Favourites",arcade:"Arcade",action:"Action",puzzle:"Puzzle",racing:"Racing",sports:"Sports",strategy:"Strategy"};
     title.childNodes[0].textContent = (labels[next] || "All games") + " ";
     render();
   }
   function visibleGames() {
     let list = games.filter(g => {
-      const matchCategory = category === "all" || category === "popular" || category === "recent" || g.category === category;
+      const matchCategory = category === "all" || category === "popular" || category === "recent" || category === "favorites" || g.category === category;
       const haystack = (g.name+" "+g.description+" "+g.category+" "+(g.tags||[]).join(" ")).toLowerCase();
       return matchCategory && haystack.includes(query);
     });
     if (category === "recent") list = recent.map(id => games.find(g => g.id === id)).filter(Boolean).filter(g => (g.name+" "+g.description).toLowerCase().includes(query));
+    if (category === "favorites") list = favorites.map(id => games.find(g => g.id === id)).filter(Boolean).filter(g => (g.name+" "+g.description).toLowerCase().includes(query));
     if (category === "popular") list = list.slice(0,24);
     if (sort.value === "name") list.sort((a,b)=>a.name.localeCompare(b.name));
     return list;
@@ -60,7 +61,13 @@
       const play = document.createElement("span");
       play.className = "card-play";
       play.textContent = "▶";
-      thumb.append(tag,icon,play);
+      const fav = document.createElement("button");
+      fav.className = "favorite-btn" + (favorites.includes(game.id) ? " is-favorite" : "");
+      fav.type = "button";
+      fav.textContent = favorites.includes(game.id) ? "♥" : "♡";
+      fav.title = favorites.includes(game.id) ? "Remove from favourites" : "Add to favourites";
+      fav.addEventListener("click", e => { e.stopPropagation(); const next = favorites.includes(game.id) ? favorites.filter(id => id !== game.id) : [game.id, ...favorites]; favorites.splice(0, favorites.length, ...next); saveStore("groupcat-favorites", favorites); render(); });
+      thumb.append(tag,icon,play,fav);
       const info = document.createElement("div");
       info.className = "game-info";
       const name = document.createElement("div");
