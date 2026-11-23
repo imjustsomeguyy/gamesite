@@ -538,3 +538,89 @@ footer a{color:#aeb8d7;text-decoration:none}
 .cookie-game-frame-wrap{width:min(1500px,calc(100% - 28px));height:min(76vh,900px);min-height:540px;margin:0 auto;border:1px solid rgba(255,255,255,.13);border-radius:18px;overflow:hidden;background:#101014}
 .cookie-game-frame-wrap iframe{display:block;width:100%;height:100%;border:0;background:#fff}
 @media(max-width:700px){.cookieclicker-heading{margin:16px auto 12px;padding:0 14px}.cookie-save-panel{margin:0 8px 12px;padding:13px;border-radius:14px}.cookie-save-card{align-items:flex-start;flex-direction:column}.cookie-save-actions{width:100%}.cookie-save-actions button{flex:1}.cookie-save-create{width:100%}.cookie-save-create input{min-width:0;flex:1}.cookie-save-create button{width:100%}.cookie-game-frame-wrap{width:calc(100% - 16px);height:76vh;min-height:520px;border-radius:12px}}
+
+
+/* Optional low-effects performance mode — keeps the Photon colour palette */
+html.gc-performance-mode *,
+html.gc-performance-mode *::before,
+html.gc-performance-mode *::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+html.gc-performance-mode body { background-attachment: scroll !important; }
+html.gc-performance-mode .welcome-content,
+html.gc-performance-mode .menu-content,
+html.gc-performance-mode .proxy-content,
+html.gc-performance-mode .special-panel,
+html.gc-performance-mode .finmalc-content,
+html.gc-performance-mode .account-panel,
+html.gc-performance-mode .menu-option,
+html.gc-performance-mode .menu-back,
+html.gc-performance-mode .back-to-menu,
+html.gc-performance-mode .search,
+html.gc-performance-mode .filter-chip,
+html.gc-performance-mode .sort-wrap select,
+html.gc-performance-mode .sidebar,
+html.gc-performance-mode .hero,
+html.gc-performance-mode .game-card,
+html.gc-performance-mode .player-overlay,
+html.gc-performance-mode .player-frame-wrap,
+html.gc-performance-mode .video-card,
+html.gc-performance-mode .menu-option .option-icon {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+html.gc-performance-mode .welcome-screen::before,
+html.gc-performance-mode .menu-screen::before,
+html.gc-performance-mode .proxy-screen::before,
+html.gc-performance-mode .groupcat-screen::before,
+html.gc-performance-mode .finmalc-screen::before,
+html.gc-performance-mode .welcome-content::before,
+html.gc-performance-mode .welcome-content::after,
+html.gc-performance-mode .menu-content::before,
+html.gc-performance-mode .menu-content::after,
+html.gc-performance-mode .hero-art,
+html.gc-performance-mode .menu-orb,
+html.gc-performance-mode .spark,
+html.gc-performance-mode .orbit {
+  filter: none !important;
+  opacity: .35 !important;
+}
+html.gc-performance-mode .game-card:hover,
+html.gc-performance-mode .menu-option:hover,
+html.gc-performance-mode .welcome-play:hover,
+html.gc-performance-mode .primary-btn:hover {
+  transform: none !important;
+}
+#gc-quick-tools {
+  position: fixed;
+  left: 14px;
+  bottom: 14px;
+  z-index: 99998;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  max-width: calc(100vw - 90px);
+}
+#gc-quick-tools button {
+  min-height: 38px;
+  border: 1px solid rgba(226,208,255,.22);
+  border-radius: 999px;
+  padding: 0 12px;
+  background: rgba(20,15,31,.94);
+  color: #eee7ff;
+  font: 600 11px "DM Sans",Arial,sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 16px #0005;
+}
+#gc-quick-tools button[aria-pressed="true"] {
+  border-color: rgba(194,157,255,.65);
+  background: #392957;
+  color: #fff;
+}
+@media(max-width:520px) {
+  #gc-quick-tools { left: 9px; bottom: 9px; gap: 5px; }
+  #gc-quick-tools button { min-height: 36px; padding: 0 10px; font-size: 10px; }
+}
