@@ -27,9 +27,10 @@
     <div class="menu-content">
 <h1>Menu</h1>
       <div class="menu-options">
-        <button class="menu-option games-option" id="menu-games"><span class="option-icon">▦</span><span class="option-copy"><strong>Games</strong></span><span class="option-arrow">↗</span></button>
+        <button class="menu-option games-option" id="menu-games" type="button" onclick="document.getElementById(\'welcome-screen\').hidden=true;document.getElementById(\'menu-screen\').hidden=true;document.querySelector(\'.app-shell\').hidden=false;window.scrollTo(0,0)"><span class="option-icon">▦</span><span class="option-copy"><strong>Games</strong></span><span class="option-arrow">↗</span></button>
         <button class="menu-option proxy-option" id="menu-proxy"><span class="option-icon">◉</span><span class="option-copy"><strong>Proxy</strong></span><span class="option-arrow">↗</span></button>
-        <a class="menu-option groupcat-option" href="https://groupcat.xyz" target="_blank" rel="noreferrer"><span class="option-icon">👀</span><span class="option-copy"><strong>Groupcat</strong></span><span class="option-arrow">↗</span></a>
+        <button class="menu-option groupcat-option" id="menu-groupcat" type="button"><span class="option-icon">👀</span><span class="option-copy"><strong>Groupcat</strong></span><span class="option-arrow">↗</span></button>
+        <button class="menu-option finmalc-option" id="menu-finmalc" type="button"><span class="option-icon">🗿</span><span class="option-copy"><strong>fin malc</strong></span><span class="option-arrow">↗</span></button>
       </div>
     </div>
     <div class="menu-orb menu-orb-one"></div><div class="menu-orb menu-orb-two"></div>
@@ -38,6 +39,18 @@
   <section class="proxy-screen" id="proxy-screen" hidden>
     <div class="proxy-top"><button class="menu-back" id="proxy-back">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
     <div class="proxy-content"><div class="proxy-icon">◉</div><h1>Proxy</h1><p class="proxy-small">Not available yet.</p><button class="welcome-play" id="proxy-back-bottom">Back <span>↗</span></button></div>
+  </section>
+
+
+  <section class="groupcat-screen" id="groupcat-screen" hidden>
+    <div class="special-top"><button class="menu-back" id="groupcat-back">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
+    <div class="special-panel password-panel" id="groupcat-lock"><div class="special-kicker">RESTRICTED AREA</div><h1>Groupcat</h1><p>This page is password protected.</p><form id="groupcat-password-form"><input id="groupcat-password" type="password" placeholder="Enter password" autocomplete="current-password" required><button class="welcome-play" type="submit">Unlock <span>↗</span></button></form><p class="password-error" id="groupcat-password-error" hidden>Wrong password. Try again.</p></div>
+    <div class="special-panel" id="groupcat-secret" hidden><div class="special-kicker">ACCESS GRANTED</div><h1>You're in.</h1><p>Welcome to the Groupcat page.</p><a class="welcome-play special-link" href="https://groupcat.xyz" target="_blank" rel="noreferrer">Open Groupcat.xyz <span>↗</span></a></div>
+  </section>
+
+  <section class="finmalc-screen" id="finmalc-screen" hidden>
+    <div class="special-top"><button class="menu-back" id="finmalc-back">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
+    <div class="finmalc-content"><div class="finmalc-stamp">100% FINLAY APPROVED* (*not legally verified)</div><h1>FIN MALC.</h1><div class="finmalc-subtitle">A totally serious fan page for a very important bloke.</div><div class="finmalc-face">🗿</div><div class="finmalc-marquee">FINLAY MALCOLM FAN CLUB • FINLAY MALCOLM FAN CLUB • FINLAY MALCOLM FAN CLUB •</div><h2>THE LEGEND. THE MYTH. THE MALCOLM.</h2><p>Some people change the world. Finlay probably changed the group chat. This page exists for reasons nobody can fully explain.</p><div class="video-card"><div class="video-heading">📼 THE FIN MALC ARCHIVE</div><video id="finmalc-video" controls playsinline preload="metadata"><source src="videos/finlay.mp4" type="video/mp4">Your browser does not support this video.</video><div class="video-help">Video not showing? Add your MP4 as <code>videos/finlay.mp4</code> in the GitHub repository.</div></div><div class="finmalc-footer">EST. FOR THE CULTURE. PROBABLY.</div></div>
   </section>
 
   <div class="app-shell" hidden>
