@@ -3,10 +3,11 @@
   const welcome = document.getElementById("welcome-screen");
   const menu = document.getElementById("menu-screen");
   const proxy = document.getElementById("proxy-screen");
+  const accountScreen = document.getElementById("account-screen");
   const groupcatScreen = document.getElementById("groupcat-screen");
   const finmalcScreen = document.getElementById("finmalc-screen");
   const appShell = document.querySelector(".app-shell");
-  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
+  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; accountScreen.hidden = screen !== "account"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
   const search = document.getElementById("search");
   const count = document.getElementById("game-count");
   const title = document.getElementById("section-title");
@@ -21,9 +22,97 @@
   let query = "";
   let games = Array.isArray(window.GAMES) ? window.GAMES : [];
   const getStore = key => { try { return JSON.parse(localStorage.getItem(key) || "[]"); } catch { return []; } };
-  const saveStore = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value.slice(0,30))); } catch {} };
+  const saveStore = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value.slice(0,30))); } catch {} if (window.GROUPCAT_ACCOUNT?.user) syncAccountData(); };
   const recent = getStore("groupcat-recent");
   const favorites = getStore("groupcat-favorites");
+  window.GROUPCAT_ACCOUNT = { user: null, mode: "login", syncing: false };
+  const accountMessage = document.getElementById("account-message");
+  function accountStatus(message, error=false) { accountMessage.textContent=message; accountMessage.classList.toggle("error",error); }
+  function setAccountMode(mode) {
+    window.GROUPCAT_ACCOUNT.mode=mode;
+    document.getElementById("account-login-tab").classList.toggle("active",mode==="login");
+    document.getElementById("account-signup-tab").classList.toggle("active",mode==="signup");
+    document.getElementById("account-heading").textContent=mode==="login"?"Welcome back.":"Create your account.";
+    document.getElementById("account-description").textContent=mode==="login"?"Sign in to sync your favourites and recently played games across devices.":"Pick a username and password. Your game data will be saved to your account.";
+    document.getElementById("account-submit").innerHTML=(mode==="login"?"Log in":"Create account")+" <span>↗</span>";
+    document.getElementById("account-password").autocomplete=mode==="login"?"current-password":"new-password";
+    document.getElementById("account-password").minLength=mode==="login"?1:8;
+    accountStatus("");
+  }
+  async function accountRequest(action, body) {
+    const response=await fetch("/api/auth",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({action,...body})});
+    const data=await response.json().catch(()=>({error:"The server returned an invalid response."}));
+    if(!response.ok) throw new Error(data.error||"Something went wrong.");
+    return data;
+  }
+  async function syncAccountData() {
+    if(!window.GROUPCAT_ACCOUNT.user||window.GROUPCAT_ACCOUNT.syncing)return;
+    window.GROUPCAT_ACCOUNT.syncing=true;
+    try {
+      const response=await fetch("/api/data",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({favorites,recent})});
+      if(!response.ok) throw new Error("Could not save your account data.");
+      document.getElementById("account-signed-message").textContent="Your game data is saved.";
+      updateAccountStats();
+    } catch(error) { document.getElementById("account-signed-message").textContent=error.message; }
+    finally { window.GROUPCAT_ACCOUNT.syncing=false; }
+  }
+  function updateAccountStats() {
+    document.getElementById("account-fav-count").textContent=favorites.length;
+    document.getElementById("account-recent-count").textContent=recent.length;
+  }
+  async function loadAccountData() {
+    const response=await fetch("/api/data",{credentials:"same-origin"});
+    if(!response.ok) throw new Error("Signed in, but your saved data could not be loaded.");
+    const data=await response.json();
+    favorites.splice(0,favorites.length,...(Array.isArray(data.favorites)?data.favorites:[]));
+    recent.splice(0,recent.length,...(Array.isArray(data.recent)?data.recent:[]));
+    saveStore("groupcat-favorites",favorites);
+    saveStore("groupcat-recent",recent);
+    updateAccountStats(); render();
+  }
+  function showAccountUser(user) {
+    window.GROUPCAT_ACCOUNT.user=user;
+    document.getElementById("account-logged-out").hidden=!!user;
+    document.getElementById("account-logged-in").hidden=!user;
+    if(user) {
+      document.getElementById("account-welcome").textContent="Hi, "+user.username+".";
+      document.getElementById("account-avatar").textContent=user.username.slice(0,1).toUpperCase();
+      updateAccountStats();
+      document.getElementById("account-signed-message").textContent="Loading your saved data…";
+    }
+  }
+  async function checkExistingSession() {
+    try {
+      const response=await fetch("/api/auth",{credentials:"same-origin"});
+      if(!response.ok)return;
+      const data=await response.json();
+      if(data.user){showAccountUser(data.user);await loadAccountData();}
+    } catch {}
+  }
+  document.getElementById("account-login-tab").addEventListener("click",()=>setAccountMode("login"));
+  document.getElementById("account-signup-tab").addEventListener("click",()=>setAccountMode("signup"));
+  document.getElementById("account-form").addEventListener("submit",async event=>{
+    event.preventDefault();
+    const username=document.getElementById("account-username").value.trim();
+    const password=document.getElementById("account-password").value;
+    const button=document.getElementById("account-submit");
+    button.disabled=true; accountStatus("Please wait…");
+    try {
+      const data=await accountRequest(window.GROUPCAT_ACCOUNT.mode,{username,password});
+      showAccountUser(data.user);
+      if(window.GROUPCAT_ACCOUNT.mode==="signup") {
+        await fetch("/api/data",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({favorites,recent})});
+      } else { await loadAccountData(); }
+      document.getElementById("account-signed-message").textContent="Account ready. Your data is saved.";
+    } catch(error) { accountStatus(error.message,true); }
+    finally { button.disabled=false; }
+  });
+  document.getElementById("account-logout").addEventListener("click",async()=>{
+    try { await accountRequest("logout",{}); } catch {}
+    showAccountUser(null); accountStatus("You have been logged out."); setAccountMode("login");
+  });
+  document.getElementById("menu-account").addEventListener("click",()=>{showScreen("account");});
+
 
   function selectCategory(next) {
     category = next;
@@ -114,6 +203,7 @@
   document.getElementById("menu-back-home").addEventListener("click",()=>showScreen("welcome"));
   document.getElementById("menu-games").addEventListener("click",()=>showScreen("games"));
   document.getElementById("menu-proxy").addEventListener("click",()=>showScreen("proxy"));
+  document.getElementById("account-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("menu-groupcat").addEventListener("click",()=>{document.getElementById("groupcat-lock").hidden=false;document.getElementById("groupcat-secret").hidden=true;document.getElementById("groupcat-password").value="";document.getElementById("groupcat-password-error").hidden=true;showScreen("groupcat");});
   document.getElementById("groupcat-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("groupcat-password-form").addEventListener("submit",e=>{e.preventDefault();if(document.getElementById("groupcat-password").value==="finmilk"){document.getElementById("groupcat-lock").hidden=true;document.getElementById("groupcat-secret").hidden=false;}else{document.getElementById("groupcat-password-error").hidden=false;}});
@@ -136,4 +226,5 @@
   const requested = hash.get("play");
   if(requested){const game=games.find(g=>g.id===requested);if(game)launch(game);}
   render();
+  checkExistingSession();
 })();
