@@ -25,7 +25,7 @@
   const saveStore = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value.slice(0,30))); } catch {} if (window.GROUPCAT_ACCOUNT?.user) syncAccountData(); };
   const recent = getStore("groupcat-recent");
   const favorites = getStore("groupcat-favorites");
-  window.GROUPCAT_ACCOUNT = { user: null, mode: "login", syncing: false };
+  window.GROUPCAT_ACCOUNT = { user: null, mode: "login", syncing: false, syncPending: false };
   const accountMessage = document.getElementById("account-message");
   function accountStatus(message, error=false) { accountMessage.textContent=message; accountMessage.classList.toggle("error",error); }
   function setAccountMode(mode) {
@@ -46,11 +46,15 @@
     return data;
   }
   async function syncAccountData() {
-    if(!window.GROUPCAT_ACCOUNT.user||window.GROUPCAT_ACCOUNT.syncing)return;
+    if(!window.GROUPCAT_ACCOUNT.user)return;
+    if(window.GROUPCAT_ACCOUNT.syncing){window.GROUPCAT_ACCOUNT.syncPending=true;return;}
     window.GROUPCAT_ACCOUNT.syncing=true;
     try {
-      const response=await fetch("/api/data",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({favorites,recent})});
-      if(!response.ok) throw new Error("Could not save your account data.");
+      do {
+        window.GROUPCAT_ACCOUNT.syncPending=false;
+        const response=await fetch("/api/data",{method:"PUT",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({favorites,recent})});
+        if(!response.ok) throw new Error("Could not save your account data.");
+      } while(window.GROUPCAT_ACCOUNT.syncPending);
       document.getElementById("account-signed-message").textContent="Your game data is saved.";
       updateAccountStats();
     } catch(error) { document.getElementById("account-signed-message").textContent=error.message; }
