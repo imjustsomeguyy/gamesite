@@ -3,12 +3,13 @@
   const welcome = document.getElementById("welcome-screen");
   const menu = document.getElementById("menu-screen");
   const proxy = document.getElementById("proxy-screen");
+  const gunspinScreen = document.getElementById("gunspin-screen");
   const accountScreen = document.getElementById("account-screen");
   const minecraftScreen = document.getElementById("minecraft-screen");
   const groupcatScreen = document.getElementById("groupcat-screen");
   const finmalcScreen = document.getElementById("finmalc-screen");
   const appShell = document.querySelector(".app-shell");
-  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; accountScreen.hidden = screen !== "account"; minecraftScreen.hidden = screen !== "minecraft"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
+  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; gunspinScreen.hidden = screen !== "gunspin"; accountScreen.hidden = screen !== "account"; minecraftScreen.hidden = screen !== "minecraft"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
   const search = document.getElementById("search");
   const count = document.getElementById("game-count");
   const title = document.getElementById("section-title");
@@ -238,12 +239,6 @@
   document.getElementById("menu-finmalc").addEventListener("click",()=>showScreen("finmalc"));
   document.getElementById("finmalc-back").addEventListener("click",()=>showScreen("menu"));
   document.getElementById("proxy-back").addEventListener("click",()=>showScreen("menu"));
-  document.getElementById("proxy-back-bottom").addEventListener("click",()=>showScreen("menu"));
-  document.getElementById("piped-search-form").addEventListener("submit",event=>{
-    event.preventDefault();
-    const query=document.getElementById("piped-search").value.trim();
-    if(query)window.open("https://piped.video/results?search_query="+encodeURIComponent(query),"_blank","noopener,noreferrer");
-  });
   document.getElementById("games-back").addEventListener("click",()=>showScreen("menu"));
   document.querySelectorAll("[data-category]").forEach(el=>el.addEventListener("click",()=>selectCategory(el.dataset.category)));
   search.addEventListener("input",()=>{query=search.value.trim().toLowerCase();render();});
