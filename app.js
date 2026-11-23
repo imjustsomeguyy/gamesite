@@ -120,7 +120,7 @@
         const card=document.createElement("article");card.className="cookie-save-card";
         const details=document.createElement("div");details.className="cookie-save-details";
         const name=document.createElement("strong");name.textContent=save.name;
-        const date=document.createElement("span");date.textContent="Last saved "+new Date(save.updated_at).toLocaleString();
+        const date=document.createElement("span");date.textContent="Last played "+new Date(save.last_played_at||save.updated_at).toLocaleString();
         details.append(name,date);
         const actions=document.createElement("div");actions.className="cookie-save-actions";
         for(const [action,label] of [["load","Load"],["update","Update"],["delete","Delete"]]){
