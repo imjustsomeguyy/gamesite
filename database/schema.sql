@@ -19,3 +19,15 @@ CREATE TABLE IF NOT EXISTS user_data (
   data_json TEXT NOT NULL,
   updated_at INTEGER NOT NULL
 );
+
+ 
+-- Cookie Clicker cloud saves (maximum 3 per account is enforced by the API).
+CREATE TABLE IF NOT EXISTS cookie_saves (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  name TEXT NOT NULL,
+  save_data TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  updated_at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS cookie_saves_user_updated ON cookie_saves(user_id, updated_at);
