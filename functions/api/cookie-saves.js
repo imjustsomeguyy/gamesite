@@ -21,10 +21,13 @@ export async function onRequest(context){
     if(request.method==="GET"){
       const id=new URL(request.url).searchParams.get("id");
       if(id){
+        const now=Date.now();
         const row=await env.DB.prepare("SELECT id,name,save_data,created_at,updated_at FROM cookie_saves WHERE id=? AND user_id=?").bind(id,user.id).first();
-        return row?json({id:row.id,name:row.name,save:row.save_data,createdAt:row.created_at,updatedAt:row.updated_at}):json({error:"Save not found."},404);
+        if(!row)return json({error:"Save not found."},404);
+        await env.DB.prepare("UPDATE cookie_saves SET last_played_at=? WHERE id=? AND user_id=?").bind(now,id,user.id).run();
+        return json({id:row.id,name:row.name,save:row.save_data,createdAt:row.created_at,updatedAt:row.updated_at,lastPlayedAt:now});
       }
-      const result=await env.DB.prepare("SELECT id,name,created_at,updated_at FROM cookie_saves WHERE user_id=? ORDER BY updated_at DESC").bind(user.id).all();
+      const result=await env.DB.prepare("SELECT id,name,created_at,updated_at,last_played_at FROM cookie_saves WHERE user_id=? ORDER BY last_played_at DESC").bind(user.id).all();
       return json({saves:result.results||[],limit:3});
     }
     if(request.method==="POST"){
@@ -37,12 +40,12 @@ export async function onRequest(context){
       catch{return json({error:"That Cookie Clicker save is invalid."},400);}
       const now=Date.now();
       if(body.id){
-        const result=await env.DB.prepare("UPDATE cookie_saves SET name=?,save_data=?,updated_at=? WHERE id=? AND user_id=?").bind(name,save,now,String(body.id),user.id).run();
+        const result=await env.DB.prepare("UPDATE cookie_saves SET name=?,save_data=?,updated_at=?,last_played_at=? WHERE id=? AND user_id=?").bind(name,save,now,now,String(body.id),user.id).run();
         if(!result.meta?.changes)return json({error:"Save not found."},404);
         return json({ok:true,id:body.id,updatedAt:now});
       }
       const id=crypto.randomUUID();
-      const result=await env.DB.prepare("INSERT INTO cookie_saves (id,user_id,name,save_data,created_at,updated_at) SELECT ?,?,?,?,?,? WHERE (SELECT COUNT(*) FROM cookie_saves WHERE user_id=?) < 3").bind(id,user.id,name,save,now,now,user.id).run();
+      const result=await env.DB.prepare("INSERT INTO cookie_saves (id,user_id,name,save_data,created_at,updated_at,last_played_at) SELECT ?,?,?,?,?,?,?,? WHERE (SELECT COUNT(*) FROM cookie_saves WHERE user_id=?) < 3").bind(id,user.id,name,save,now,now,now,user.id).run();
       if(!result.meta?.changes)return json({error:"You already have 3 saves. Delete one before creating another."},409);
       return json({ok:true,id,createdAt:now});
     }
