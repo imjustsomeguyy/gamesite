@@ -97,13 +97,18 @@
 
   <section class="cookieclicker-screen" id="cookieclicker-screen" hidden>
     <div class="special-top"><button class="menu-back" type="button" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
-    <div class="cookieclicker-heading"><div class="special-kicker">GROUPCAT ARCADE</div><h1>Cookie Clicker</h1><p>Play, then save your bakery to your account. Up to three cloud saves.</p></div>
-    <div class="cookie-save-panel">
+    <div class="cookieclicker-heading"><div class="special-kicker">GROUPCAT ARCADE</div><h1>Cookie Clicker</h1><p>Play with an account or jump straight in as a guest.</p></div>
+    <div class="cookie-guest-panel" id="cookie-guest-panel">
+      <strong>Playing without an account?</strong>
+      <p>Your progress may only be stored in this browser and could be lost if you clear site data, use private browsing, or switch devices. If the game offers an export or download option, save a personal backup regularly. Guest progress is not backed up to Groupcat cloud saves.</p>
+      <div class="cookie-guest-actions"><button type="button" id="cookie-play-guest">Play without an account</button><button type="button" id="cookie-guest-login">Log in / Create account</button></div>
+    </div>
+    <div class="cookie-save-panel" id="cookie-save-panel" hidden>
       <div class="cookie-save-top"><div><strong>Your cloud saves</strong><span id="cookie-save-count">0 / 3 slots used</span></div><div class="cookie-save-create"><input id="cookie-save-name" maxlength="32" placeholder="Name this save" aria-label="Save name"><button id="cookie-save-new" type="button">Save current game</button></div></div>
       <div id="cookie-save-list" class="cookie-save-list"><p class="cookie-save-empty">Loading your saves…</p></div>
       <p id="cookie-save-message" class="cookie-save-message" role="status"></p>
     </div>
-    <div class="cookie-game-frame-wrap"><iframe id="cookieclicker-frame" src="/cookieclicker/index.html" title="Cookie Clicker" allow="fullscreen; autoplay" allowfullscreen></iframe></div>
+    <div class="cookie-game-frame-wrap" id="cookie-game-frame-wrap" hidden><iframe id="cookieclicker-frame" src="about:blank" title="Cookie Clicker" allow="fullscreen; autoplay" allowfullscreen></iframe></div>
   </section>
 
   <section class="groupcat-screen" id="groupcat-screen" hidden>
@@ -185,7 +190,6 @@
   </div>
 <script>
 window.showSiteScreen = function(screen) {
-  if(screen==="cookieclicker" && !window.GROUPCAT_ACCOUNT?.user){const msg=document.getElementById("account-message");if(msg)msg.textContent="Log in to use your Cookie Clicker cloud saves.";screen="account";}
   const ids = {welcome:"welcome-screen",menu:"menu-screen",minecraft:"minecraft-screen",account:"account-screen",proxy:"proxy-screen",gunspin:"gunspin-screen",cookieclicker:"cookieclicker-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen"};
   ["welcome-screen","menu-screen","minecraft-screen","account-screen","proxy-screen","gunspin-screen","cookieclicker-screen","groupcat-screen","finmalc-screen"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
   const app=document.querySelector(".app-shell"); if(app) app.hidden = true;
