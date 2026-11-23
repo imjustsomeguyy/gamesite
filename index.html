@@ -28,12 +28,38 @@
 <h1>Menu</h1>
       <div class="menu-options">
         <button class="menu-option games-option" id="menu-games" type="button" onclick="document.getElementById(&quot;welcome-screen&quot;).hidden=true;document.getElementById(&quot;menu-screen&quot;).hidden=true;document.querySelector(&quot;.app-shell&quot;).hidden=false;window.scrollTo(0,0)"><span class="option-icon" aria-hidden="true"><svg class="menu-icon minecraft-icon" viewBox="0 0 48 48"><path d="M24 3 43 13.5v21L24 45 5 34.5v-21L24 3Z" fill="#6b4328"/><path d="M24 3 43 13.5 24 24 5 13.5 24 3Z" fill="#69b94b"/><path d="M5 13.5 24 24v21L5 34.5v-21Z" fill="#8b5a36"/><path d="M24 24 43 13.5v21L24 45V24Z" fill="#5d3a27"/><path d="m13 17.5 5 2.8v5.5l-5-2.8v-5.5Zm13 7.1 5-2.8v5.5l-5 2.8v-5.5Z" fill="#d9c18b" opacity=".9"/></svg></span><span class="option-copy"><strong>Games</strong></span><span class="option-arrow">↗</span></button>
+        <button class="menu-option account-option" id="menu-account" type="button" onclick="window.showSiteScreen(&quot;account&quot;)"><span class="option-icon account-menu-icon" aria-hidden="true">👤</span><span class="option-copy"><strong>Account</strong><small>Sign in or create an account</small></span><span class="option-arrow">↗</span></button>
         <button class="menu-option proxy-option" id="menu-proxy" onclick="window.showSiteScreen(&quot;proxy&quot;)"><span class="option-icon" aria-hidden="true"><svg class="menu-icon globe-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="2.6"/><path d="M5.8 24h36.4M24 5c5.2 5.2 7.8 11.5 7.8 19S29.2 37.8 24 43M24 5c-5.2 5.2-7.8 11.5-7.8 19S18.8 37.8 24 43M10.2 12.5h27.6M10.2 35.5h27.6" stroke="currentColor" stroke-width="1.7" opacity=".85"/><path d="M13 29.5h22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><text x="24" y="27.2" text-anchor="middle" font-size="9.5" font-weight="800" fill="currentColor">www</text></svg></span><span class="option-copy"><strong>Proxy</strong></span><span class="option-arrow">↗</span></button>
         <button class="menu-option groupcat-option" id="menu-groupcat" type="button" onclick="window.showSiteScreen(&quot;groupcat&quot;)"><span class="option-icon">👀</span><span class="option-copy"><strong>Groupcat</strong></span><span class="option-arrow">↗</span></button>
         <button class="menu-option finmalc-option" id="menu-finmalc" type="button" onclick="window.showSiteScreen(&quot;finmalc&quot;)"><span class="option-icon">🗿</span><span class="option-copy"><strong>fin malc</strong></span><span class="option-arrow">↗</span></button>
       </div>
     </div>
     <div class="menu-orb menu-orb-one"></div><div class="menu-orb menu-orb-two"></div>
+  </section>
+
+  <section class="account-screen" id="account-screen" hidden>
+    <div class="special-top"><button class="menu-back" id="account-back" type="button" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
+    <div class="account-panel">
+      <div class="special-kicker">GROUPCAT PROFILE</div>
+      <div id="account-logged-out">
+        <h1 id="account-heading">Welcome back.</h1>
+        <p id="account-description">Sign in to sync your favourites and recently played games across devices.</p>
+        <div class="account-tabs"><button type="button" class="account-tab active" id="account-login-tab">Log in</button><button type="button" class="account-tab" id="account-signup-tab">Create account</button></div>
+        <form id="account-form" class="account-form">
+          <label for="account-username">Username</label><input id="account-username" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" autocapitalize="none" required placeholder="Choose a username">
+          <label for="account-password">Password</label><input id="account-password" name="password" type="password" minlength="8" autocomplete="current-password" required placeholder="At least 8 characters">
+          <button class="welcome-play account-submit" type="submit" id="account-submit">Log in <span>↗</span></button>
+          <p class="account-message" id="account-message" role="status"></p>
+        </form>
+        <p class="account-note">Your password is securely hashed on the server. Never reuse a password from another site.</p>
+      </div>
+      <div id="account-logged-in" hidden>
+        <div class="account-avatar" id="account-avatar">G</div><h1 id="account-welcome">You're signed in.</h1><p>Your games and favourites can now sync with your account.</p>
+        <div class="account-stats"><div><strong id="account-fav-count">0</strong><span>Favourites</span></div><div><strong id="account-recent-count">0</strong><span>Recently played</span></div></div>
+        <button class="account-logout" type="button" id="account-logout">Log out</button>
+        <p class="account-message" id="account-signed-message" role="status"></p>
+      </div>
+    </div>
   </section>
 
   <section class="proxy-screen" id="proxy-screen" hidden>
@@ -121,8 +147,8 @@
   </div>
 <script>
 window.showSiteScreen = function(screen) {
-  const ids = {welcome:"welcome-screen",menu:"menu-screen",proxy:"proxy-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen",games:null};
-  ["welcome-screen","menu-screen","proxy-screen","groupcat-screen","finmalc-screen"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
+  const ids = {welcome:"welcome-screen",menu:"menu-screen",account:"account-screen",proxy:"proxy-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen",games:null};
+  ["welcome-screen","menu-screen","account-screen","proxy-screen","groupcat-screen","finmalc-screen"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
   const app=document.querySelector(".app-shell"); if(app) app.hidden = screen !== "games";
   if(screen==="groupcat"){const lock=document.getElementById("groupcat-lock"),secret=document.getElementById("groupcat-secret"),input=document.getElementById("groupcat-password"),error=document.getElementById("groupcat-password-error");if(lock)lock.hidden=false;if(secret)secret.hidden=true;if(input)input.value="";if(error)error.hidden=true;}
   window.scrollTo(0,0);
