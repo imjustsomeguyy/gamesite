@@ -300,7 +300,7 @@
     playerTitle.textContent = game.name;
     frame.src = game.path;
     document.body.style.overflow = "hidden";
-    history.replaceState(null,"","#play="+encodeURIComponent(game.id));
+    history.replaceState(null,"",location.pathname+location.search+"#play="+encodeURIComponent(game.id));
   }
   function close() {
     overlay.hidden = true;
