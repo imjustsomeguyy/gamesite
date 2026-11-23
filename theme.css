@@ -245,3 +245,40 @@ footer a{color:#aeb8d7;text-decoration:none}
 :root[data-theme="matrix"] .minecraft-launch{background:linear-gradient(120deg,#d2ff57,#43e88e);color:#071109}
 :root[data-theme="matrix"] .minecraft-kicker,:root[data-theme="matrix"] .minecraft-version,:root[data-theme="matrix"] .special-kicker,:root[data-theme="matrix"] .eyebrow{color:#c6ff55}
 :root[data-theme="matrix"] .theme-lab{border-color:#a5ff4c66;background:rgba(3,15,9,.92);box-shadow:0 0 30px #9cff3b20}
+
+
+/* PHOTON FINAL POLISH — continuously shifting spectral silver light */
+:root[data-theme="mono"] body:before{
+  background:conic-gradient(from 0deg at 50% 50%,#ffffff18,#7c8ba833,#d9e0ea22,#6f778833,#ffffff20,#a6b5c922,#ffffff18),
+  radial-gradient(ellipse at 18% 22%,#c7d7ed44,transparent 38%),
+  radial-gradient(ellipse at 82% 30%,#ffffff35,transparent 36%),
+  radial-gradient(ellipse at 50% 92%,#687b9944,transparent 43%);
+  background-size:180% 180%,160% 160%,170% 170%,160% 160%;
+  filter:blur(42px);animation:photon-spectrum 24s ease-in-out infinite alternate;
+}
+@keyframes photon-spectrum{
+  0%{background-position:0% 20%,0% 0%,100% 20%,40% 100%;filter:blur(42px) hue-rotate(0deg)}
+  50%{background-position:100% 80%,80% 100%,0% 80%,100% 0%;filter:blur(48px) hue-rotate(24deg)}
+  100%{background-position:20% 100%,100% 20%,20% 0%,0% 40%;filter:blur(42px) hue-rotate(-18deg)}
+}
+:root[data-theme="mono"] body:after{animation:photon-grid 38s linear infinite;mask-image:linear-gradient(transparent,#000 22%,#000 82%,transparent)}
+@keyframes photon-grid{from{background-position:0 0}to{background-position:96px 96px}}
+:root[data-theme="mono"] .welcome-content h1 span,:root[data-theme="mono"] .finmalc-content h1{
+ background-size:220% auto;animation:photon-text 9s ease-in-out infinite alternate;
+}
+@keyframes photon-text{from{background-position:0% 50%;filter:drop-shadow(0 0 8px #fff5)}to{background-position:100% 50%;filter:drop-shadow(0 0 18px #d8e6ff88)}}
+:root[data-theme="mono"] .brand-mark,:root[data-theme="mono"] .option-icon,:root[data-theme="mono"] .proxy-icon,:root[data-theme="mono"] .minecraft-launch,:root[data-theme="mono"] .welcome-play{
+ background-size:220% 220%;animation:photon-sheen 8s ease-in-out infinite alternate;
+}
+@keyframes photon-sheen{from{background-position:0% 20%;filter:brightness(.94)}to{background-position:100% 80%;filter:brightness(1.18)}}
+:root[data-theme="mono"] .menu-option,:root[data-theme="mono"] .account-panel,:root[data-theme="mono"] .special-panel,:root[data-theme="mono"] .proxy-card,:root[data-theme="mono"] .video-card{
+ transition:border-color .35s ease,box-shadow .35s ease,background .35s ease,transform .35s ease;
+}
+:root[data-theme="mono"] .menu-option:hover{box-shadow:0 0 34px #e8f1ff25,0 18px 60px #000b;border-color:#ffffff80}
+.theme-lab{display:none!important}
+#menu-screen .menu-content{transform:translate3d(var(--menu-x,0px),var(--menu-y,0px),0);transition:transform .22s ease-out;will-change:transform}
+#menu-screen .menu-orb{transition:transform .25s ease-out}
+@media(prefers-reduced-motion:reduce){
+ :root[data-theme="mono"] body:before,:root[data-theme="mono"] body:after,:root[data-theme="mono"] .welcome-content h1 span,:root[data-theme="mono"] .finmalc-content h1,:root[data-theme="mono"] .brand-mark,:root[data-theme="mono"] .option-icon,:root[data-theme="mono"] .proxy-icon,:root[data-theme="mono"] .minecraft-launch,:root[data-theme="mono"] .welcome-play{animation:none!important}
+ #menu-screen .menu-content{transition:none}
+}
