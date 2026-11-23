@@ -102,6 +102,18 @@
       <p>This opens the official game, hosted by its creator. Your progress is handled by Cookie Clicker in your browser, not by your Groupcat account. Browser storage or privacy settings may affect whether progress is retained. Use the game's own Options menu to export a backup regularly.</p>
       <div class="cookie-guest-actions"><button type="button" id="cookie-play-guest">Play Cookie Clicker</button><a class="cookie-guest-login" href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer">Open in a new tab ↗</a></div>
     </div>
+    <section class="cookie-one-save" id="cookie-one-save" aria-label="One Cookie Clicker save slot">
+      <div class="cookie-one-save-heading"><div><strong>My saved game</strong><span>One save slot · stored in this browser</span></div><span class="cookie-slot-status" id="cookie-slot-status">Empty slot</span></div>
+      <p>In Cookie Clicker, open Options → Export save, then paste the long save text below. Save it here to keep one backup. To use it again, copy it and choose Options → Import save in the game.</p>
+      <textarea id="cookie-save-text" rows="5" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Paste your Cookie Clicker export string here…"></textarea>
+      <div class="cookie-one-save-actions">
+        <button type="button" id="cookie-save-slot">Save / overwrite slot</button>
+        <button type="button" id="cookie-copy-slot">Copy saved string</button>
+        <button type="button" id="cookie-load-slot">Load saved string</button>
+        <button type="button" id="cookie-clear-slot">Clear slot</button>
+      </div>
+      <p class="cookie-slot-message" id="cookie-slot-message" role="status">Your saved string stays on this device and browser. It is not synced to your account.</p>
+    </section>
     <div class="cookie-save-panel" id="cookie-save-panel" hidden></div>
     <div class="cookie-game-frame-wrap" id="cookie-game-frame-wrap" hidden><iframe id="cookieclicker-frame" src="about:blank" title="Official Cookie Clicker" allow="fullscreen; autoplay; clipboard-read; clipboard-write" allowfullscreen></iframe><p class="cookie-external-fallback">If the game does not load here, <a href="https://orteil.dashnet.org/cookieclicker/" target="_blank" rel="noopener noreferrer">open the official game in a new tab</a>.</p></div>
   </section>
