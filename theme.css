@@ -1,0 +1,192 @@
+/* GROUPCAT GAMES — NEON AURORA THEME */
+:root{
+  color-scheme:dark;
+  --bg:#070914;--panel:rgba(17,22,43,.72);--panel2:rgba(26,32,59,.82);
+  --line:rgba(153,170,255,.16);--muted:#9ba5c7;--text:#f5f7ff;
+  --purple:#a78bfa;--purple2:#6d5dfc;--cyan:#62e7f5;--pink:#ff70c8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:#070914;color:var(--text);font-family:"DM Sans",system-ui,sans-serif;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;inset:-25%;pointer-events:none;z-index:-1}
+body:before{background:
+ radial-gradient(ellipse at 18% 22%,rgba(99,75,255,.34),transparent 34%),
+ radial-gradient(ellipse at 82% 28%,rgba(0,205,229,.22),transparent 32%),
+ radial-gradient(ellipse at 60% 88%,rgba(255,73,174,.16),transparent 36%);
+ filter:blur(28px);animation:aurora-drift 22s ease-in-out infinite alternate}
+body:after{inset:0;opacity:.23;background-image:linear-gradient(rgba(144,161,255,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(144,161,255,.09) 1px,transparent 1px);background-size:54px 54px;mask-image:linear-gradient(to bottom,black,transparent 90%);animation:grid-flow 35s linear infinite}
+@keyframes aurora-drift{0%{transform:translate3d(-3%,1%,0) rotate(-5deg) scale(1)}50%{transform:translate3d(3%,-2%,0) rotate(4deg) scale(1.08)}100%{transform:translate3d(-1%,3%,0) rotate(-2deg) scale(1.02)}}
+@keyframes grid-flow{to{background-position:54px 54px}}
+@keyframes float-up{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 24px rgba(130,104,255,.22)}50%{box-shadow:0 0 42px rgba(98,231,245,.32)}}
+@keyframes sheen{to{background-position:200% center}}
+button,input,select{font:inherit}
+button{color:inherit}
+[hidden]{display:none!important}
+.welcome-screen,.menu-screen,.minecraft-screen,.account-screen,.proxy-screen,.groupcat-screen,.finmalc-screen{position:relative;min-height:100svh;isolation:isolate;overflow:hidden;background:transparent}
+.welcome-screen:before,.menu-screen:before,.minecraft-screen:before,.account-screen:before,.proxy-screen:before,.groupcat-screen:before,.finmalc-screen:before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;background:radial-gradient(circle,rgba(111,88,255,.22),transparent 68%);filter:blur(12px);top:12%;left:50%;transform:translateX(-50%);z-index:-1;pointer-events:none}
+.welcome-top,.menu-top,.special-top,.proxy-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:28px clamp(20px,5vw,72px)}
+.welcome-logo{display:inline-flex;align-items:center;gap:9px;color:#f7f8ff;text-decoration:none;font:700 17px "Space Grotesk",sans-serif;letter-spacing:-.6px}
+.welcome-logo>span:last-child{color:#a7a9c8;margin-left:-7px}
+.brand-mark{width:34px;height:34px;border-radius:12px;display:inline-grid;place-items:center;background:linear-gradient(140deg,#b39cff,#6d5dfc 58%,#35c9df);color:#fff;font:700 23px "Space Grotesk",sans-serif;box-shadow:0 0 28px #8871ff70}
+.welcome-content{min-height:calc(100svh - 95px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 20px 100px}
+.welcome-content h1,.menu-content h1,.minecraft-content h1,.account-panel h1,.proxy-content h1,.special-panel h1,.finmalc-content h1{font:700 clamp(58px,10vw,112px)/.94 "Space Grotesk",sans-serif;letter-spacing:-.075em;margin:0 0 34px;text-shadow:0 8px 50px #8270ff2c}
+.welcome-content h1 span{background:linear-gradient(100deg,#fff 8%,#b6a4ff 42%,#65e6f4 72%,#ff8bd6);background-size:200% auto;background-clip:text;-webkit-background-clip:text;color:transparent;animation:sheen 8s linear infinite}
+.welcome-play,.primary-btn,.proxy-launch{display:inline-flex;align-items:center;justify-content:center;gap:22px;min-height:54px;padding:0 27px;border:1px solid rgba(255,255,255,.22);border-radius:16px;background:linear-gradient(115deg,#8068ff,#5c68e9 52%,#26aabd);color:white;text-decoration:none;font-weight:800;cursor:pointer;box-shadow:0 12px 38px #6658f54a,inset 0 1px 0 #ffffff50;transition:transform .2s,filter .2s,box-shadow .2s}
+.welcome-play:hover,.primary-btn:hover,.proxy-launch:hover{transform:translateY(-3px);filter:brightness(1.13);box-shadow:0 16px 48px #6658f577}
+.welcome-play span{font-size:19px}
+.menu-back,.back-to-menu{border:1px solid var(--line);border-radius:13px;background:rgba(20,25,49,.62);color:#dce2ff;padding:11px 16px;cursor:pointer;backdrop-filter:blur(18px);transition:.2s}
+.menu-back:hover,.back-to-menu:hover{background:rgba(91,89,180,.25);border-color:#9c91ff80}
+.menu-content{position:relative;z-index:1;width:min(680px,calc(100% - 36px));margin:clamp(36px,8vh,90px) auto 80px}
+.menu-content h1{font-size:clamp(46px,7vw,72px);margin-bottom:28px}
+.menu-options{display:grid;gap:13px}
+.menu-option{width:100%;min-height:82px;display:flex;align-items:center;gap:18px;padding:15px 20px;border:1px solid rgba(173,185,255,.16);border-radius:21px;background:linear-gradient(110deg,rgba(26,32,62,.82),rgba(15,22,43,.68));backdrop-filter:blur(22px);text-align:left;cursor:pointer;box-shadow:0 12px 36px #0003;transition:transform .22s,border-color .22s,background .22s}
+.menu-option:hover{transform:translateX(5px);border-color:rgba(128,221,255,.5);background:linear-gradient(110deg,rgba(53,52,111,.85),rgba(16,42,64,.8))}
+.option-icon{width:50px;height:50px;flex:0 0 50px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#8470f1,#3d91ba);font-size:25px;overflow:hidden}
+.menu-icon{width:29px;height:29px}
+.minecraft-logo-image{width:100%;height:100%;object-fit:cover}
+.option-copy{display:flex;flex:1;flex-direction:column;gap:4px}
+.option-copy strong{font:700 18px "Space Grotesk",sans-serif}
+.option-copy small{color:var(--muted);font-size:12px}
+.option-arrow{font-size:21px;color:#aab5ff}
+.account-menu-icon{background:linear-gradient(145deg,#8a6fff,#c66fc6)}
+.proxy-option .option-icon{background:linear-gradient(145deg,#28b6ca,#5b70e9)}
+.groupcat-option .option-icon{background:linear-gradient(145deg,#a16bdb,#e17ba8)}
+.finmalc-option .option-icon{background:linear-gradient(145deg,#777b90,#484f69)}
+.menu-orb{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none;z-index:-1;animation:float-up 8s ease-in-out infinite}
+.menu-orb-one{width:180px;height:180px;right:8%;top:22%;background:radial-gradient(circle,#7d69ff35,transparent 70%)}
+.menu-orb-two{width:220px;height:220px;left:3%;bottom:10%;background:radial-gradient(circle,#4bd8e52b,transparent 70%);animation-delay:-4s}
+.special-top{gap:16px}
+.minecraft-content,.proxy-content{position:relative;z-index:1;width:min(760px,calc(100% - 36px));margin:4vh auto 70px;text-align:center}
+.minecraft-cube-large{width:112px;height:112px;margin:0 auto 25px;border-radius:28px;overflow:hidden;box-shadow:0 15px 55px #5f69fa55;animation:float-up 5s ease-in-out infinite}
+.minecraft-logo-large{width:100%;height:100%;object-fit:cover}
+.minecraft-kicker,.special-kicker,.minecraft-version,.eyebrow{font-size:11px;letter-spacing:2px;font-weight:800;color:#9eabff}
+.minecraft-content h1{font-size:clamp(48px,8vw,82px);margin:13px 0}
+.minecraft-version{font-size:14px;letter-spacing:1px;color:#75e6ef}
+.minecraft-description,.proxy-small,.special-panel>p,.account-panel>p{max-width:560px;margin:18px auto 27px;color:#aeb7d4;line-height:1.7}
+.minecraft-status{color:#9da9ca;font-size:13px;min-height:20px;margin:18px 0}
+.minecraft-frame-wrap{width:100%;height:min(72vh,760px);margin:28px auto 0;border:1px solid #91a0ff55;border-radius:20px;overflow:hidden;background:#000;box-shadow:0 20px 70px #0008}
+.minecraft-frame-wrap iframe{width:100%;height:100%;border:0}
+.account-panel,.special-panel{position:relative;z-index:1;width:min(460px,calc(100% - 36px));margin:8vh auto 60px;padding:34px;border:1px solid rgba(167,181,255,.2);border-radius:26px;background:linear-gradient(145deg,rgba(27,33,65,.85),rgba(13,19,39,.8));backdrop-filter:blur(24px);box-shadow:0 24px 80px #0006}
+.account-panel h1,.special-panel h1{font-size:42px;letter-spacing:-.055em;margin:16px 0}
+.account-panel>p,.special-panel>p{font-size:14px}
+.account-tabs{display:flex;gap:8px;margin:24px 0}
+.account-tab{flex:1;padding:11px;border:1px solid var(--line);border-radius:12px;background:#ffffff08;color:#b8c1df;cursor:pointer}
+.account-tab.active{background:#7765ec33;border-color:#a99aff80;color:#fff}
+.account-form{display:grid;gap:10px}
+.account-form label{font-size:12px;color:#b9c3e3;font-weight:700}
+.account-form input,.password-panel input,.proxy-search-form input{width:100%;min-height:48px;padding:0 14px;border:1px solid rgba(169,183,255,.22);border-radius:12px;background:rgba(4,8,22,.65);color:white;outline:none}
+.account-form input:focus,.password-panel input:focus,.proxy-search-form input:focus{border-color:#8f82ff;box-shadow:0 0 0 3px #8171ff25}
+.account-submit{width:100%;margin-top:10px}
+.account-note,.account-message,.password-error{font-size:12px;color:#9da9ca;line-height:1.6}
+.account-avatar{width:60px;height:60px;display:grid;place-items:center;border-radius:20px;background:linear-gradient(140deg,#b39cff,#36bed2);font:700 28px "Space Grotesk"}
+.account-stats{display:flex;gap:12px;margin:25px 0}
+.account-stats>div{flex:1;padding:16px;border-radius:14px;background:#ffffff0a;display:grid;gap:4px}
+.account-stats strong{font-size:24px}.account-stats span{font-size:12px;color:var(--muted)}
+.account-logout{padding:12px 18px;border:1px solid var(--line);border-radius:12px;background:#ffffff0b;cursor:pointer}
+.proxy-content{max-width:650px;margin-top:7vh}
+.proxy-icon{width:76px;height:76px;margin:0 auto 22px;display:grid;place-items:center;border-radius:23px;background:linear-gradient(140deg,#22b6c9,#7669f6);box-shadow:0 10px 40px #43c5e94d}
+.proxy-globe{width:44px;height:44px}
+.proxy-content h1{font-size:64px;margin-bottom:8px}
+.proxy-card{display:flex;align-items:center;gap:15px;padding:17px;border:1px solid var(--line);border-radius:18px;background:var(--panel);text-align:left;backdrop-filter:blur(18px)}
+.proxy-card-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:13px;background:#e94f7740}
+.proxy-card-copy{flex:1;display:grid;gap:5px}.proxy-card-copy span{font-size:12px;color:var(--muted);line-height:1.5}
+.proxy-launch{min-height:40px;padding:0 14px;border-radius:11px;gap:6px;font-size:12px}
+.proxy-search-form{display:flex;gap:9px;margin:16px 0}
+.proxy-search-form input{flex:1;min-width:0}
+.proxy-search-form button{padding:0 17px;border:0;border-radius:12px;background:linear-gradient(120deg,#7564ee,#25aebd);font-weight:700;cursor:pointer}
+.proxy-disclaimer{font-size:11px;line-height:1.6;color:#8994b8;text-align:left}
+.special-panel{text-align:center}
+.password-panel form{display:grid;gap:12px;margin-top:20px}
+.special-link{margin-top:12px}
+.finmalc-content{position:relative;z-index:1;width:min(760px,calc(100% - 36px));margin:5vh auto 70px;text-align:center}
+.finmalc-stamp{display:inline-block;padding:9px 14px;border:1px solid #ff8bc855;border-radius:999px;color:#ff9acb;background:#ff79bf12;font-size:10px;font-weight:800;letter-spacing:1px}
+.finmalc-content h1{margin:20px 0;background:linear-gradient(90deg,#ffb4d8,#c7b0ff,#72e7ef);background-clip:text;-webkit-background-clip:text;color:transparent}
+.finmalc-subtitle,.finmalc-content p{color:#aeb7d4;line-height:1.7}
+.finmalc-face{font-size:100px;animation:float-up 4s ease-in-out infinite;filter:drop-shadow(0 15px 25px #0007)}
+.finmalc-marquee{margin:25px 0;padding:12px;border-block:1px solid #ff85c433;color:#ff9bd0;font-size:11px;font-weight:800;letter-spacing:2px}
+.finmalc-content h2{font:700 22px "Space Grotesk";letter-spacing:.03em}
+.video-card{margin:28px auto;padding:18px;border:1px solid var(--line);border-radius:20px;background:var(--panel);text-align:left}
+.video-heading{margin-bottom:12px;font-weight:800;font-size:12px;letter-spacing:1px}
+.video-card video{width:100%;max-height:440px;border-radius:12px;background:#000}
+.video-help,.finmalc-footer{margin-top:12px;color:#929dbd;font-size:11px}
+.app-shell{min-height:100vh}
+.sidebar{width:238px;position:fixed;inset:0 auto 0 0;background:rgba(9,13,29,.86);border-right:1px solid var(--line);padding:28px 18px;display:flex;flex-direction:column;z-index:5;backdrop-filter:blur(24px)}
+.brand{display:flex;align-items:center;gap:11px;color:#fff;text-decoration:none;font:700 19px "Space Grotesk";letter-spacing:-.8px;margin:0 0 48px 7px}
+.brand-muted{color:#999fbd;font-weight:500}
+.side-label{font-size:10px;letter-spacing:1.5px;color:#7883a8;font-weight:800;padding:0 10px 12px}
+.side-label-spaced{margin-top:32px}
+.nav-link{border:0;background:transparent;color:#aab4d1;text-align:left;padding:12px;border-radius:11px;margin:2px 0;cursor:pointer}
+.nav-link span{display:inline-block;width:26px;color:#a99aff}
+.nav-link:hover,.nav-link.active{background:#8372ff22;color:#fff}
+.sidebar-bottom{margin-top:auto;color:#8f9abc;font-size:11px}
+.status-dot,.live-dot,.player-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#6be7cf;box-shadow:0 0 12px #6be7cf;margin-right:8px}
+.main{margin-left:238px;padding:0 clamp(22px,4vw,60px)}
+.topbar{height:86px;display:flex;align-items:center;gap:20px;border-bottom:1px solid var(--line)}
+.search{display:flex;align-items:center;gap:10px;max-width:420px;flex:1;padding:11px 14px;border:1px solid var(--line);border-radius:13px;background:#111831aa}
+.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:white}
+.search kbd{color:#8f9abc}.top-link{color:#aeb8d7;text-decoration:none;font-size:12px}
+.mobile-brand{display:none}
+.hero{position:relative;min-height:390px;display:flex;align-items:center;justify-content:space-between;padding:55px 0;border-bottom:1px solid var(--line);overflow:hidden}
+.hero-copy{position:relative;z-index:1;max-width:500px}
+.eyebrow{font-size:10px;letter-spacing:2px}
+.hero h1{font:700 clamp(44px,6vw,76px)/1 "Space Grotesk";letter-spacing:-.07em;margin:20px 0}
+.hero h1 span{color:#8e86ff}
+.hero p{max-width:390px;color:#aab5d3;line-height:1.7}
+.primary-btn{margin-top:15px;min-height:46px;padding:0 19px;border-radius:12px;font-size:13px}
+.hero-art{position:relative;width:300px;height:260px;flex:0 0 300px;animation:float-up 7s ease-in-out infinite}
+.orbit{position:absolute;border:1px solid #9b8aff55;border-radius:50%;inset:15px;transform:rotate(-25deg) scaleY(.55)}
+.orbit-two{inset:45px 0;transform:rotate(35deg) scaleY(.65);border-color:#5ce5ed55}
+.hero-tile{position:absolute;display:grid;place-items:center;width:90px;height:90px;border:1px solid #ffffff30;border-radius:24px;background:linear-gradient(145deg,#7665e9,#253c70);box-shadow:0 18px 45px #0008;font-size:36px}
+.tile-back{top:32px;left:35px;transform:rotate(-16deg);opacity:.65}.tile-mid{top:95px;right:25px;transform:rotate(14deg);background:linear-gradient(145deg,#31b8c5,#34417c)}.tile-front{top:83px;left:105px;transform:rotate(-5deg);background:linear-gradient(145deg,#a47bf6,#5744b8);animation:pulse-glow 4s infinite}
+.spark{position:absolute;color:#72e9f2;font-size:25px}.spark-one{right:35px;top:20px}.spark-two{left:30px;bottom:25px;color:#ff8bd2}
+.hero-index{position:absolute;right:0;bottom:24px;color:#8792b3;font-size:11px;letter-spacing:2px}.hero-index span{color:#596482}
+.section-heading{display:flex;justify-content:space-between;align-items:end;padding:34px 0 20px}
+.section-heading h2{font:700 27px "Space Grotesk";margin:8px 0}.section-heading h2 span{font:500 12px "DM Sans";color:#9aa5c8;margin-left:8px}
+.sort-wrap{display:flex;align-items:center;gap:10px;color:#9ba6c7;font-size:12px}
+.sort-wrap select{padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:#111831;color:white}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.filter-chip{padding:9px 13px;border:1px solid var(--line);border-radius:999px;background:#111831aa;color:#aeb8d7;font-size:11px;cursor:pointer}
+.filter-chip.selected,.filter-chip:hover{background:#7868e83b;border-color:#9a8dff80;color:white}
+.game-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px}
+.game-card{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,rgba(29,37,70,.88),rgba(12,19,39,.85));overflow:hidden;transition:transform .2s,border-color .2s}
+.game-card:hover{transform:translateY(-4px);border-color:#8e83ff80}
+.game-card button{width:100%;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.game-card img{width:100%;aspect-ratio:16/10;object-fit:cover;background:#151b36}
+.game-card h3{margin:12px 13px 5px;font:700 15px "Space Grotesk"}
+.game-card p{margin:0 13px 14px;color:#9ba6c7;font-size:11px;line-height:1.5}
+.empty-state{text-align:center;padding:60px 20px;color:#9ba6c7}
+footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;padding:30px 0;color:#8994b5;font-size:11px}
+footer a{color:#aeb8d7;text-decoration:none}
+.player-overlay{position:fixed;inset:0;z-index:20;background:#050711f5;display:flex;flex-direction:column;padding:14px}
+.player-top{display:flex;align-items:center;justify-content:space-between;padding:8px 4px 14px}
+.player-actions{display:flex;gap:8px}.player-actions button{width:40px;height:38px;border:1px solid var(--line);border-radius:11px;background:#151c37;cursor:pointer}
+.player-frame-wrap{flex:1;min-height:0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000}
+.player-frame-wrap iframe{width:100%;height:100%;border:0}
+@media(max-width:760px){
+ .welcome-top,.menu-top,.special-top,.proxy-top{padding:19px 18px}
+ .menu-content{margin:45px auto 60px}
+ .menu-option{min-height:74px;padding:12px 14px}
+ .account-panel,.special-panel{padding:25px;margin-top:5vh}
+ .main{margin-left:0;padding:0 18px}
+ .sidebar{display:none}
+ .topbar{height:auto;min-height:70px;flex-wrap:wrap;padding:12px 0;gap:12px}
+ .mobile-brand{display:flex;align-items:center;gap:8px;font:700 14px "Space Grotesk"}
+ .mobile-brand .brand-mark{width:27px;height:27px;font-size:18px}
+ .search{order:3;max-width:none;flex-basis:100%}
+ .top-link{margin-left:auto}
+ .hero{min-height:330px;padding:42px 0}
+ .hero-art{position:absolute;right:-110px;opacity:.45;transform:scale(.8)}
+ .hero-copy{max-width:85%}
+ .hero-index{display:none}
+ .section-heading{align-items:start;gap:12px;flex-direction:column}
+ .game-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .game-card{border-radius:13px}
+ .proxy-search-form{flex-direction:column}
+ .proxy-search-form button{min-height:46px}
+ .minecraft-frame-wrap{height:68svh;border-radius:12px}
+ footer{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
