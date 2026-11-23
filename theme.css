@@ -648,3 +648,20 @@ html.gc-performance-mode .primary-btn:hover {
 
 .cookie-game-frame-wrap:not([hidden]){display:flex;flex-direction:column}
 .cookie-game-frame-wrap iframe{flex:1;min-height:0;height:auto}
+
+
+/* Single-slot Cookie Clicker export manager */
+.cookie-one-save{width:min(900px,calc(100% - 28px));margin:0 auto 16px;padding:17px;border:1px solid rgba(211,183,255,.28);border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.09),rgba(45,30,68,.5));color:#f5efff;box-shadow:0 10px 30px #0003}
+.cookie-one-save-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cookie-one-save-heading strong{display:block;font:700 15px "Space Grotesk",sans-serif}
+.cookie-one-save-heading span{display:block;margin-top:3px;color:#bdb0d0;font-size:11px}
+.cookie-slot-status{padding:6px 9px;border:1px solid rgba(211,183,255,.25);border-radius:999px;background:#21172e;color:#d9c4ff!important;font-size:10px!important}
+.cookie-one-save>p{margin:10px 0;color:#c0b5d0;font-size:12px;line-height:1.55}
+.cookie-one-save textarea{display:block;width:100%;min-height:112px;padding:11px;border:1px solid rgba(211,183,255,.25);border-radius:10px;resize:vertical;background:#100d17;color:#f5efff;font:11px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+.cookie-one-save textarea:focus{outline:2px solid #a77be8;outline-offset:1px}
+.cookie-one-save-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.cookie-one-save-actions button{min-height:38px;padding:0 12px;border:1px solid rgba(230,211,255,.25);border-radius:9px;background:rgba(255,255,255,.08);color:#f5efff;font:600 11px "DM Sans",sans-serif;cursor:pointer}
+.cookie-one-save-actions button:first-child{background:linear-gradient(135deg,#d5bdff,#956bea);color:#211431;border-color:#ffffff70}
+.cookie-one-save-actions button:disabled{opacity:.4;cursor:not-allowed}
+.cookie-one-save .cookie-slot-message{min-height:16px;margin-bottom:0;font-size:11px}
+@media(max-width:600px){.cookie-one-save{padding:13px}.cookie-one-save-actions button{flex:1 1 calc(50% - 8px)}}
