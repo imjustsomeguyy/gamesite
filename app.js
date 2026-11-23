@@ -4,12 +4,13 @@
   const menu = document.getElementById("menu-screen");
   const proxy = document.getElementById("proxy-screen");
   const gunspinScreen = document.getElementById("gunspin-screen");
+  const cookieClickerScreen = document.getElementById("cookieclicker-screen");
   const accountScreen = document.getElementById("account-screen");
   const minecraftScreen = document.getElementById("minecraft-screen");
   const groupcatScreen = document.getElementById("groupcat-screen");
   const finmalcScreen = document.getElementById("finmalc-screen");
   const appShell = document.querySelector(".app-shell");
-  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; gunspinScreen.hidden = screen !== "gunspin"; accountScreen.hidden = screen !== "account"; minecraftScreen.hidden = screen !== "minecraft"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
+  const showScreen = screen => { welcome.hidden = screen !== "welcome"; menu.hidden = screen !== "menu"; proxy.hidden = screen !== "proxy"; gunspinScreen.hidden = screen !== "gunspin"; cookieClickerScreen.hidden = screen !== "cookieclicker"; accountScreen.hidden = screen !== "account"; minecraftScreen.hidden = screen !== "minecraft"; groupcatScreen.hidden = screen !== "groupcat"; finmalcScreen.hidden = screen !== "finmalc"; appShell.hidden = screen !== "games"; window.scrollTo(0,0); };
   const search = document.getElementById("search");
   const count = document.getElementById("game-count");
   const title = document.getElementById("section-title");
@@ -96,6 +97,85 @@
       if(data.user){showAccountUser(data.user);await loadAccountData();}
     } catch {}
   }
+
+  const cookieFrame=document.getElementById("cookieclicker-frame");
+  const cookieSaveList=document.getElementById("cookie-save-list");
+  const cookieSaveMessage=document.getElementById("cookie-save-message");
+  let cookieSaves=[];
+  const cookieSaveStatus=message=>{cookieSaveMessage.textContent=message;};
+  async function refreshCookieSaves(){
+    if(!window.GROUPCAT_ACCOUNT.user)return;
+    cookieSaveStatus("Loading your saves…");
+    try{
+      const response=await fetch("/api/cookie-saves",{credentials:"same-origin"});
+      const data=await response.json();
+      if(!response.ok)throw new Error(data.error||"Could not load your saves.");
+      cookieSaves=Array.isArray(data.saves)?data.saves:[];
+      document.getElementById("cookie-save-count").textContent=cookieSaves.length+" / 3 slots used";
+      cookieSaveList.replaceChildren();
+      if(!cookieSaves.length){
+        const empty=document.createElement("p");empty.className="cookie-save-empty";empty.textContent="No saves yet. Start playing, name your bakery save, then press Save current game.";cookieSaveList.append(empty);
+      }
+      for(const save of cookieSaves){
+        const card=document.createElement("article");card.className="cookie-save-card";
+        const details=document.createElement("div");details.className="cookie-save-details";
+        const name=document.createElement("strong");name.textContent=save.name;
+        const date=document.createElement("span");date.textContent="Last saved "+new Date(save.updated_at).toLocaleString();
+        details.append(name,date);
+        const actions=document.createElement("div");actions.className="cookie-save-actions";
+        for(const [action,label] of [["load","Load"],["update","Update"],["delete","Delete"]]){
+          const button=document.createElement("button");button.type="button";button.dataset.action=action;button.dataset.id=save.id;button.textContent=label;
+          if(action==="delete")button.className="danger";
+          actions.append(button);
+        }
+        card.append(details,actions);cookieSaveList.append(card);
+      }
+      cookieSaveStatus("");
+      document.getElementById("cookie-save-new").disabled=cookieSaves.length>=3;
+    }catch(error){cookieSaveStatus(error.message);cookieSaveList.replaceChildren();document.getElementById("cookie-save-new").disabled=true;}
+  }
+  async function waitForCookieGame(){
+    if(cookieFrame.contentWindow?.GroupcatCookieGame)return cookieFrame.contentWindow.GroupcatCookieGame;
+    await new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>reject(new Error("Cookie Clicker is still loading. Try again in a moment.")),15000);
+      cookieFrame.addEventListener("load",()=>{clearTimeout(timer);resolve();},{once:true});
+    });
+    if(!cookieFrame.contentWindow?.GroupcatCookieGame)throw new Error("Cookie Clicker did not finish loading. Refresh the page and try again.");
+    return cookieFrame.contentWindow.GroupcatCookieGame;
+  }
+  async function saveCookieSlot(id=null){
+    try{
+      const existing=cookieSaves.find(s=>s.id===id);
+      const name=existing?existing.name:document.getElementById("cookie-save-name").value.trim();
+      if(!name)throw new Error("Enter a name for this save first.");
+      if(!id&&cookieSaves.length>=3)throw new Error("You already have 3 saves. Delete one first.");
+      const game=await waitForCookieGame();
+      const save=game.exportSave();
+      const response=await fetch("/api/cookie-saves",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({id,name,save})});
+      const data=await response.json();
+      if(!response.ok)throw new Error(data.error||"Could not save your bakery.");
+      if(!id)document.getElementById("cookie-save-name").value="";
+      cookieSaveStatus("Bakery saved to your account.");
+      await refreshCookieSaves();
+    }catch(error){cookieSaveStatus(error.message);}
+  }
+  document.getElementById("cookie-save-new").addEventListener("click",()=>saveCookieSlot());
+  cookieSaveList.addEventListener("click",async event=>{
+    const button=event.target.closest("button[data-action]");if(!button)return;
+    const id=button.dataset.id,action=button.dataset.action;
+    if(action==="delete"){
+      if(!confirm("Delete this Cookie Clicker save permanently?"))return;
+      try{const response=await fetch("/api/cookie-saves?id="+encodeURIComponent(id),{method:"DELETE",credentials:"same-origin"});const data=await response.json();if(!response.ok)throw new Error(data.error||"Could not delete save.");cookieSaveStatus("Save deleted.");await refreshCookieSaves();}catch(error){cookieSaveStatus(error.message);}
+    }else if(action==="update"){await saveCookieSlot(id);}
+    else if(action==="load"){
+      try{
+        const response=await fetch("/api/cookie-saves?id="+encodeURIComponent(id),{credentials:"same-origin"});const data=await response.json();if(!response.ok)throw new Error(data.error||"Could not load save.");
+        const game=await waitForCookieGame();game.importSave(data.save);cookieSaveStatus("Loaded "+data.name+".");
+      }catch(error){cookieSaveStatus(error.message);}
+    }
+  });
+  document.getElementById("menu-cookieclicker").addEventListener("click",()=>{if(window.GROUPCAT_ACCOUNT.user)refreshCookieSaves();});
+
   document.getElementById("account-login-tab").addEventListener("click",()=>setAccountMode("login"));
   document.getElementById("account-signup-tab").addEventListener("click",()=>setAccountMode("signup"));
   document.getElementById("account-form").addEventListener("submit",async event=>{
