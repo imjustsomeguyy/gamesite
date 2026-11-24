@@ -368,13 +368,21 @@
     }, 350);
   });
 
-  setTheme(safeRead("gc_theme", "mono") || "mono");
+  let savedTheme = "mono";
+  try { savedTheme = localStorage.getItem("gc_theme") || "mono"; } catch {}
+  setTheme(savedTheme);
   let savedAccent = "";
   try { savedAccent = localStorage.getItem("gc_custom_accent") || ""; } catch {}
   if (savedAccent) {
     if (accentPicker) accentPicker.value = savedAccent;
     setAccent(savedAccent);
   }
+  window.addEventListener("groupcat:data-loaded", () => {
+    favs.clear();
+    (safeRead("groupcat-favorites", []) || []).filter((value) => typeof value === "string").forEach((value) => favs.add(value));
+    recent = (safeRead("groupcat-recent", []) || []).filter((value) => typeof value === "string");
+    render();
+  });
   updateFavourites();
   render();
 })();
