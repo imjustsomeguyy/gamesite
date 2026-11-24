@@ -1,0 +1,14 @@
+# Friendly game URLs
+/c00kie /c00kie/official-2.058 301
+/c00kie/ /c00kie/official-2.058 301
+/c00kie/official-2.058 /cookieclicker/official-2.058.html 200
+/cookieclicker/official-2.058.html /c00kie/official-2.058 301
+/cookieclicker/official-2.058 /c00kie/official-2.058 301
+/cookieclicker /c00kie/official-2.058 301
+/cookieclicker/ /c00kie/official-2.058 301
+
+/modern-mc /modern-mc/26.3.html 301
+/modern-mc/ /modern-mc/26.3.html 301
+/minecraft/26.3.html /modern-mc/26.3.html 301
+/minecraft /modern-mc/26.3.html 301
+/minecraft/ /modern-mc/26.3.html 301
