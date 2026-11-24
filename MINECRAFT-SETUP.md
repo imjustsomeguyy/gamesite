@@ -1,6 +1,6 @@
 # Self-hosted Minecraft client storage
 
-The launcher requests exactly `/minecraft/26.3.html` on the Groupcat domain. The Pages Function in `functions/minecraft/[[path]].js` streams that object from Cloudflare R2. The game itself will load from your Groupcat domain; it will not redirect to or iframe an external Eaglercraft site.
+The launcher requests exactly `/modern-mc/26.3.html` on the Groupcat domain. The Pages Function in `functions/modern-mc/[[path]].js` streams that object from Cloudflare R2. The game itself will load from your Groupcat domain; it will not redirect to or iframe an external Eaglercraft site.
 
 ## Client file to use
 
