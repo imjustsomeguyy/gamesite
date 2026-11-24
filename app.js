@@ -236,7 +236,7 @@
     empty.hidden = list.length !== 0;
     list.forEach(game => {
       const card = document.createElement("article");
-      card.className = "game-card";
+      card.className = "game-card" + (game.cardClass ? " " + game.cardClass : "");
       card.tabIndex = 0;
       card.setAttribute("role","button");
       card.setAttribute("aria-label","Play "+game.name);
