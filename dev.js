@@ -37,13 +37,16 @@
     else saves.textContent="Cookie Clicker saves: none";
     article.append(saves);list.append(article);
    }
-  }catch(error){$("api-status").textContent="ERROR";$("system-status").textContent=error.message;if(error.message==="Admin login required."){login.hidden=false;dashboard.hidden=true;}}
+  }catch(error){$("api-status").textContent="ERROR";$("system-status").textContent=error.message;}
  }
+ const DEV_PASSWORD="chinners";
  $("login-form").addEventListener("submit",async event=>{
-  event.preventDefault();$("login-status").textContent="Checking password…";
-  try{const response=await fetch("/api/admin",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({action:"login",password:$("admin-password").value})});const data=await response.json();if(!response.ok)throw new Error(data.error||"Login failed.");$("admin-password").value="";login.hidden=true;dashboard.hidden=false;await load();}
-  catch(error){$("login-status").textContent=error.message;}
+  event.preventDefault();
+  if($("admin-password").value!==DEV_PASSWORD){$("login-status").textContent="Incorrect Dev Mode password.";return;}
+  $("admin-password").value="";
+  login.hidden=true;dashboard.hidden=false;
+  await load();
  });
  $("refresh").addEventListener("click",load);
- $("logout").addEventListener("click",async()=>{await fetch("/api/admin",{method:"POST",headers:{"Content-Type":"application/json"},credentials:"same-origin",body:JSON.stringify({action:"logout"})});dashboard.hidden=true;login.hidden=false;$("system-status").textContent="Dev Mode locked.";});
+ $("logout").addEventListener("click",()=>{dashboard.hidden=true;login.hidden=false;$("system-status").textContent="Dev Mode locked.";});
 })();
