@@ -282,7 +282,7 @@ window.unlockGroupcat = function(event) {
       const performanceButton = document.getElementById("gc-performance-toggle");
       const scrambleButton = document.getElementById("gc-url-scramble");
       const cloakButton = document.getElementById("gc-cloak-tab");
-      const originalSearch = location.search;
+      const originalUrl = location.pathname + location.search + location.hash;
       let scrambleTimer = null;
       const randomToken = () => {
         const bytes = crypto.getRandomValues(new Uint8Array(10));
@@ -299,7 +299,7 @@ window.unlockGroupcat = function(event) {
         if (enabled) {
           const updateAddress = () => {
             try {
-              history.replaceState(history.state, "", location.pathname + "?s=" + randomToken() + location.hash);
+              history.replaceState(history.state, "", "/" + randomToken() + "?s=" + randomToken() + "&u=" + randomToken() + "#" + randomToken());
             } catch {
               applyUrlScramble(false);
             }
@@ -307,7 +307,7 @@ window.unlockGroupcat = function(event) {
           updateAddress();
           scrambleTimer = setInterval(updateAddress, 50);
         } else {
-          try { history.replaceState(history.state, "", location.pathname + originalSearch + location.hash); } catch {}
+          try { history.replaceState(history.state, "", originalUrl); } catch {}
         }
       };
       const applyPerformance = enabled => {
