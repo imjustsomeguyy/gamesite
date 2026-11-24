@@ -503,3 +503,45 @@ body{
  .gc-game-options .menu-option{min-height:76px}
  .gc-settings-panel{right:0;width:min(290px,calc(100vw - 28px))}
 }
+
+/* Full-width menu navigation bar: brand left, clock centred, controls right */
+#menu-screen .gc-mainbar{
+  position:relative!important;
+  z-index:30!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important;
+  align-items:center!important;
+  width:100%!important;
+  max-width:none!important;
+  height:68px!important;
+  min-height:68px!important;
+  margin:0!important;
+  padding:0 clamp(18px,3.2vw,52px)!important;
+  box-sizing:border-box!important;
+  border:0!important;
+  border-bottom:1px solid rgba(220,196,255,.16)!important;
+  border-radius:0!important;
+  background:rgba(17,15,23,.88)!important;
+  box-shadow:0 8px 28px rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(18px);
+}
+#menu-screen .gc-bar-left{display:flex!important;align-items:center!important;justify-content:flex-start!important;gap:14px!important;min-width:0!important}
+#menu-screen .gc-bar-title{grid-column:1!important;grid-row:1!important;justify-self:start!important;text-align:left!important;font:800 14px "Space Grotesk",sans-serif!important;letter-spacing:2.2px!important;white-space:nowrap!important}
+#menu-screen .gc-clock{grid-column:2!important;grid-row:1!important;justify-self:center!important;display:block!important;text-align:center!important;padding:0 14px!important;font:600 12px "Space Grotesk",monospace!important;letter-spacing:1.4px!important;color:#c3b5df!important;font-variant-numeric:tabular-nums!important;white-space:nowrap!important}
+#menu-screen .gc-bar-right{grid-column:3!important;grid-row:1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;min-width:0!important}
+#menu-screen .gc-account-button,#menu-screen .gc-settings-button{border:1px solid rgba(255,255,255,.14)!important;background:#211c2b!important;color:#eee8fa!important;border-radius:8px!important;padding:9px 13px!important;font:600 11px "DM Sans",sans-serif!important;white-space:nowrap!important}
+#menu-screen .gc-home-back{padding:6px 8px!important;font-size:10px!important;opacity:.7}
+#menu-screen .gc-settings-wrap{position:relative!important}
+@media(max-width:720px){
+ #menu-screen .gc-mainbar{height:62px!important;min-height:62px!important;padding:0 12px!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important}
+ #menu-screen .gc-bar-title{font-size:11px!important;letter-spacing:1.1px!important}
+ #menu-screen .gc-home-back{display:none!important}
+ #menu-screen .gc-clock{font-size:10px!important;letter-spacing:.5px!important;padding:0 5px!important}
+ #menu-screen .gc-bar-right{gap:5px!important}
+ #menu-screen .gc-account-button,#menu-screen .gc-settings-button{font-size:9px!important;padding:8px 7px!important}
+}
+@media(max-width:390px){
+ #menu-screen .gc-bar-title{font-size:9px!important;letter-spacing:.5px!important}
+ #menu-screen .gc-clock{font-size:9px!important}
+ #menu-screen .gc-account-button,#menu-screen .gc-settings-button{font-size:8px!important;padding:7px 5px!important}
+}
