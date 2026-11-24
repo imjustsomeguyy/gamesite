@@ -25,24 +25,42 @@
   </section>
 
   <section class="menu-screen" id="menu-screen" hidden>
-    <div class="menu-top"><button class="menu-back" id="menu-back-home" onclick="window.showSiteScreen(&quot;welcome&quot;)">← Back</button><a class="welcome-logo" href="#"><span class="brand-mark">g</span> groupcat<span>games</span></a></div>
-    <div class="menu-content">
-<h1>Menu</h1>
-      <div class="menu-options">
-        <button class="menu-option minecraft-option" id="menu-minecraft" type="button" onclick="window.showSiteScreen(&quot;minecraft&quot;)"><span class="option-icon" aria-hidden="true"><img class="menu-icon minecraft-icon minecraft-logo-image" src="images/minecraft-logo.webp" alt="Minecraft grass block logo"></span><span class="option-copy"><strong>Minecraft</strong></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option account-option" id="menu-account" type="button" onclick="window.showSiteScreen(&quot;account&quot;)"><span class="option-icon account-menu-icon" aria-hidden="true">👤</span><span class="option-copy"><strong>Account</strong><small>Sign in or create an account</small></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option cookieclicker-option" id="menu-cookieclicker" type="button" onclick="window.showSiteScreen(&quot;cookieclicker&quot;)"><span class="option-icon">🍪</span><span class="option-copy"><strong>Cookie Clicker</strong><small>Play the original Cookie Clicker</small></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option gunspin-option" id="menu-gunspin" type="button" onclick="window.showSiteScreen(&quot;gunspin&quot;)"><span class="option-icon">🔫</span><span class="option-copy"><strong>GunSpin</strong><small>Play GunSpin</small></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option polytrack-option" id="menu-polytrack" type="button" onclick="window.showSiteScreen('games');document.querySelector('[data-category=&quot;racing&quot;]').click()"><span class="option-icon">🏎️</span><span class="option-copy"><strong>PolyTrack</strong><small>Play PolyTrack</small></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option gta-option" id="menu-gta" type="button" onclick="window.showSiteScreen('games');document.querySelector('[data-category=&quot;action&quot;]').click();document.getElementById('search').value='GTA';document.getElementById('search').dispatchEvent(new Event('input'))"><span class="option-icon">🌴</span><span class="option-copy"><strong>GTA: Jay Edition</strong><small>Explore Vice City</small></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option proxy-option" id="menu-proxy" onclick="window.showSiteScreen(&quot;proxy&quot;)"><span class="option-icon" aria-hidden="true"><svg class="menu-icon globe-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="2.6"/><path d="M5.8 24h36.4M24 5c5.2 5.2 7.8 11.5 7.8 19S29.2 37.8 24 43M24 5c-5.2 5.2-7.8 11.5-7.8 19S18.8 37.8 24 43M10.2 12.5h27.6M10.2 35.5h27.6" stroke="currentColor" stroke-width="1.7" opacity=".85"/><path d="M13 29.5h22" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><text x="24" y="27.2" text-anchor="middle" font-size="9.5" font-weight="800" fill="currentColor">www</text></svg></span><span class="option-copy"><strong>Proxy</strong></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option groupcat-option" id="menu-groupcat" type="button" onclick="window.showSiteScreen(&quot;groupcat&quot;)"><span class="option-icon">👀</span><span class="option-copy"><strong>Groupcat</strong></span><span class="option-arrow">↗</span></button>
-        <button class="menu-option finmalc-option" id="menu-finmalc" type="button" onclick="window.showSiteScreen(&quot;finmalc&quot;)"><span class="option-icon">🗿</span><span class="option-copy"><strong>fin malc</strong></span><span class="option-arrow">↗</span></button>
+    <header class="gc-mainbar">
+      <div class="gc-bar-left"><button class="menu-back" id="menu-back-home" type="button" onclick="window.showSiteScreen('welcome')">← Back</button></div>
+      <div class="gc-bar-title">GROUPCAT GAMES</div>
+      <div class="gc-bar-right">
+        <time class="gc-clock" id="gc-clock">--:--:--</time>
+        <button class="gc-account-button" id="menu-account" type="button" onclick="window.showSiteScreen('account')">Account ↗</button>
+        <div class="gc-settings-wrap">
+          <button class="gc-settings-button" id="gc-settings-button" type="button" aria-expanded="false" aria-controls="gc-settings-panel">⚙ Settings</button>
+          <div class="gc-settings-panel" id="gc-settings-panel" hidden>
+            <div class="gc-settings-heading">QUICK SETTINGS</div>
+            <button class="gc-setting-row" id="gc-url-scramble" type="button" aria-pressed="false"><span><strong>Tab cloaking</strong><small>Flash random strings in the address bar</small></span><span class="gc-setting-state">Off</span></button>
+            <button class="gc-setting-row" id="gc-cloak-tab" type="button"><span><strong>Open cloaked tab</strong><small>Open Groupcat in a separate tab</small></span><span>↗</span></button>
+            <button class="gc-setting-row" id="gc-focus-mode" type="button" aria-pressed="false"><span><strong>Focus mode</strong><small>Toggle browser fullscreen</small></span><span class="gc-setting-state">Off</span></button>
+            <button class="gc-setting-row" id="gc-performance-toggle" type="button" aria-pressed="false"><span><strong>Performance mode</strong><small>Reduce visual effects and animations</small></span><span class="gc-setting-state">Off</span></button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="menu-content gc-games-menu">
+      <div class="gc-menu-eyebrow">PICK UP WHERE YOU LEFT OFF</div>
+      <h1>Choose a game.</h1>
+      <div class="menu-options gc-game-options">
+        <a class="menu-option minecraft-option" id="menu-minecraft" href="/minecraft/26.3.html"><span class="option-icon"><img class="menu-icon minecraft-icon minecraft-logo-image" src="images/minecraft-logo.webp" alt=""></span><span class="option-copy"><strong>Minecraft 26.3</strong><small>Survive, build and explore</small></span><span class="option-arrow">↗</span></a>
+        <a class="menu-option cookieclicker-option" id="menu-cookieclicker" href="/cookieclicker/official-2.058.html"><span class="option-icon">🍪</span><span class="option-copy"><strong>Cookie Clicker</strong><small>The original cookie-clicking game</small></span><span class="option-arrow">↗</span></a>
+        <a class="menu-option gunspin-option" id="menu-gunspin" href="/gunspin/index.html"><span class="option-icon">🔫</span><span class="option-copy"><strong>GunSpin</strong><small>Use recoil to launch yourself</small></span><span class="option-arrow">↗</span></a>
+        <a class="menu-option polytrack-option" id="menu-polytrack" href="/games/polytrack.html"><span class="option-icon">🏎️</span><span class="option-copy"><strong>PolyTrack</strong><small>Low-poly racing and time trials</small></span><span class="option-arrow">↗</span></a>
+        <a class="menu-option gta-option" id="menu-gta" href="/games/gtavc.html"><span class="option-icon">🌴</span><span class="option-copy"><strong>GTA: Jay Edition</strong><small>Explore Vice City</small></span><span class="option-arrow">↗</span></a>
+      </div>
+      <div class="gc-menu-extras">
+        <button class="gc-extra-link" id="menu-proxy" type="button" onclick="window.showSiteScreen('proxy')">Proxy ↗</button>
+        <button class="gc-extra-link" id="menu-groupcat" type="button" onclick="window.showSiteScreen('groupcat')">Groupcat</button>
+        <button class="gc-extra-link" id="menu-finmalc" type="button" onclick="window.showSiteScreen('finmalc')">fin malc</button>
       </div>
     </div>
     <div class="menu-orb menu-orb-one"></div><div class="menu-orb menu-orb-two"></div>
   </section>
-
   <section class="minecraft-screen" id="minecraft-screen" hidden>
     <div class="special-top"><button class="menu-back" type="button" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
     <div class="minecraft-content">
@@ -132,77 +150,11 @@
     <div class="finmalc-content"><div class="finmalc-stamp">100% FINLAY APPROVED* (*not legally verified)</div><h1>FIN MALC.</h1><div class="finmalc-subtitle">A totally serious fan page for a very important bloke.</div><div class="finmalc-face">🗿</div><div class="finmalc-marquee">FINLAY MALCOLM FAN CLUB • FINLAY MALCOLM FAN CLUB • FINLAY MALCOLM FAN CLUB •</div><h2>THE LEGEND. THE MYTH. THE MALCOLM.</h2><p>Some people change the world. Finlay probably changed the group chat. This page exists for reasons nobody can fully explain.</p><div class="video-card"><div class="video-heading">📼 THE FIN MALC ARCHIVE</div><video id="finmalc-video" controls playsinline preload="metadata"><source src="videos/finlay.mp4" type="video/mp4">Your browser does not support this video.</video><div class="video-help">Video not showing? Add your MP4 as <code>videos/finlay.mp4</code> in the GitHub repository.</div></div><div class="finmalc-footer">EST. FOR THE CULTURE. PROBABLY.</div></div>
   </section>
 
-  <div class="app-shell" hidden>
-    <aside class="sidebar">
-      <a class="brand" href="#" aria-label="Groupcat Games home"><span class="brand-mark">g</span><span>groupcat<span class="brand-muted">games</span></span></a>
-      <div class="side-label">DISCOVER</div>
-      <button class="nav-link active" data-category="all"><span>⌂</span> Home</button>
-      <button class="nav-link" data-category="popular"><span>↗</span> Popular</button>
-      <button class="nav-link" data-category="recent"><span>◷</span> Recently played</button>
-      <button class="nav-link" data-category="favorites"><span>♡</span> Favourites</button>
-      <div class="side-label side-label-spaced">CATEGORIES</div>
-      <button class="nav-link" data-category="arcade"><span>▦</span> Arcade</button>
-      <button class="nav-link" data-category="action"><span>✳</span> Action</button>
-      <button class="nav-link" data-category="puzzle"><span>◇</span> Puzzle</button>
-      <button class="nav-link" data-category="racing"><span>⌁</span> Racing</button>
-      <button class="nav-link" data-category="sports"><span>◉</span> Sports</button>
-      <button class="nav-link" data-category="strategy"><span>♟</span> Strategy</button>
-      <div class="sidebar-bottom"><span class="status-dot"></span> More games added regularly</div>
-    </aside>
 
-    <main class="main">
-      <header class="topbar">\n        <button class="back-to-menu" id="games-back" onclick="window.showSiteScreen(&quot;menu&quot;)">← Menu</button>
-        <div class="mobile-brand"><span class="brand-mark">g</span> groupcat<span class="brand-muted">games</span></div>
-        <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search games..." autocomplete="off"><kbd>/</kbd></label>
-        <a class="top-link" href="https://groupcat.xyz" target="_blank" rel="noreferrer">Groupcat.xyz ↗</a>
-      </header>
-
-      <section class="hero">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="live-dot"></span> YOUR NEXT DISTRACTION</div>
-          <h1>Play something<br><span>great.</span></h1>
-          <p>A growing collection of games. No installs, no fuss. Just click and play.</p>
-          <a class="primary-btn" href="#games">Explore games <span>→</span></a>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
-          <div class="hero-tile tile-back">✦</div><div class="hero-tile tile-mid">◈</div><div class="hero-tile tile-front">▶</div>
-          <div class="spark spark-one">✳</div><div class="spark spark-two">✦</div>
-        </div>
-        <div class="hero-index">01 <span>/</span> PLAY</div>
-      </section>
-
-      <section class="section-heading" id="games">
-        <div><div class="eyebrow">THE LIBRARY</div><h2 id="section-title">All games <span id="game-count">0</span></h2></div>
-        <div class="sort-wrap"><span>Sort by</span><select id="sort"><option value="featured">Featured</option><option value="name">Name A–Z</option></select></div>
-      </section>
-
-      <div class="filter-row" id="filter-row">
-        <button class="filter-chip selected" data-category="all">All games</button>
-        <button class="filter-chip" data-category="arcade">Arcade</button>
-        <button class="filter-chip" data-category="action">Action</button>
-        <button class="filter-chip" data-category="puzzle">Puzzle</button>
-        <button class="filter-chip" data-category="racing">Racing</button>
-        <button class="filter-chip" data-category="sports">Sports</button>
-        <button class="filter-chip" data-category="strategy">Strategy</button>
-        <button class="filter-chip" data-category="favorites">Favourites</button>
-      </div>
-
-      <section class="game-grid" id="game-grid" aria-live="polite"></section>
-      <div class="empty-state" id="empty-state" hidden><div>⌕</div><h3>No games found</h3><p>Try another search or category.</p></div>
-      <footer><span>GROUPCAT GAMES</span><span>Built for the love of playing.</span><a href="https://groupcat.xyz">Back to Groupcat ↗</a></footer>
-    </main>
-  </div>
-
-  <div class="player-overlay" id="player-overlay" hidden>
-    <div class="player-top"><div><span class="player-dot"></span><strong id="player-title">Game</strong></div><div class="player-actions"><button id="fullscreen" title="Fullscreen">⛶</button><button id="close-player" title="Close">✕</button></div></div>
-    <div class="player-frame-wrap"><iframe id="game-frame" title="Game player" allow="fullscreen; autoplay; gamepad; clipboard-read; clipboard-write" allowfullscreen></iframe></div>
-  </div>
 <script>
 window.showSiteScreen = function(screen) {
-  const ids = {welcome:"welcome-screen",menu:"menu-screen",minecraft:"minecraft-screen",account:"account-screen",proxy:"proxy-screen",gunspin:"gunspin-screen",cookieclicker:"cookieclicker-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen",games:"app-shell"};
-  ["welcome-screen","menu-screen","minecraft-screen","account-screen","proxy-screen","gunspin-screen","cookieclicker-screen","groupcat-screen","finmalc-screen","app-shell"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
-  const app=document.querySelector(".app-shell"); if(app) app.hidden = screen !== "games";
+  const ids = {welcome:"welcome-screen",menu:"menu-screen",minecraft:"minecraft-screen",account:"account-screen",proxy:"proxy-screen",gunspin:"gunspin-screen",cookieclicker:"cookieclicker-screen",groupcat:"groupcat-screen",finmalc:"finmalc-screen"};
+  ["welcome-screen","menu-screen","minecraft-screen","account-screen","proxy-screen","gunspin-screen","cookieclicker-screen","groupcat-screen","finmalc-screen"].forEach(id => { const el=document.getElementById(id); if(el) el.hidden = id !== ids[screen]; });
   if(screen==="groupcat"){const lock=document.getElementById("groupcat-lock"),secret=document.getElementById("groupcat-secret"),input=document.getElementById("groupcat-password"),error=document.getElementById("groupcat-password-error");if(lock)lock.hidden=false;if(secret)secret.hidden=true;if(input)input.value="";if(error)error.hidden=true;}
   window.scrollTo(0,0);
 };
@@ -215,17 +167,7 @@ window.unlockGroupcat = function(event) {
   return false;
 };
 </script>
-  <script>
-    (() => {
-      document.title = "New Tab";
-      const icon = document.createElement("link");
-      icon.rel = "icon";
-      icon.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='22' fill='%23fbbc04'/%3E%3Cpath d='M24 2a22 22 0 0 0-19 11l19 11 19-11A22 22 0 0 0 24 2' fill='%23ea4335'/%3E%3Cpath d='M5 13a22 22 0 0 0 19 33l11-19-11-19z' fill='%2334a853'/%3E%3Ccircle cx='24' cy='24' r='11' fill='%234285f4' stroke='white' stroke-width='2'/%3E%3C/svg%3E";
-      document.head.append(icon);
-    })();
-  </script>
-  <script src="games.js?v=20261124-3"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20261124-menu"></script>
 
   <script>
     document.documentElement.dataset.theme = localStorage.getItem("gc_theme") || "mono";
@@ -251,100 +193,49 @@ window.unlockGroupcat = function(event) {
     })();
   </script>
 
-  <style>
-    #gc-focus-mode{position:fixed;right:14px;bottom:14px;z-index:99999;border:1px solid #ffffff30;border-radius:999px;padding:10px 14px;background:#171520e8;color:#fff;font:600 12px DM Sans,Arial,sans-serif;box-shadow:0 5px 24px #0007;backdrop-filter:blur(12px);cursor:pointer}
-    #gc-focus-mode:hover{background:#302643}
-  </style>
-  <button id="gc-focus-mode" type="button" aria-label="Enter browser fullscreen">⛶ Focus mode</button>
-  <script>
-    (() => {
-      const button=document.getElementById("gc-focus-mode");
-      if(!button)return;
-      const update=()=>{button.textContent=document.fullscreenElement?"⛶ Exit focus":"⛶ Focus mode";};
-      button.addEventListener("click",async()=>{
-        try{
-          if(document.fullscreenElement) await document.exitFullscreen();
-          else if(document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
-          else alert("Fullscreen is not supported here. On a computer, press F11 to hide the browser toolbar.");
-        }catch{alert("Your browser blocked fullscreen. Try pressing F11 on a computer.");}
-      });
-      document.addEventListener("fullscreenchange",update);
-    })();
-  </script>
 
-  <div id="gc-quick-tools" aria-label="Site quick settings">
-    <button id="gc-performance-toggle" type="button" aria-pressed="false">⚡ Performance: Off</button>
-    <button id="gc-url-scramble" type="button" aria-pressed="false">⌁ URL scramble: Off</button>
-    <button id="gc-cloak-tab" type="button">↗ Open cloaked tab</button>
-  </div>
   <script>
     (() => {
-      const root = document.documentElement;
-      const performanceButton = document.getElementById("gc-performance-toggle");
-      const scrambleButton = document.getElementById("gc-url-scramble");
-      const cloakButton = document.getElementById("gc-cloak-tab");
-      const paramsAtLoad = new URLSearchParams(location.search);
-      const forceRandomTab = paramsAtLoad.get("gc_random_tab") === "1";
-      const isScrambledAddress = location.pathname.length === 11 &&
-        /^\/[a-z0-9]+$/.test(location.pathname) &&
-        paramsAtLoad.has("s") && paramsAtLoad.has("u");
-      const originalUrl = (isScrambledAddress || forceRandomTab) ? "/" : location.pathname + location.search + location.hash;
-      const canonicalSiteUrl = location.origin + "/";
-      let scrambleTimer = null;
-      const randomToken = () => {
-        const bytes = crypto.getRandomValues(new Uint8Array(10));
-        return Array.from(bytes, value => "abcdefghijklmnopqrstuvwxyz0123456789"[value % 36]).join("");
+      const clock=document.getElementById("gc-clock");
+      const tick=()=>{if(clock)clock.textContent=new Intl.DateTimeFormat("en-GB",{hour:"2-digit",minute:"2-digit",second:"2-digit",hour12:false}).format(new Date());};
+      tick();setInterval(tick,1000);
+      const panel=document.getElementById("gc-settings-panel");
+      const opener=document.getElementById("gc-settings-button");
+      const closePanel=()=>{panel.hidden=true;opener.setAttribute("aria-expanded","false");};
+      opener.addEventListener("click",()=>{panel.hidden=!panel.hidden;opener.setAttribute("aria-expanded",String(!panel.hidden));});
+      document.addEventListener("click",e=>{if(!e.target.closest(".gc-settings-wrap"))closePanel();});
+      document.addEventListener("keydown",e=>{if(e.key==="Escape")closePanel();});
+      const root=document.documentElement;
+      const params=new URLSearchParams(location.search);
+      const forceRandom=params.get("gc_random_tab")==="1";
+      const scrambled=location.pathname.length===11&&/^\/[a-z0-9]+$/.test(location.pathname)&&params.has("s")&&params.has("u");
+      const original=(forceRandom||scrambled)?"/":location.pathname+location.search+location.hash;
+      const token=()=>Array.from(crypto.getRandomValues(new Uint8Array(10)),v=>"abcdefghijklmnopqrstuvwxyz0123456789"[v%36]).join("");
+      const scramble=document.getElementById("gc-url-scramble");
+      let timer=null;
+      const applyScramble=on=>{
+        if(timer){clearInterval(timer);timer=null;}
+        scramble.setAttribute("aria-pressed",String(on));
+        scramble.querySelector(".gc-setting-state").textContent=on?"On":"Off";
+        try{localStorage.setItem("gc_url_scramble",on?"on":"off");}catch{}
+        if(on){
+          const update=()=>{try{history.replaceState(history.state,"","/"+token()+"?s="+token()+"&u="+token()+"#"+token());}catch{applyScramble(false);}};
+          update();timer=setInterval(update,50);
+        }else{try{history.replaceState(history.state,"",original);}catch{}}
       };
-      const applyUrlScramble = enabled => {
-        if (scrambleTimer) {
-          clearInterval(scrambleTimer);
-          scrambleTimer = null;
-        }
-        scrambleButton.setAttribute("aria-pressed", String(enabled));
-        scrambleButton.textContent = enabled ? "⌁ URL scramble: On" : "⌁ URL scramble: Off";
-        try { localStorage.setItem("gc_url_scramble", enabled ? "on" : "off"); } catch {}
-        if (enabled) {
-          const updateAddress = () => {
-            try {
-              history.replaceState(history.state, "", "/" + randomToken() + "?s=" + randomToken() + "&u=" + randomToken() + "#" + randomToken());
-            } catch {
-              applyUrlScramble(false);
-            }
-          };
-          updateAddress();
-          scrambleTimer = setInterval(updateAddress, 50);
-        } else {
-          try { history.replaceState(history.state, "", originalUrl); } catch {}
-        }
-      };
-      const applyPerformance = enabled => {
-        root.classList.toggle("gc-performance-mode", enabled);
-        performanceButton.setAttribute("aria-pressed", String(enabled));
-        performanceButton.textContent = enabled ? "⚡ Performance: On" : "⚡ Performance: Off";
-        try { localStorage.setItem("gc_performance_mode", enabled ? "on" : "off"); } catch {}
-      };
-      let enabled = false;
-      try { enabled = localStorage.getItem("gc_performance_mode") === "on"; } catch {}
-      applyPerformance(enabled);
-      performanceButton.addEventListener("click", () => {
-        applyPerformance(!root.classList.contains("gc-performance-mode"));
-      });
-      let scrambleEnabled = false;
-      try { scrambleEnabled = localStorage.getItem("gc_url_scramble") === "on"; } catch {}
-      if (forceRandomTab) {
-        try { history.replaceState(history.state, "", "/"); } catch {}
-        scrambleEnabled = true;
-      }
-      applyUrlScramble(scrambleEnabled);
-      scrambleButton.addEventListener("click", () => {
-        applyUrlScramble(!scrambleTimer);
-      });
-      cloakButton.addEventListener("click", () => {
-        const tab = window.open(canonicalSiteUrl + "?gc_random_tab=1", "_blank");
-        if (!tab) {
-          alert("Your browser blocked the new tab. Allow pop-ups for this site, then try again.");
-        }
-      });
+      let scrambleOn=false,performanceOn=false;
+      try{scrambleOn=localStorage.getItem("gc_url_scramble")==="on";performanceOn=localStorage.getItem("gc_performance_mode")==="on";}catch{}
+      if(forceRandom){try{history.replaceState(history.state,"","/");}catch{}scrambleOn=true;}
+      applyScramble(scrambleOn);
+      scramble.addEventListener("click",()=>applyScramble(!timer));
+      document.getElementById("gc-cloak-tab").addEventListener("click",()=>{const tab=window.open(location.origin+"/?gc_random_tab=1","_blank");if(!tab)alert("Your browser blocked the new tab. Allow pop-ups for this site and try again.");});
+      const perf=document.getElementById("gc-performance-toggle");
+      const applyPerformance=on=>{root.classList.toggle("gc-performance-mode",on);perf.setAttribute("aria-pressed",String(on));perf.querySelector(".gc-setting-state").textContent=on?"On":"Off";try{localStorage.setItem("gc_performance_mode",on?"on":"off");}catch{}};
+      applyPerformance(performanceOn);perf.addEventListener("click",()=>applyPerformance(!root.classList.contains("gc-performance-mode")));
+      const focus=document.getElementById("gc-focus-mode");
+      const updateFocus=()=>{const on=!!document.fullscreenElement;focus.setAttribute("aria-pressed",String(on));focus.querySelector(".gc-setting-state").textContent=on?"On":"Off";};
+      focus.addEventListener("click",async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{alert("Fullscreen was blocked. You can also press F11 on your keyboard.");}});
+      document.addEventListener("fullscreenchange",updateFocus);updateFocus();
     })();
   </script>
 
