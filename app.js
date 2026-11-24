@@ -26,7 +26,7 @@
   async function loadAccountData(){
     const response=await fetch("/api/data",{credentials:"same-origin"});if(!response.ok)throw new Error("Signed in, but your saved data could not be loaded.");
     const data=await response.json();favorites.splice(0,favorites.length,...(Array.isArray(data.favorites)?data.favorites:[]));recent.splice(0,recent.length,...(Array.isArray(data.recent)?data.recent:[]));
-    try{localStorage.setItem("groupcat-favorites",JSON.stringify(favorites));localStorage.setItem("groupcat-recent",JSON.stringify(recent));}catch{}updateStats();
+    try{localStorage.setItem("groupcat-favorites",JSON.stringify(favorites));localStorage.setItem("groupcat-recent",JSON.stringify(recent));}catch{}updateStats();window.dispatchEvent(new Event("groupcat:data-loaded"));
   }
   function showUser(user){
     window.GROUPCAT_ACCOUNT.user=user;$("account-logged-out").hidden=!!user;$("account-logged-in").hidden=!user;
