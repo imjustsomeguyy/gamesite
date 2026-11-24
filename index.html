@@ -26,11 +26,12 @@
 
   <section class="menu-screen" id="menu-screen" hidden>
     <header class="gc-mainbar">
-      <div class="gc-bar-left"><button class="menu-back" id="menu-back-home" type="button" onclick="window.showSiteScreen('welcome')">← Back</button></div>
-      <div class="gc-bar-title">GROUPCAT GAMES</div>
+      <div class="gc-bar-left">
+        <div class="gc-bar-title">GROUPCAT GAMES</div>
+        <button class="menu-back gc-home-back" id="menu-back-home" type="button" onclick="window.showSiteScreen('welcome')" aria-label="Back to welcome">←</button>
+      </div>
+      <time class="gc-clock" id="gc-clock">--:--:--</time>
       <div class="gc-bar-right">
-        <time class="gc-clock" id="gc-clock">--:--:--</time>
-        <button class="gc-account-button" id="menu-account" type="button" onclick="window.showSiteScreen('account')">Account ↗</button>
         <div class="gc-settings-wrap">
           <button class="gc-settings-button" id="gc-settings-button" type="button" aria-expanded="false" aria-controls="gc-settings-panel">⚙ Settings</button>
           <div class="gc-settings-panel" id="gc-settings-panel" hidden>
@@ -41,8 +42,9 @@
             <button class="gc-setting-row" id="gc-performance-toggle" type="button" aria-pressed="false"><span><strong>Performance mode</strong><small>Reduce visual effects and animations</small></span><span class="gc-setting-state">Off</span></button>
           </div>
         </div>
+        <button class="gc-account-button" id="menu-account" type="button" onclick="window.showSiteScreen('account')">Account ↗</button>
       </div>
-    </header>
+    </header>der>
     <div class="menu-content gc-games-menu">
       <div class="gc-menu-eyebrow">PICK UP WHERE YOU LEFT OFF</div>
       <h1>Choose a game.</h1>
