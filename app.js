@@ -66,7 +66,7 @@
     minecraftButton.disabled=true;
     status.textContent="Checking the Minecraft client and R2 connection…";
     try{
-      const response=await fetch("/minecraft/26.3.html",{method:"HEAD",cache:"no-store"});
+      const response=await fetch("/modern-mc/26.3.html",{method:"HEAD",cache:"no-store"});
       if(response.status===503){
         status.textContent="R2 binding missing: connect the MINECRAFT binding to the groupcat-minecraft bucket in the production Pages project.";
       }else if(response.status===404){
@@ -74,7 +74,7 @@
       }else if(!response.ok){
         status.textContent="Minecraft storage returned error "+response.status+".";
       }else{
-        $("minecraft-frame").src="/minecraft/26.3.html";
+        $("minecraft-frame").src="/modern-mc/26.3.html";
         $("minecraft-frame-wrap").hidden=false;
         status.textContent="Loading Minecraft 26.3…";
         minecraftButton.hidden=true;
