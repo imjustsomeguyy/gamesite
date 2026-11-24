@@ -102,7 +102,7 @@
   const cookieGuestPanel=document.getElementById("cookie-guest-panel");
   const cookieSavePanel=document.getElementById("cookie-save-panel");
   const cookieGameWrap=document.getElementById("cookie-game-frame-wrap");
-  const COOKIE_CLICKER_OFFICIAL_URL="https://orteil.dashnet.org/cookieclicker/";
+  const COOKIE_CLICKER_OFFICIAL_URL="/cookieclicker/official-2.058.html";
   function startCookieClicker(){
     cookieGuestPanel.hidden=true;
     cookieSavePanel.hidden=true;
