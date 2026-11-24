@@ -665,3 +665,20 @@ html.gc-performance-mode .primary-btn:hover {
 .cookie-one-save-actions button:disabled{opacity:.4;cursor:not-allowed}
 .cookie-one-save .cookie-slot-message{min-height:16px;margin-bottom:0;font-size:11px}
 @media(max-width:600px){.cookie-one-save{padding:13px}.cookie-one-save-actions button{flex:1 1 calc(50% - 8px)}}
+
+
+/* GTA: Jay Edition — Vice City / GTA VI sunset palette */
+.game-card.gta-jay-edition .game-thumb{
+  background:linear-gradient(135deg,#ff4fa3 0%,#ff8b5d 38%,#a54dcb 70%,#263e8f 100%)!important;
+  border:1px solid rgba(255,126,190,.55);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 0 24px rgba(255,79,163,.12);
+}
+.game-card.gta-jay-edition .game-tag{
+  background:rgba(26,13,43,.62);
+  border:1px solid rgba(255,255,255,.25);
+  color:#fff;
+}
+.game-card.gta-jay-edition .thumb-icon{
+  color:#fff;
+  text-shadow:0 3px 18px rgba(39,12,65,.65);
+}
