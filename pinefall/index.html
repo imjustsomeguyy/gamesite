@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071018">
+<title>PINEFALL — a quiet night in the pines</title>
+<meta name="description" content="A tiny animated winter forest, made from characters and colour.">
+<style>
+:root{color-scheme:dark;--bg:#061018;--muted:#91a8b4;--ice:#b9e8f4;--green:#477f70;--amber:#ffbd62}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(ellipse at 50% 70%,#102b30 0,#081820 42%,#040b12 100%);color:#e7f4f5;font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+body{min-height:100vh;overflow:hidden;display:grid;place-items:center}
+main{width:min(1200px,100vw);padding:clamp(16px,3vw,34px);position:relative}
+header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 auto 14px;max-width:1000px}
+.brand{letter-spacing:.32em;font-size:12px;color:#d4e9eb}.brand span{color:#82b8a9}
+.sub{font-size:10px;letter-spacing:.16em;color:#718e9b;margin-top:7px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+button{font:inherit;font-size:10px;letter-spacing:.12em;color:#c6dadd;background:#10232c;border:1px solid #29434a;border-radius:999px;padding:9px 13px;cursor:pointer;transition:.2s}
+button:hover{background:#1b3540;border-color:#5b8a8e;color:#fff}button:focus-visible{outline:2px solid #9ed9df;outline-offset:3px}
+.scene{position:relative;max-width:1000px;margin:auto;border:1px solid #27404a;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,rgba(5,13,24,.9),rgba(7,24,29,.94));box-shadow:0 30px 100px #0009,inset 0 0 80px #1b4a4a22}
+.scene:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 78%,#ff9b3b18,transparent 30%),linear-gradient(90deg,#061018aa,transparent 20%,transparent 80%,#061018aa)}
+canvas{display:block;width:100%;height:auto;aspect-ratio:16/9}
+footer{max-width:1000px;margin:13px auto 0;display:flex;justify-content:space-between;gap:12px;color:#718c98;font-size:9px;letter-spacing:.15em;text-transform:uppercase}
+.hint{color:#a5bdc2}
+@media(max-width:600px){header{align-items:flex-start;flex-direction:column}.actions{justify-content:flex-start}footer{font-size:8px;flex-direction:column}.scene{border-radius:12px}canvas{aspect-ratio:4/5}}
+</style>
+</head>
+<body>
+<main>
+<header><div><div class="brand">✳ <span>PINE</span>FALL</div><div class="sub">A QUIET NIGHT IN THE PINES</div></div><div class="actions"><button id="pause">Ⅱ PAUSE</button><button id="snow">SNOW: ON</button><button id="full">FULLSCREEN ↗</button></div></header>
+<section class="scene" id="scene" aria-label="Animated ASCII winter campsite"><canvas id="art" aria-label="A campfire flickers between snowy pine trees as snow falls"></canvas></section>
+<footer><span>✦  −8°C &nbsp; / &nbsp; DEEP FOREST</span><span class="hint">STAY A LITTLE LONGER</span><span id="clock">NIGHTFALL</span></footer>
+</main>
+<script>
+(()=>{
+const c=document.getElementById('art'),ctx=c.getContext('2d'),scene=document.getElementById('scene');
+const W=1200,H=675,chars=['·','*','✦','❄','+'],snow=[],embers=[],smoke=[];
+let paused=false,snowOn=true,frame=0,last=0;
+const rand=(a,b)=>a+Math.random()*(b-a);
+function resize(){const d=Math.min(devicePixelRatio||1,2);c.width=W*d;c.height=H*d;ctx.setTransform(d,0,0,d,0,0)}
+function tree(x,y,s,seed=0){ctx.save();ctx.translate(x,y);ctx.scale(s,s);const rows=8+seed%4;for(let r=0;r<rows;r++){let width=(r+1)*2.3;for(let k=-width;k<=width;k+=2.2){if(Math.abs(k)>width-r*.15)continue;ctx.fillStyle=(r<2?'#a6d0c6':'#4d8775');ctx.globalAlpha=.65+((r+k+seed)%3)*.1;ctx.fillText(r%3===0?'✦':(Math.abs(k)%4<1?'♠':'▲'),k*3, r*8)}}ctx.globalAlpha=1;ctx.fillStyle='#8b7660';ctx.fillText('║',-2,rows*8+12);ctx.restore()}
+function forest(){ctx.font='18px monospace';for(let i=0;i<17;i++){const x=i*76-20,s=.65+(i%5)*.13,y=350+(i%3)*16;tree(x,y,s,i)}for(let i=0;i<15;i++){const x=i*86+12,s=.48+(i%4)*.12;tree(x,270+(i%4)*20,s,i+4)}}
+function init(){for(let i=0;i<150;i++)snow.push({x:rand(0,W),y:rand(0,H),z:rand(.4,1.5),v:rand(.5,2),dr:rand(-.5,.5),ch:chars[Math.floor(rand(0,chars.length))]})}
+function drawSky(){ctx.fillStyle='#081723';ctx.fillRect(0,0,W,H);let g=ctx.createRadialGradient(600,380,20,600,380,620);g.addColorStop(0,'#17333a55');g.addColorStop(1,'#07121d00');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.fillStyle='#d3eaf0';ctx.globalAlpha=.7;ctx.font='19px monospace';for(let i=0;i<48;i++){let x=(i*197)%W,y=(i*83)%270;ctx.fillText(i%5===0?'✦':'.',x,y)}ctx.globalAlpha=1;ctx.fillStyle='#d5eaf0';ctx.font='48px monospace';ctx.globalAlpha=.82;ctx.fillText('◔',950,112);ctx.globalAlpha=1}
+function ground(){ctx.fillStyle='#102a2b';ctx.beginPath();ctx.moveTo(0,450);ctx.quadraticCurveTo(330,390,610,465);ctx.quadraticCurveTo(920,520,1200,420);ctx.lineTo(1200,675);ctx.lineTo(0,675);ctx.fill();ctx.fillStyle='#b6d5d4';ctx.globalAlpha=.65;ctx.font='18px monospace';for(let i=0;i<100;i++){let x=(i*137)%W,y=470+(i*47)%195;ctx.fillText(i%3===0?'✧':'.',x,y)}ctx.globalAlpha=1}
+function camp(){ctx.save();ctx.translate(600,510);ctx.font='24px monospace';ctx.textAlign='center';ctx.fillStyle='#8b6650';ctx.fillText('╲══════╱',0,30);ctx.fillStyle='#d28c54';ctx.fillText('╱══════╲',0,48);let f=Math.sin(frame*.19)*7;ctx.shadowBlur=35;ctx.shadowColor='#ff8b32';ctx.fillStyle='#ff6b32';ctx.font='bold 44px monospace';ctx.fillText(f>0?'♨':'♨',0,-5+f*.2);ctx.shadowBlur=0;ctx.fillStyle='#ffb642';ctx.font='bold 35px monospace';ctx.fillText('▲',-2,-22+f);ctx.fillStyle='#fff0a3';ctx.font='23px monospace';ctx.fillText('◆',1,-38+f*.6);ctx.restore()}
+function animate(t){if(!paused){frame++;drawSky();forest();ground();camp();ctx.font='16px monospace';if(snowOn){for(const p of snow){p.y+=p.v*p.z;p.x+=p.dr*p.z+Math.sin(frame*.01+p.y)*.2;if(p.y>H){p.y=-10;p.x=rand(0,W)}if(p.x<0)p.x=W;if(p.x>W)p.x=0;ctx.globalAlpha=.35+p.z*.4;ctx.fillStyle=p.z>1?'#e6f6ff':'#9dcbd9';ctx.fillText(p.ch,p.x,p.y)}}ctx.globalAlpha=1;
+if(frame%3===0){embers.push({x:rand(585,615),y:485,v:rand(.8,2),life:rand(30,70),a:1});smoke.push({x:rand(592,608),y:480,v:rand(.4,.9),life:rand(45,85),a:.25})}
+for(const arr of [embers,smoke]){for(let i=arr.length-1;i>=0;i--){const p=arr[i];p.y-=p.v;p.x+=Math.sin(frame*.04+i)*.45;p.life--;p.a*=.985;ctx.globalAlpha=Math.max(0,p.a);ctx.fillStyle=arr===embers?'#ffb45e':'#a9c4c4';ctx.font=arr===embers?'13px monospace':'18px monospace';ctx.fillText(arr===embers?'✦':'·',p.x,p.y);if(p.life<=0)arr.splice(i,1)}}ctx.globalAlpha=1;ctx.fillStyle='#d6e8e8';ctx.font='12px monospace';ctx.textAlign='center';ctx.fillText('~  the forest is quiet tonight  ~',600,630)}
+requestAnimationFrame(animate)}
+document.getElementById('pause').onclick=()=>{paused=!paused;document.getElementById('pause').textContent=paused?'▶ RESUME':'Ⅱ PAUSE';if(paused)requestAnimationFrame(()=>{})};
+document.getElementById('snow').onclick=()=>{snowOn=!snowOn;document.getElementById('snow').textContent='SNOW: '+(snowOn?'ON':'OFF')};
+document.getElementById('full').onclick=()=>{if(!document.fullscreenElement)scene.requestFullscreen?.();else document.exitFullscreen?.()};
+window.addEventListener('resize',resize);resize();init();requestAnimationFrame(animate);
+})();
+</script>
+</body></html>
+<!-- Pinefall standalone Cloudflare Pages release -->
