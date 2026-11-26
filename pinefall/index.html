@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d0d">
+<title>Winter Campfire · Groupcat</title>
+<style>
+:root{color-scheme:dark;--snow:#dce8e8;--muted:#829494;--ember:#ff9b50}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 78%,#182525 0,#0b1314 48%,#070b0c 100%);color:var(--snow);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-x:hidden}
+header{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(18px,5vw,64px);border-bottom:1px solid #ffffff12;background:#070b0c99}
+a{color:#c9d8d8;text-decoration:none}a:hover{color:#fff}
+.brand{font:700 13px system-ui,sans-serif;letter-spacing:.16em}.back{font-size:12px;color:var(--muted)}
+main{max-width:1120px;margin:auto;padding:clamp(28px,6vw,70px) 20px 50px;text-align:center}
+.kicker{font-size:10px;letter-spacing:.32em;color:#9caeaa}
+h1{font:600 clamp(28px,5vw,48px)/1.1 Georgia,serif;letter-spacing:.025em;margin:14px 0 9px}
+.sub{font-size:12px;color:var(--muted);margin:0 0 32px}
+.scene{position:relative;isolation:isolate;min-height:470px;border:1px solid #d9eeee1a;border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#0b151d 0%,#101e25 57%,#101a19 100%);box-shadow:0 24px 90px #0009}
+.skyglow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 80%,#ff9b501c,transparent 34%);z-index:-1}
+.forest{position:absolute;inset:15px 0 0;display:flex;justify-content:space-between;pointer-events:none;color:#526b69;opacity:.58;text-align:left;font-size:clamp(8px,1.25vw,14px);line-height:1.02;white-space:pre;overflow:hidden}
+.forest span:nth-child(2){align-self:flex-start;margin-top:34px;color:#71807a;opacity:.8}
+.forest span:nth-child(3){align-self:flex-start;margin-top:75px}
+.forest span:nth-child(4){align-self:flex-start;margin-top:28px;color:#71807a}
+.snow{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.72}
+.fire-wrap{position:absolute;z-index:3;left:50%;bottom:36px;transform:translateX(-50%);width:min(560px,94%);padding:12px 0 0;background:radial-gradient(ellipse at 50% 82%,#ff9d4c18,transparent 60%)}
+ascii-art{display:block;color:#ffbf83;font-size:13px;line-height:1.08;white-space:pre}
+.fire-label{margin-top:3px;color:#a5b5af;font-size:9px;letter-spacing:.22em}
+.ground{position:absolute;bottom:0;left:0;right:0;height:65px;background:linear-gradient(180deg,transparent,#091110 55%);z-index:1}
+.footer{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:18px;color:#71827f;font-size:10px;letter-spacing:.1em}
+@media(max-width:600px){.scene{min-height:440px}.forest{font-size:8px}.fire-wrap{bottom:28px}ascii-art{font-size:10px}.sub{line-height:1.6}}
+@media(prefers-reduced-motion:reduce){.snow{opacity:.3}}
+</style>
+<script type="module" src="https://ascii.rest/ascii.js"></script>
+</head>
+<body>
+<header><a class="brand" href="/">GROUPCAT / GAMES</a><a class="back" href="/">← BACK TO MENU</a></header>
+<main>
+<div class="kicker">A QUIET PLACE IN THE WOODS</div>
+<h1>Winter Campfire</h1>
+<p class="sub">Snow falling through the pines. A fire keeping the cold away.</p>
+<section class="scene" aria-label="Animated ASCII winter campfire scene">
+<div class="skyglow"></div>
+<div class="forest" aria-hidden="true">
+<span>       /\\       /\\\\          /\\       /\\\\\
+      /  \\     /  \\\\        /  \\     /  \\\\
+     /    \\   /    \\\\      /    \\   /    \\\\
+    /      \\ /      \\\\    /      \\ /      \\\\
+       ||         ||             ||         ||
+       ||         ||             ||         ||</span>
+<span>   /\\        /\\       /\\
+  /  \\      /  \\     /  \\
+ /    \\    /    \\   /    \\
+/      \\  /      \\ /      \\
+   ||         ||        ||</span>
+<span>      /\\          /\\       /\\
+     /  \\        /  \\     /  \\
+    /    \\      /    \\   /    \\
+   /      \\    /      \\ /      \\
+      ||           ||        ||</span>
+<span>  /\\        /\\\\       /\\
+ /  \\      /  \\\\     /  \\
+/    \\    /    \\\\   /    \\
+      ||         ||         ||</span>
+</div>
+<div class="snow"><ascii-art piece="snowfall" label="Falling snow"></ascii-art></div>
+<div class="ground"></div>
+<div class="fire-wrap">
+<ascii-art piece="campfire" label="Animated campfire"></ascii-art>
+<div class="fire-label">STAY A WHILE</div>
+</div>
+</section>
+<div class="footer"><span>ASCII ANIMATION</span><span>•</span><span>SNOWFALL + FIRE</span><span>•</span><span>TAKE A BREATHER</span></div>
+</main>
+</body>
+</html>
