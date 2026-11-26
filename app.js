@@ -11,7 +11,7 @@
     $("account-login-tab").classList.toggle("active",mode==="login");
     $("account-signup-tab").classList.toggle("active",mode==="signup");
     $("account-heading").textContent=mode==="login"?"Welcome back.":"Create your account.";
-    $("account-description").textContent=mode==="login"?"Sign in to sync your favourites and recently played games across devices.":"Pick a username and password. Your game data will be saved to your account.";
+    $("account-description").textContent=mode==="login"?"Sign in to your account.":"Choose a username and password.";
     $("account-submit").innerHTML=(mode==="login"?"Log in":"Create account")+" <span>↗</span>";
     $("account-password").autocomplete=mode==="login"?"current-password":"new-password";
     $("account-password").minLength=mode==="login"?1:8;
