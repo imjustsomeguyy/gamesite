@@ -1,0 +1,58 @@
+/* Groupcat — Vice City / GTA VI inspired refresh */
+:root{
+  --gc-night:#0c0d1b;
+  --gc-ink:#111222;
+  --gc-panel:#19182b;
+  --gc-panel2:#211b35;
+  --gc-pink:#cc46a0;
+  --gc-coral:#f76685;
+  --gc-orange:#ff885f;
+  --gc-amber:#ffa948;
+  --gc-cream:#fff1dc;
+}
+html,body{background:var(--gc-night);color:var(--gc-cream)}
+.welcome-screen,.menu-screen,.proxy-screen,.minecraft-screen,.account-screen,.groupcat-screen,.finmalc-screen,.gunspin-screen,.cookieclicker-screen{
+  background:
+    radial-gradient(ellipse at 50% 0%,rgba(129,61,187,.24),transparent 42%),
+    radial-gradient(ellipse at 88% 78%,rgba(204,70,160,.13),transparent 36%),
+    linear-gradient(180deg,#1f1f38 0%,#18182d 32%,#111222 68%,#0c0d1b 100%)!important;
+  color:var(--gc-cream);
+}
+.welcome-screen:after,.menu-screen:after{opacity:.12;background-image:linear-gradient(rgba(255,241,220,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,241,220,.045) 1px,transparent 1px);background-size:56px 56px}
+.welcome-content,.menu-content{
+  border:1px solid rgba(255,241,220,.13)!important;
+  background:linear-gradient(145deg,rgba(37,30,59,.94),rgba(17,18,34,.96))!important;
+  box-shadow:0 24px 80px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.07)!important;
+}
+.welcome-logo,.welcome-content h1,.menu-content h1{color:var(--gc-cream)}
+.welcome-content h1 span{background:linear-gradient(100deg,#4c5fca 0%,#813dbb 22%,#cc46a0 44%,#f76685 62%,#ff885f 80%,#ffa948 100%);background-clip:text;-webkit-background-clip:text;color:transparent}
+.welcome-play,.primary-btn,.proxy-launch{
+  border:1px solid rgba(255,241,220,.5)!important;
+  background:linear-gradient(110deg,#cc46a0 0%,#f76685 42%,#ff885f 75%,#ffa948 100%)!important;
+  color:#1b1024!important;box-shadow:0 9px 30px rgba(204,70,160,.2),inset 0 1px rgba(255,255,255,.35)!important
+}
+.welcome-play:hover,.primary-btn:hover,.proxy-launch:hover{filter:brightness(1.12);box-shadow:0 12px 36px rgba(247,102,133,.3)!important}
+.brand-mark,.option-icon{background:linear-gradient(145deg,#cc46a0,#ff885f)!important;color:#160d20!important;box-shadow:0 6px 22px rgba(204,70,160,.24)!important}
+.menu-option{
+  border:1px solid rgba(255,241,220,.13)!important;
+  background:linear-gradient(110deg,rgba(42,34,63,.88),rgba(20,20,39,.92))!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.22)!important;
+}
+.menu-option:hover{border-color:rgba(247,102,133,.65)!important;background:linear-gradient(110deg,rgba(70,39,78,.95),rgba(30,27,52,.98))!important;transform:translateY(-2px)!important}
+.option-copy strong{color:var(--gc-cream)}
+.option-copy small,.welcome-content p{color:#c1b5c9!important}
+.option-arrow{color:#ff9a91!important}
+.gc-mainbar{border-color:rgba(255,241,220,.12)!important}
+.gc-bar-title,.gc-menu-eyebrow,.special-kicker,.minecraft-kicker,.eyebrow{color:#f18ab0!important}
+.gc-settings-button,.gc-account-button,.gc-extra-link,.menu-back{
+  border-color:rgba(255,241,220,.16)!important;background:rgba(20,18,38,.78)!important;color:var(--gc-cream)!important
+}
+.gc-settings-panel,.account-panel,.special-panel,.cookie-one-save,.cookie-guest-panel{
+  background:linear-gradient(145deg,rgba(39,31,61,.97),rgba(16,17,34,.98))!important;
+  border-color:rgba(255,241,220,.15)!important;color:var(--gc-cream)!important
+}
+.gc-setting-row:hover,.gc-extra-link:hover{background:rgba(204,70,160,.14)!important}
+.gc-menu-footer{border-color:rgba(255,241,220,.12)!important}
+.gc-footer-dot{background:#ff885f!important;box-shadow:0 0 10px #ff885f99!important}
+@media(max-width:620px){.menu-option{min-height:70px}.welcome-content,.menu-content{width:min(620px,calc(100vw - 28px))}}
+@media(prefers-reduced-motion:reduce){.welcome-content h1 span{animation:none}}
