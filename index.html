@@ -40,10 +40,10 @@
           <button class="gc-settings-button" id="gc-settings-button" type="button" aria-expanded="false" aria-controls="gc-settings-panel">⚙ Settings</button>
           <div class="gc-settings-panel" id="gc-settings-panel" hidden>
             <div class="gc-settings-heading">QUICK SETTINGS</div>
-            <button class="gc-setting-row" id="gc-url-scramble" type="button" aria-pressed="false"><span><strong>URL scrambling</strong><small>Cosmetic path randomisation inside Groupcat</small></span><span class="gc-setting-state">Off</span></button>
-            <button class="gc-setting-row" id="gc-cloak-tab" type="button"><span><strong>Open cloaked tab</strong><small>Open Groupcat in a separate tab</small></span><span>↗</span></button>
-            <button class="gc-setting-row" id="gc-focus-mode" type="button" aria-pressed="false"><span><strong>Focus mode</strong><small>Toggle browser fullscreen</small></span><span class="gc-setting-state">Off</span></button>
-            <button class="gc-setting-row" id="gc-performance-toggle" type="button" aria-pressed="false"><span><strong>Performance mode</strong><small>Reduce visual effects and animations</small></span><span class="gc-setting-state">Off</span></button>
+            <button class="gc-setting-row" id="gc-url-scramble" type="button" aria-pressed="false"><span><strong>URL scrambling</strong></span><span class="gc-setting-state">Off</span></button>
+            <button class="gc-setting-row" id="gc-cloak-tab" type="button"><span><strong>Open cloaked tab</strong></span><span>↗</span></button>
+            <button class="gc-setting-row" id="gc-focus-mode" type="button" aria-pressed="false"><span><strong>Focus mode</strong></span><span class="gc-setting-state">Off</span></button>
+            <button class="gc-setting-row" id="gc-performance-toggle" type="button" aria-pressed="false"><span><strong>Performance mode</strong></span><span class="gc-setting-state">Off</span></button>
           </div>
         </div>
         <button class="gc-account-button" id="menu-account" type="button" onclick="window.showSiteScreen('account')">Account ↗</button>
@@ -72,7 +72,7 @@
       <div class="minecraft-kicker">GROUPCAT ARCADE</div>
       <h1>Minecraft</h1>
       <p class="minecraft-version">Eaglercraft 26.3-JM</p>
-      <p class="minecraft-description">A self-hosted Minecraft client, served from Groupcat instead of loading an external game website.</p>
+      
       <aside class="minecraft-save-notice" role="note" aria-label="Important world saving notice">
         <div class="minecraft-save-icon" aria-hidden="true">!</div>
         <div><strong>Minecraft worlds aren't saved to your Groupcat account. Back them up separately.</strong></div>
@@ -89,7 +89,7 @@
       <div class="special-kicker">GROUPCAT PROFILE</div>
       <div id="account-logged-out">
         <h1 id="account-heading">Welcome back.</h1>
-        <p id="account-description">Sign in to sync your favourites and recently played games across devices.</p>
+        <p id="account-description">Sign in to your account.</p>
         <div class="account-tabs"><button type="button" class="account-tab active" id="account-login-tab">Log in</button><button type="button" class="account-tab" id="account-signup-tab">Create account</button></div>
         <form id="account-form" class="account-form">
           <label for="account-username">Username</label><input id="account-username" name="username" type="text" minlength="3" maxlength="24" autocomplete="username" autocapitalize="none" required placeholder="Choose a username">
@@ -101,7 +101,7 @@
       </div>
       <div id="account-logged-in" hidden>
         <div class="account-avatar" id="account-avatar">G</div><h1 id="account-welcome">You're signed in.</h1><p>Your games and favourites can now sync with your account.</p>
-        <div class="account-stats"><div><strong id="account-fav-count">0</strong><span>Favourites</span></div><div><strong id="account-recent-count">0</strong><span>Recently played</span></div></div>
+        <div class="account-stats"><div><strong id="account-fav-count">0</strong><span>Favourites</span></div><div><strong id="account-recent-count">0</strong><span>Played</span></div></div>
         <button class="account-logout" type="button" id="account-logout">Log out</button>
         <p class="account-message" id="account-signed-message" role="status"></p>
       </div>
@@ -116,7 +116,7 @@
 
   <section class="gunspin-screen" id="gunspin-screen" hidden>
     <div class="special-top"><button class="menu-back" type="button" onclick="window.showSiteScreen(&quot;menu&quot;)">← Back to menu</button><span class="welcome-logo"><span class="brand-mark">g</span> groupcat<span>games</span></span></div>
-    <div class="gunspin-heading"><div class="special-kicker">GROUPCAT ARCADE</div><h1>GunSpin</h1><p>Progress is currently stored by the game in this browser. Account syncing is not enabled yet.</p></div>
+    <div class="gunspin-heading"><div class="special-kicker">GROUPCAT ARCADE</div><h1>GunSpin</h1></div>
     <div class="gunspin-frame-wrap"><iframe src="/gunspin/index.html" title="GunSpin" allow="fullscreen; autoplay" allowfullscreen></iframe></div>
   </section>
 
