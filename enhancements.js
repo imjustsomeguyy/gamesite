@@ -132,7 +132,7 @@
 
   const footer = document.createElement("div");
   footer.className = "gc-menu-footer";
-  footer.innerHTML = '<span><i class="gc-footer-dot"></i> GROUPCAT ARCADE READY</span><span id="gc-footer-count">5 TITLES</span><span>Press / to search</span>';
+  footer.innerHTML = '<span><i class="gc-footer-dot"></i> GROUPCAT ARCADE READY</span><span id="gc-footer-count">4 TITLES</span><span>Press / to search</span>';
   grid.parentNode.insertBefore(footer, grid.nextSibling);
 
   const search = $("gc-game-search");
