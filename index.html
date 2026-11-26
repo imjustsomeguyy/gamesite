@@ -64,7 +64,7 @@
           <button class="gc-settings-button" id="gc-settings-button" type="button" aria-expanded="false" aria-controls="gc-settings-panel">⚙ Settings</button>
           <div class="gc-settings-panel" id="gc-settings-panel" hidden>
             <div class="gc-settings-heading">QUICK SETTINGS</div>
-            <button class="gc-setting-row" id="gc-url-scramble" type="button" aria-pressed="false"><span><strong>Tab cloaking</strong><small>Flash random strings in the address bar</small></span><span class="gc-setting-state">Off</span></button>
+            <button class="gc-setting-row" id="gc-url-scramble" type="button" aria-pressed="false"><span><strong>URL scrambling</strong><small>Cosmetic path randomisation inside Groupcat</small></span><span class="gc-setting-state">Off</span></button>
             <button class="gc-setting-row" id="gc-cloak-tab" type="button"><span><strong>Open cloaked tab</strong><small>Open Groupcat in a separate tab</small></span><span>↗</span></button>
             <button class="gc-setting-row" id="gc-focus-mode" type="button" aria-pressed="false"><span><strong>Focus mode</strong><small>Toggle browser fullscreen</small></span><span class="gc-setting-state">Off</span></button>
             <button class="gc-setting-row" id="gc-performance-toggle" type="button" aria-pressed="false"><span><strong>Performance mode</strong><small>Reduce visual effects and animations</small></span><span class="gc-setting-state">Off</span></button>
@@ -207,9 +207,9 @@ window.unlockGroupcat = function(event) {
       // The site is intentionally embedded in an about:blank wrapper after consent.
       // Skip the gate inside that wrapper to avoid opening another wrapper recursively.
       if(window.self!==window.top){gate.hidden=true;return;}
-      enable.addEventListener("click",()=>{
+      window.openGroupcatCloak=function(){
         const cloak=window.open("about:blank","_blank");
-        if(!cloak){error.hidden=false;return;}
+        if(!cloak){error.hidden=false;return false;}
         try{
           const doc=cloak.document;
           doc.open();
@@ -219,14 +219,15 @@ window.unlockGroupcat = function(event) {
           frame.title="Groupcat";
           frame.allow="fullscreen; autoplay; clipboard-read; clipboard-write; gamepad";
           frame.setAttribute("allowfullscreen","");
-          frame.src=location.href;
+          frame.src=location.origin+"/";
           doc.body.appendChild(frame);
           gate.hidden=true;
           document.body.style.overflow="hidden";
-          // Move the original tab away once the new about:blank wrapper is ready.
           setTimeout(()=>{try{location.replace("about:blank");}catch{}},250);
-        }catch(e){try{cloak.close();}catch{}error.hidden=false;}
-      });
+          return true;
+        }catch(e){try{cloak.close();}catch{}error.hidden=false;return false;}
+      };
+      enable.addEventListener("click",()=>window.openGroupcatCloak());
       leave.addEventListener("click",()=>{location.replace("about:blank");});
     })();
   </script>
@@ -291,7 +292,7 @@ window.unlockGroupcat = function(event) {
       if(forceRandom){try{history.replaceState(history.state,"","/");}catch{}scrambleOn=true;}
       applyScramble(scrambleOn);
       scramble.addEventListener("click",()=>applyScramble(!timer));
-      document.getElementById("gc-cloak-tab").addEventListener("click",()=>{const tab=window.open(location.origin+"/?gc_random_tab=1","_blank");if(!tab)alert("Your browser blocked the new tab. Allow pop-ups for this site and try again.");});
+      document.getElementById("gc-cloak-tab").addEventListener("click",()=>{if(typeof window.openGroupcatCloak==="function")window.openGroupcatCloak();else alert("Open the site in a top-level tab first.");});
       const perf=document.getElementById("gc-performance-toggle");
       const applyPerformance=on=>{root.classList.toggle("gc-performance-mode",on);perf.setAttribute("aria-pressed",String(on));perf.querySelector(".gc-setting-state").textContent=on?"On":"Off";try{localStorage.setItem("gc_performance_mode",on?"on":"off");}catch{}};
       applyPerformance(performanceOn);perf.addEventListener("click",()=>applyPerformance(!root.classList.contains("gc-performance-mode")));
