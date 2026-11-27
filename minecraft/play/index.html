@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101610"><title>Loading Minecraft · Groupcat</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:#101610;color:#eee;font-family:Arial,Helvetica,sans-serif}
+body{display:grid;place-items:center}.load{text-align:center;width:min(420px,86vw)}.mark{width:42px;height:42px;margin:0 auto 24px;background:linear-gradient(135deg,#91b66b 0 48%,#5e823e 49%);box-shadow:inset -7px -7px #0003;position:relative}.mark:after{content:"";position:absolute;left:7px;right:7px;bottom:7px;height:9px;background:#805e3d;box-shadow:0 -9px #a27a4d}h1{font-size:21px;letter-spacing:.04em;margin:0 0 9px}.status{font-size:13px;color:#aeb6a5;margin:0 0 25px}.track{height:5px;background:#30392f;overflow:hidden}.bar{height:100%;width:0;background:#9abd70;transition:width .2s}.hint{font-size:11px;color:#778273;margin-top:15px}.error{color:#ffb5a8;line-height:1.5}.back{display:inline-block;margin-top:20px;color:#b7d18e;text-decoration:none;font-size:13px}
+</style></head><body><main class="load"><div class="mark"></div><h1>Loading Minecraft</h1><p class="status" id="status">Connecting to Groupcat…</p><div class="track"><div class="bar" id="bar"></div></div><div class="hint" id="hint">First launch downloads the game files. Next time is faster.</div></main>
+<script>
+(async()=>{
+ const status=document.getElementById('status'),bar=document.getElementById('bar'),hint=document.getElementById('hint');
+ const set=(s,p)=>{status.textContent=s;if(p!=null)bar.style.width=p+'%';};
+ try{
+  if(!('DecompressionStream' in window)) throw new Error('This browser does not support the game file format. Try Chrome or Edge on a computer.');
+  set('Downloading game files…',3);
+  const response=await fetch('https://groupcat-minecraft-client.ethan-cd5.workers.dev/client.zip');
+  if(!response.ok) throw new Error('Could not retrieve the game files ('+response.status+'). Please try again in a moment.');
+  const total=Number(response.headers.get('content-length'))||0,reader=response.body.getReader();let chunks=[],received=0;
+  while(true){const part=await reader.read();if(part.done)break;chunks.push(part.value);received+=part.value.length;set('Downloading game files…',total?Math.min(85,Math.round(received/total*85)):35);}
+  const zip=new Uint8Array(received);let pos=0;for(const c of chunks){zip.set(c,pos);pos+=c.length;}chunks=null;
+  set('Preparing Minecraft…',88);
+  const view=new DataView(zip.buffer);let eocd=-1;
+  for(let i=zip.length-22;i>=Math.max(0,zip.length-65557);i--){if(view.getUint32(i,true)===0x06054b50){eocd=i;break;}}
+  if(eocd<0)throw new Error('The downloaded game archive is invalid.');
+  const count=view.getUint16(eocd+10,true),central=view.getUint32(eocd+16,true);let cursor=central,chosen=null;
+  for(let i=0;i<count;i++){
+   if(view.getUint32(cursor,true)!==0x02014b50)break;
+   const method=view.getUint16(cursor+10,true),compressed=view.getUint32(cursor+20,true),nameLen=view.getUint16(cursor+28,true),extraLen=view.getUint16(cursor+30,true),commentLen=view.getUint16(cursor+32,true),local=view.getUint32(cursor+42,true);
+   const name=new TextDecoder().decode(zip.subarray(cursor+46,cursor+46+nameLen));
+   if(name.toLowerCase().endsWith('.html')&&!name.endsWith('/')){chosen={method,compressed,local};break;}
+   cursor+=46+nameLen+extraLen+commentLen;
+  }
+  if(!chosen)throw new Error('Could not find the Minecraft client in the archive.');
+  const localName=view.getUint16(chosen.local+26,true),localExtra=view.getUint16(chosen.local+28,true),start=chosen.local+30+localName+localExtra;
+  const compressedData=zip.slice(start,start+chosen.compressed);let htmlBlob;
+  if(chosen.method===0)htmlBlob=new Blob([compressedData],{type:'text/html'});
+  else if(chosen.method===8){const stream=new Blob([compressedData]).stream().pipeThrough(new DecompressionStream('deflate-raw'));htmlBlob=await new Response(stream).blob();}
+  else throw new Error('Unsupported game archive compression.');
+  set('Starting Minecraft…',97);
+  const html=await htmlBlob.text();
+  if(!html.toLowerCase().includes('<html')&&!html.toLowerCase().includes('<!doctype'))throw new Error('The Minecraft client file appears incomplete.');
+  document.open();document.write(html);document.close();
+ }catch(err){document.querySelector('.load').innerHTML='<div class="mark"></div><h1>Could not start Minecraft</h1><p class="status error">'+String(err.message||err).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</p><a class="back" href="/">← Back to Groupcat Minecraft</a>';}
+})();
+</script></body></html>
