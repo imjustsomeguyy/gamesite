@@ -15,24 +15,20 @@ header{height:76px;display:flex;align-items:center;padding:0 clamp(22px,6vw,88px
 .cube:after{content:"";position:absolute;left:5px;right:5px;bottom:5px;height:7px;background:#76553a;box-shadow:0 -7px #9a7447}
 main{flex:1;display:grid;place-items:center;text-align:center;padding:70px 22px 90px}
 .hero{max-width:760px}
-.kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:#c7d6ae;margin-bottom:22px}
-h1{font-size:clamp(46px,8vw,86px);line-height:.98;letter-spacing:-.065em;margin:0 0 20px;font-weight:900;text-shadow:0 5px 25px #0008}
+h1{font-size:clamp(46px,8vw,86px);line-height:.98;letter-spacing:-.065em;margin:0;font-weight:900;text-shadow:0 5px 25px #0008}
 h1 span{color:#a9c77a}
-.sub{font-size:16px;color:#e1e2d6;margin:0 auto 36px;line-height:1.6}
-.play{display:inline-flex;align-items:center;justify-content:center;gap:13px;min-width:210px;padding:17px 34px;background:#84a95a;color:#111a10;text-decoration:none;font-weight:900;letter-spacing:.12em;font-size:15px;border:1px solid #c3df98;box-shadow:0 5px 0 #4b6534,0 12px 30px #0005;transition:transform .15s,filter .15s}
+.play{display:inline-flex;align-items:center;justify-content:center;gap:13px;min-width:210px;padding:17px 34px;background:#84a95a;color:#111a10;text-decoration:none;font-weight:900;letter-spacing:.12em;font-size:15px;border:1px solid #c3df98;box-shadow:0 5px 0 #4b6534,0 12px 30px #0005;transition:transform .15s,filter .15s;margin-top:36px}
 .play:hover{transform:translateY(-2px);filter:brightness(1.08)}
 .play:active{transform:translateY(3px);box-shadow:0 2px 0 #4b6534}
 .arrow{font-size:19px}
 footer{padding:18px 24px;text-align:center;color:#d0d2c2a8;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
-@media(max-width:600px){body{background-position:center}header{height:64px}main{padding-top:50px;padding-bottom:65px}.sub{font-size:14px}}
+@media(max-width:600px){body{background-position:center}header{height:64px}main{padding-top:50px;padding-bottom:65px}}
 </style>
 </head>
 <body>
 <header><div class="brand"><span class="cube" aria-hidden="true"></span><span>GROUPCAT <span style="color:#a9c77a">MINECRAFT</span></span></div></header>
 <main><section class="hero">
-<div class="kicker">A little world of your own</div>
 <h1>GROUPCAT<br><span>MINECRAFT</span></h1>
-<p class="sub">Minecraft in your browser. No installation needed.</p>
 <a class="play" href="/play/"><span>PLAY</span><span class="arrow">→</span></a>
 </section></main>
 <footer>GROUPCAT · BROWSER EDITION</footer>
