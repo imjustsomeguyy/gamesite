@@ -10,9 +10,9 @@
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--cream)}
 body{min-height:100vh;background:linear-gradient(180deg,rgba(11,18,13,.35),rgba(11,18,13,.86)),url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=2200&q=85") center/cover fixed;display:flex;flex-direction:column}
 header{height:76px;display:flex;align-items:center;padding:0 clamp(22px,6vw,88px);border-bottom:1px solid #ffffff20;background:#10171070;backdrop-filter:blur(10px)}
-.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.02em}
-.cube{width:30px;height:30px;position:relative;background:linear-gradient(135deg,#8eae62 0 48%,#587b3c 49%);box-shadow:inset -5px -5px #0003,0 3px 12px #0005;transform:rotate(-3deg)}
-.cube:after{content:"";position:absolute;left:5px;right:5px;bottom:5px;height:7px;background:#76553a;box-shadow:0 -7px #9a7447}
+.brand{display:flex;align-items:center}
+.brand-logo{display:block;width:142px;height:auto;max-height:48px;object-fit:contain;filter:drop-shadow(0 2px 5px #0008)}
+.hero-logo{display:block;width:min(680px,88vw);height:auto;margin:0 auto;filter:drop-shadow(0 8px 24px #0009)}
 main{flex:1;display:grid;place-items:center;text-align:center;padding:70px 22px 90px}
 .hero{max-width:760px}
 h1{font-size:clamp(46px,8vw,86px);line-height:.98;letter-spacing:-.065em;margin:0;font-weight:900;text-shadow:0 5px 25px #0008}
@@ -26,9 +26,9 @@ footer{padding:18px 24px;text-align:center;color:#d0d2c2a8;font-size:11px;letter
 </style>
 </head>
 <body>
-<header><div class="brand"><span class="cube" aria-hidden="true"></span><span>GROUPCAT <span style="color:#a9c77a">MINECRAFT</span></span></div></header>
+<header><div class="brand"><img class="brand-logo" src="https://www.citypng.com/public/uploads/preview/hd-minecraft-logo-transparent-background-701751694772068q54lqpdt1o.png" alt="Minecraft"></div></header>
 <main><section class="hero">
-<h1>GROUPCAT<br><span>MINECRAFT</span></h1>
+<img class="hero-logo" src="https://www.citypng.com/public/uploads/preview/hd-minecraft-logo-transparent-background-701751694772068q54lqpdt1o.png" alt="Minecraft">
 <a class="play" href="/play/"><span>PLAY</span><span class="arrow">→</span></a>
 </section></main>
 <footer>GROUPCAT · BROWSER EDITION</footer>
